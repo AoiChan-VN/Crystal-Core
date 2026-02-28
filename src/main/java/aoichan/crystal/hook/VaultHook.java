@@ -1,4 +1,4 @@
-package aoidev.crystal.hook;
+package aoichan.crystal.hook;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
