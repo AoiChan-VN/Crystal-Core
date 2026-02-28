@@ -33,9 +33,7 @@
     </repository>
            
   </repositories>
-  <!-- Vault | Cần thì add vào -->
-  <dependencies>
-
+         
     <!-- Paper -->
     <dependency>
       <groupId>io.papermc.paper</groupId>
