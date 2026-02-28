@@ -1,4 +1,4 @@
-package aoichan.crystal;
+package aoichan.crystal.ui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
