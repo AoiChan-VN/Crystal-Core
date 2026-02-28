@@ -1,6 +1,6 @@
 package aoichan.crystal.hook;
 
-import aoidev.crystal.gem.GemManager;
+import aoichan.crystal.gem.GemManager;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
