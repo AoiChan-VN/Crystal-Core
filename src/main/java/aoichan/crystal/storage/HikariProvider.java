@@ -1,4 +1,4 @@
-package aoidev.crystal.storage;
+package aoichan.crystal.storage;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
