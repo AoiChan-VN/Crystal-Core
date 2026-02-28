@@ -33,7 +33,8 @@
     </repository>
            
   </repositories>
-         
+
+  </dependencies>       
     <!-- Paper -->
     <dependency>
       <groupId>io.papermc.paper</groupId>
