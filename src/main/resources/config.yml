@@ -1,9 +1,0 @@
-storage:
-  type: sqlite
-  sqlite-file: gems.db
-
-economy:
-  enabled: true
-
-placeholderapi:
-  enabled: true
