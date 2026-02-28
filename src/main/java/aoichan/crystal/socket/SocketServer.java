@@ -1,4 +1,4 @@
-package aoidev.crystal;
+package aoichan.crystal;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
