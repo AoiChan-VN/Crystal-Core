@@ -1,4 +1,4 @@
-package aoidev.crystal.gem;
+package aoichan.crystal.gem;
 
 import aoidev.crystal.storage.StorageAdapter;
 import org.bukkit.plugin.Plugin;
