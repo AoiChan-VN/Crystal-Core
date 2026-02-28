@@ -1,4 +1,4 @@
-package aoichan.crystal;
+package aoichan.crystal.security;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
