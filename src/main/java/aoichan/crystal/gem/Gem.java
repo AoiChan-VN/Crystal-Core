@@ -1,4 +1,4 @@
-package aoidev.crystal.gem;
+package aoichan.crystal.gem;
 
 import java.util.Objects;
 import java.util.UUID;
