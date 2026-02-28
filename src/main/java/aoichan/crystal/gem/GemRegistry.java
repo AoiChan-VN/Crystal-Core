@@ -1,4 +1,4 @@
-package aoidev.crystal.gem;
+package aoichan.crystal.gem;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
