@@ -6,13 +6,16 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class SQLiteStorage implements StorageAdapter {
 
     private final HikariDataSource ds;
+    private final Executor executor;
 
-    public SQLiteStorage(HikariDataSource ds) {
+    public SQLiteStorage(HikariDataSource ds, Executor executor) {
         this.ds = ds;
+        this.executor = executor;
         createTable();
     }
 
@@ -38,7 +41,7 @@ public class SQLiteStorage implements StorageAdapter {
         return CompletableFuture.runAsync(() -> {
             try (Connection c = ds.getConnection();
                  PreparedStatement ps = c.prepareStatement(
-                         "REPLACE INTO gems (id,type,level) VALUES (?,?,?)")) {
+                         "REPLACE INTO gems VALUES (?,?,?)")) {
 
                 ps.setString(1, gem.getId().toString());
                 ps.setString(2, gem.getType());
@@ -48,7 +51,7 @@ public class SQLiteStorage implements StorageAdapter {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        }, executor);
     }
 
     @Override
@@ -60,11 +63,10 @@ public class SQLiteStorage implements StorageAdapter {
 
                 ps.setString(1, id.toString());
                 ps.executeUpdate();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        }, executor);
     }
 
     @Override
@@ -90,11 +92,12 @@ public class SQLiteStorage implements StorageAdapter {
             }
 
             return list;
-        });
+
+        }, executor);
     }
 
     @Override
     public void shutdown() {
         ds.close();
     }
-                                             }
+}
