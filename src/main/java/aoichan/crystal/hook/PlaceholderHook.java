@@ -1,4 +1,4 @@
-package aoidev.crystal.hook;
+package aoichan.crystal.hook;
 
 import aoidev.crystal.gem.GemManager;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
