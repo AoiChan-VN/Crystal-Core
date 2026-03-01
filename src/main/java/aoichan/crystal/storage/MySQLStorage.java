@@ -13,14 +13,13 @@ public class MySQLStorage implements StorageProvider {
 
     @Override
     public void initTables() {
-
         try (Connection conn = pool.getDataSource().getConnection();
              Statement stmt = conn.createStatement()) {
 
             stmt.executeUpdate(
                     "CREATE TABLE IF NOT EXISTS player_gems (" +
-                    "uuid VARCHAR(36) PRIMARY KEY, " +
-                    "data TEXT)"
+                            "uuid VARCHAR(36) PRIMARY KEY, " +
+                            "data TEXT)"
             );
 
         } catch (Exception e) {
@@ -30,6 +29,6 @@ public class MySQLStorage implements StorageProvider {
 
     @Override
     public void close() {
-        // Hikari auto-managed
+        // Hikari managed by pool.shutdown()
     }
 }
