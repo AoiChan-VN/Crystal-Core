@@ -13,23 +13,23 @@ public class ProtectionManager {
     }
 
     public boolean isPermanentProtected(ItemStack item) {
-        return PDCUtil.has(item, "permanent_protect");
+        return PDCUtil.hasKey(item, "permanent_protect");
     }
 
     public boolean consumeProtection(ItemStack item) {
 
-        if (PDCUtil.has(item, "protect_once")) {
-            PDCUtil.remove(item, "protect_once");
+        if (PDCUtil.hasKey(item, "protection")) {
+            PDCUtil.remove(item, "protection");
             return true;
         }
         return false;
     }
 
     public void applyPermanent(ItemStack item) {
-        PDCUtil.set(item, "permanent_protect", 1);
+        PDCUtil.setInt(item, "protection", 1);
     }
 
     public void applyOnce(ItemStack item) {
-        PDCUtil.set(item, "protect_once", 1);
+        PDCUtil.setInt(item, "protection", 1);
     }
 }
