@@ -1,14 +1,27 @@
 package aoichan.crystal.api;
 
-public class GemData {
-    private final String id;
-    private final String displayName;
+import java.util.UUID;
 
-    public GemData(String id, String displayName) {
-        this.id = id;
-        this.displayName = displayName;
+// [!] Code: Gem Data Object
+public class GemData {
+
+    private final UUID uuid;
+    private int amount;
+
+    public GemData(UUID uuid, int amount) {
+        this.uuid = uuid;
+        this.amount = amount;
     }
 
-    public String getId() { return id; }
-    public String getDisplayName() { return displayName; }
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }
