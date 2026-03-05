@@ -1,63 +1,65 @@
 package aoichan.crystal.storage;
 
 import aoichan.crystal.AoiMain;
+import aoichan.crystal.api.GemData;
+import aoichan.crystal.core.cache.GemCache;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.Set;
+import java.util.UUID;
+
+// [!] Code: Storage Manager (Bridge Between Cache and Storage)
 public class StorageManager {
 
-    // code của: giữ instance storage duy nhất
-    private static StorageProvider provider;
+    private final AoiMain plugin;
+    private StorageProvider provider;
 
-    // code của: khởi tạo storage khi plugin enable
-    public static void init() {
-        FileConfiguration config = AoiMain.getInstance().getConfig();
-        String type = config.getString("storage.type", "SQLITE");
+    public StorageManager(AoiMain plugin) {
+        this.plugin = plugin;
+    }
 
-        try {
+    public void initialize() {
 
-            // code của: chọn loại storage theo config
-            if (type.equalsIgnoreCase("MYSQL")) {
-                provider = new MySQLStorage();
-                Bukkit.getConsoleSender().sendMessage("§a[Crystal] Using MySQL storage.");
-            } else {
-                provider = new SQLiteStorage();
-                Bukkit.getConsoleSender().sendMessage("§a[Crystal] Using SQLite storage.");
-            }
+        String type = plugin.getConfig().getString("storage.type", "sqlite");
 
-            // code của: khởi tạo database (create table nếu chưa có)
-            provider.init();
+        if (type.equalsIgnoreCase("mysql")) {
+            provider = new MySQLStorage(plugin);
+        } else {
+            provider = new SQLiteStorage(plugin);
+        }
 
-        } catch (Exception ex) {
+        provider.initialize();
 
-            // code của: fallback nếu MySQL lỗi
-            Bukkit.getConsoleSender().sendMessage("§c[Crystal] Storage failed. Falling back to SQLite.");
-            ex.printStackTrace();
+        Bukkit.getConsoleSender().sendMessage("§a[Crystal Storage] Using: " + type.toUpperCase());
+    }
 
-            provider = new SQLiteStorage();
-            provider.init();
+    public GemData load(UUID uuid) {
+        return provider.load(uuid);
+    }
+
+    public void save(UUID uuid) {
+        provider.save(uuid);
+    }
+
+    public void saveSync(UUID uuid) {
+        provider.saveSync(uuid);
+    }
+
+    // [!] Code: Batch Async Save
+    public void saveBatch(Set<UUID> uuids) {
+        for (UUID uuid : uuids) {
+            provider.save(uuid);
         }
     }
 
-    // code của: reload storage không restart server
-    public static void reload() {
-
-        // code của: đóng kết nối cũ
-        shutdown();
-
-        // code của: khởi tạo lại
-        init();
-    }
-
-    // code của: trả về storage đang dùng
-    public static StorageProvider get() {
-        return provider;
-    }
-
-    // code của: đóng database khi plugin disable
-    public static void shutdown() {
-        if (provider != null) {
-            provider.close();
+    // [!] Code: Batch Sync Save
+    public void saveBatchSync(Set<UUID> uuids) {
+        for (UUID uuid : uuids) {
+            provider.saveSync(uuid);
         }
     }
-} 
+
+    public void shutdown() {
+        provider.shutdown();
+    }
+}
