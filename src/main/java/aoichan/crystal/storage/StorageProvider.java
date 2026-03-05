@@ -1,14 +1,19 @@
+package aoichan.crystal.storage;
+
+import aoichan.crystal.api.GemData;
+
+import java.util.UUID;
+
+// [!] Code: Storage Provider Interface
 public interface StorageProvider {
 
-    // code của: khởi tạo database
-    void init();
+    void initialize();
 
-    // code của: lưu dữ liệu
-    void saveData(java.util.UUID uuid, int gems);
+    GemData load(UUID uuid);
 
-    // code của: load dữ liệu
-    int loadData(java.util.UUID uuid);
+    void save(UUID uuid);
 
-    // code của: đóng kết nối
-    void close();
+    void saveSync(UUID uuid);
+
+    void shutdown();
 }
