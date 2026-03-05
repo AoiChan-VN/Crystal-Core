@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-// [!] Code: Dirty Player Tracker
+// [!] Code: Dirty Player Tracking System
 public class DirtyTracker {
 
     private final Set<UUID> dirtyPlayers = ConcurrentHashMap.newKeySet();
@@ -24,4 +24,4 @@ public class DirtyTracker {
     public boolean isEmpty() {
         return dirtyPlayers.isEmpty();
     }
-} 
+}
