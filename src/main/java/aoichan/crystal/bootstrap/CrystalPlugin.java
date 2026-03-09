@@ -1,8 +1,8 @@
-package aiochan.crystal.bootstrap;
+package aoichan.crystal.bootstrap;
 
-import aiochan.crystal.core.module.ModuleLoader;
-import aiochan.crystal.infrastructure.config.ConfigLoader;
-import aiochan.crystal.infrastructure.scheduler.TaskScheduler;
+import aoichan.crystal.core.module.ModuleLoader;
+import aoichan.crystal.infrastructure.config.ConfigLoader;
+import aoichan.crystal.infrastructure.scheduler.TaskScheduler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CrystalPlugin extends JavaPlugin {
