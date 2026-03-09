@@ -1,4 +1,4 @@
-package aiochan.crystal.infrastructure.config;
+package aoichan.crystal.infrastructure.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
