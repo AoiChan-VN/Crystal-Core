@@ -10,6 +10,9 @@ public class GemModule implements CrystalModule {
     // [!] Code: Gem Registry
     private final GemRegistry registry = new GemRegistry();
 
+    // [!] Code: Gem Manager
+    private GemManager gemManager;
+
     // [!] Code: Gem Loader
     private GemLoader loader;
 
@@ -18,6 +21,10 @@ public class GemModule implements CrystalModule {
 
         loader = new GemLoader(CrystalPlugin.get(), registry);
         loader.load();
+
+        gemManager = new GemManager(registry);
+
+        CrystalPlugin.get().getLogger().info("Gem Module enabled.");
     }
 
     @Override
@@ -31,7 +38,7 @@ public class GemModule implements CrystalModule {
         return "GemModule";
     }
 
-    public GemRegistry getRegistry() {
-        return registry;
+    public GemManager getGemManager() {
+        return gemManager;
     }
 }
