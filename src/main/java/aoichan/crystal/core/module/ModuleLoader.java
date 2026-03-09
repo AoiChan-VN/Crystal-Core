@@ -1,5 +1,6 @@
 package aoichan.crystal.core.module;
 
+import aoichan.crystal.gameplay.gem.GemModule;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,8 @@ public class ModuleLoader {
 
     public void loadModules() {
 
-        // [!] Code: Future modules will register here
+        // [!] Code: Register Gem Module
+        register(new GemModule());
 
     }
 
