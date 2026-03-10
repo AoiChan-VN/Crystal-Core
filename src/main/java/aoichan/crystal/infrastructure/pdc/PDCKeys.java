@@ -20,4 +20,11 @@ public class PDCKeys {
     // [!] Code: Gem level
     public static final NamespacedKey GEM_LEVEL =
         new NamespacedKey(CrystalPlugin.get(), "gem_level");
+
+    // [!] Code:
+    public static final NamespacedKey CHARM_ID =
+        new NamespacedKey(
+                CrystalPlugin.get(),
+                "charm_id"
+        );
 } 
