@@ -1,7 +1,7 @@
 package aoichan.crystal.core.item;
 
 import aoichan.crystal.core.gem.Gem;
-import aoichan.crystal.CrystalPlugin;
+import aoichan.crystal.bootstrap.CrystalPlugin;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
