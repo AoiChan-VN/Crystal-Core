@@ -53,17 +53,25 @@ public final class CrystalPlugin extends JavaPlugin {
     // [!] Code: Listener registration
     private void registerListeners() {
 
+        // [!] Code: Player join listener
         getServer().getPluginManager()
                 .registerEvents(new PlayerJoinListener(), this);
 
+        // [!] Code: Equipmentchange listener
         getServer().getPluginManager()
                 .registerEvents(new EquipmentChangeListener(), this);
 
+        // [!] Code: Combat listener
         getServer().getPluginManager()
                 .registerEvents(new CombatListener(), this);
 
+        // [!] Code: Mob death listener
         getServer().getPluginManager()
                 .registerEvents(new MobDeathListener(), this);
+
+        // [!] Code: Effect trigger listener
+        getServer().getPluginManager()
+                .registerEvents(new EffectTriggerListener(), this);
     }
 
 }
