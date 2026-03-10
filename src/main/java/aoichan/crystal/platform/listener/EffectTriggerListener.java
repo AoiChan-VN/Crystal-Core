@@ -2,12 +2,18 @@ package aoichan.crystal.platform.listener;
 
 import aoichan.crystal.gameplay.effect.EffectEngine;
 import aoichan.crystal.gameplay.effect.GemEffect;
+import aoichan.crystal.gameplay.effect.EffectType;
+import aoichan.crystal.gameplay.element.ElementEngine;
+import aoichan.crystal.gameplay.element.ElementType;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+// [!] Code: Combat trigger listener
 public class EffectTriggerListener implements Listener {
 
     @EventHandler
@@ -19,21 +25,23 @@ public class EffectTriggerListener implements Listener {
         if (!(event.getEntity() instanceof LivingEntity target))
             return;
 
-        // [!] Code: Element damage apply
+        // [!] Code: Element example
+        ElementType element = ElementType.THUNDER;
+
         double damage =
-                ElementEngine.applyElement(
+                ElementEngine.applyElementDamage(
                         player,
                         target,
                         event.getDamage(),
-                        aoichan.crystal.gameplay.element.ElementType.THUNDER
+                        element
                 );
 
         event.setDamage(damage);
 
-        // [!] Code: test effect
+        // [!] Code: Effect example
         GemEffect effect =
                 new GemEffect(
-                        aoichan.crystal.gameplay.effect.EffectType.LIGHTNING,
+                        EffectType.LIGHTNING,
                         0.2,
                         1
                 );
@@ -44,4 +52,4 @@ public class EffectTriggerListener implements Listener {
                 effect
         );
     }
-} 
+}
