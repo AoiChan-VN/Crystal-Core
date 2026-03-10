@@ -19,6 +19,17 @@ public class EffectTriggerListener implements Listener {
         if (!(event.getEntity() instanceof LivingEntity target))
             return;
 
+        // [!] Code: Element damage apply
+        double damage =
+                ElementEngine.applyElement(
+                        player,
+                        target,
+                        event.getDamage(),
+                        aoichan.crystal.gameplay.element.ElementType.THUNDER
+                );
+
+        event.setDamage(damage);
+
         // [!] Code: test effect
         GemEffect effect =
                 new GemEffect(
