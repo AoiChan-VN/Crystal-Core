@@ -1,5 +1,5 @@
 name: CrystalUltimate
-version: 1.0
+version: 2.1.0
 main: aiochan.crystal.bootstrap.CrystalPlugin
 api-version: 1.20
 
