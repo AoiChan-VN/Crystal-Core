@@ -6,6 +6,7 @@ import aoichan.crystal.gameplay.gem.GemRegistry;
 import aoichan.crystal.gameplay.drop.GemDropManager;
 
 import aoichan.crystal.platform.listener.CombatListener;
+import aoichan.crystal.platform.listener.EffectTriggerListener;
 import aoichan.crystal.platform.listener.EquipmentChangeListener;
 import aoichan.crystal.platform.listener.PlayerJoinListener;
 import aoichan.crystal.platform.listener.MobDeathListener;
