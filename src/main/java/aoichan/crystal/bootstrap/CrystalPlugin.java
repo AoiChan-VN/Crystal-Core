@@ -3,6 +3,7 @@ package aoichan.crystal.bootstrap;
 import aoichan.crystal.api.CrystalAPI;
 import aoichan.crystal.api.GemServiceImpl;
 
+import aoichan.crystal.infrastructure.util.ItemNBTUtil;
 import aoichan.crystal.platform.command.CrystalCommand;
 import aoichan.crystal.core.gem.GemParser;
 
