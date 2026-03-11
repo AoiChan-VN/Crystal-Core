@@ -23,3 +23,4 @@ jobs:
         with:
           name: Crystal Ultimate
           path: target/*.jar
+          retention-days: 1
