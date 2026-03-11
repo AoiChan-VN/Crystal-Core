@@ -5,7 +5,7 @@ import aoichan.crystal.api.GemServiceImpl;
 
 import aoichan.crystal.platform.command.CrystalCommand;
 import aoichan.crystal.core.gem.GemParser;
-import aoichan.crystal.platform.gui.GUICommand;
+import aoichan.crystal.platform.gui.base.GUICommand;
 import aoichan.crystal.gameplay.gem.GemRegistry;
 import aoichan.crystal.gameplay.drop.GemDropManager;
 
