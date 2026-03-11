@@ -83,6 +83,10 @@ public final class CrystalPlugin extends JavaPlugin {
         // [!] Code: Effect trigger listener
         getServer().getPluginManager()
                 .registerEvents(new EffectTriggerListener(), this);
+
+        // [!] Code: Click UI
+        getServer().getPluginManager()
+                .registerEvents(new GUIManager(), this);
     }
 
 }
