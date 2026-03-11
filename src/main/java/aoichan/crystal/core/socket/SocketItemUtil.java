@@ -15,7 +15,7 @@ public class SocketItemUtil {
 
     private static NamespacedKey socketKey =
             new NamespacedKey(
-                    CrystalPlugin.getInstance(),
+                    CrystalPlugin.get(),
                     "socket_data"
             );
 
