@@ -1,32 +1,35 @@
 package aoichan.crystal.platform.gui.forge;
 
-import aoichan.crystal.platform.gui.base.GUI;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.entity.Player;
 
-public class ForgeGUI extends GUI {
+// [!] Code: Forge GUI builder
+public class ForgeGUI {
 
-    // [!] Code: GUI slots
-    public static final int ITEM_SLOT = 11;
-    public static final int GEM_SLOT = 15;
-    public static final int BUTTON_SLOT = 13;
-    public static final int INFO_SLOT = 22;
+    public static final int ITEM_SLOT = 20;
+    public static final int GEM_SLOT = 24;
+    public static final int FORGE_BUTTON = 22;
 
-    @Override
-    public void open(Player player) {
-        player.openInventory(create());
+    public static void open(Player player) {
+
+        Inventory inv =
+                Bukkit.createInventory(
+                        null,
+                        45,
+                        "Luyện Khí Phường"
+                );
+
+        ItemStack forge =
+                new ItemStack(Material.ANVIL);
+
+        inv.setItem(FORGE_BUTTON, forge);
+
+        ForgeDecorator.decorate(inv);
+
+        player.openInventory(inv);
     }
 
-    @Override
-    public Inventory create() {
-
-        Inventory inv = Bukkit.createInventory(
-                null,
-                27,
-                "§5Crystal Forge"
-        );
-
-        return inv;
-    }
 }
