@@ -36,3 +36,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: release/*.jar
+          retention-days: 1
