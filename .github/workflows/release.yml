@@ -1,4 +1,4 @@
-name: Build & Release Crystal Ultimate
+name: Release
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       - name: Prepare release file
         run: |
           mkdir release
-          cp target/*.jar release/CrystalUltimate-${{ steps.version.outputs.VERSION }}.jar
+          cp target/*.jar release/AoiDev-${{ steps.version.outputs.VERSION }}.jar
 
       - name: Generate changelog
         id: changelog
@@ -47,7 +47,7 @@ jobs:
         with:
           files: release/*.jar
           body: |
-            ## 🚀 Crystal Ultimate ${{ steps.version.outputs.VERSION }}
+            🚀 **AoiDev ${{ steps.version.outputs.VERSION }}**
 
             ### Changes
             ${{ steps.changelog.outputs.CHANGELOG }}
