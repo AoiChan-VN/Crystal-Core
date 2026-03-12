@@ -1,25 +1,26 @@
 # 🌸𝓐𝓸𝒾𝒞𝒽𝒶𝓃🍀²ᵏ❤
 # Crystal Core
 
-A powerful MMORPG currency system for Minecraft servers.
+📦![Release](https://img.shields.io/github/v/release/AoiChan-Dev/AoiDev?label=release)
 
-![Release](https://img.shields.io/github/v/release/AoiChan-Dev/AoiDev?label=release)
-![build](https://img.shields.io/github/actions/workflow/status/AoiChan-Dev/AoiDev/build.yml)
-![License](https://img.shields.io/github/license/AoiChan-Dev/AoiDev)
+⚙️![build](https://img.shields.io/github/actions/workflow/status/AoiChan-Dev/AoiDev/build.yml)
 
-## Features
+📜![License](https://img.shields.io/github/license/AoiChan-Dev/AoiDev)
 
-- Crystal currency system
-- RPG mechanics
-- SQLite database
-- Lightweight & fast
+## 💡 Đặc trưng
 
-## Download
+- Hệ thống Crystal Gems, Skill đa dạng
+- Hỗ trợ lưu trữ SQLite và MySQLite
+- Nhanh gọn, nhẹ nhàng dễ sử dụng
+
+## 🧱 Phiên bản: Spigot / Paper 1.20.x
+
+## 📥 Tải xuống
 
 https://github.com/AoiChan-Dev/AoiDev/releases/latest
 
-## Installation
+## 📋 Hướng dẫn
 
-1. Download the plugin
-2. Put it into `/plugins/`
-3. Restart server
+1. 📥 Tải xuống Plugins
+2. 📁 Đặt vào thư mục `/plugins/`
+3. 🔄 Khởi động lại Server
