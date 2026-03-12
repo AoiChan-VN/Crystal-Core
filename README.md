@@ -2,9 +2,9 @@
 
 📦![Release](https://img.shields.io/github/v/release/AoiChan-Dev/AoiDev?label=release)
 ⚙️![build](https://img.shields.io/github/actions/workflow/status/AoiChan-Dev/AoiDev/build.yml)
-📜![License](https://img.shields.io/github/license/AoiChan-Dev/AoiDev)
+⚖![License](https://img.shields.io/github/license/AoiChan-Dev/AoiDev)
 
-#【Crystal Ultimate】
+## 💎 Plugins:【Crystal MMORPG】
 
 ## 💡 Đặc trưng
 
