@@ -6,12 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>aoichan</groupId>
-    <artifactId>CrystalUltimate</artifactId>
+    <artifactId>Crystal-Core</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>CrystalUltimate</name>
-    <description>Advanced RPG Gem System for Paper</description>
+    <name>Crystal-MMORPG</name>
+    <description>Advanced RPG Gem System for Spigot/Paper</description>
 
     <!-- Java version -->
     <properties>
