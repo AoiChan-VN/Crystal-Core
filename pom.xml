@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>aoichan.crystal</groupId>
-  <artifactId>CrystalUltimate</artifactId>
+  <artifactId>Crystal-Core</artifactId>
   <version>1.0.0</version>
 
   <properties>
@@ -53,16 +53,23 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.5.0</version>
-        <executions>
-          <execution>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>3.5.0</version>
+
+    <executions>
+        <execution>
             <phase>package</phase>
-            <goals><goal>shade</goal></goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-</project>
+            <goals>
+                <goal>shade</goal>
+            </goals>
+
+            <configuration>
+                <createDependencyReducedPom>false</createDependencyReducedPom>
+                <shadedArtifactAttached>false</shadedArtifactAttached>
+                <finalName>${project.artifactId}-${project.version}</finalName>
+            </configuration>
+
+        </execution>
+    </executions>
+</plugin>
