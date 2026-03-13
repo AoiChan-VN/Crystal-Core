@@ -49,7 +49,7 @@ jobs:
           files: release/*.jar
           fail_on_unmatched_files: false
           body: |
-            ## 💎 Crystal-Core v${{ steps.version.outputs.VERSION }}
+            ## 💎 Crystal-MMORPG v${{ steps.version.outputs.VERSION }}
 
             ### ✨ Changes
             ${{ steps.changelog.outputs.CHANGELOG }} 
