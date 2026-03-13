@@ -1,14 +1,13 @@
-name: 🍀𝓐𝓸𝒾𝒞𝒽𝒶𝓃 ➪【Build】
+name: 🍀𝓐𝓸𝒾𝒞𝒽𝒶𝓃💋 ➪【Build】
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - "src/**"
       - "pom.xml"
       - ".github/workflows/**"
-      
+
   pull_request:
     paths:
       - "src/**"
@@ -19,8 +18,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      actions: write
+      contents: read
+
     steps:
-      - name: Checkout source
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Java
@@ -30,17 +33,32 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-
-      - name: Build project
+      - name: Build
         run: mvn -B package -DskipTests
 
-      - name: Upload Jar
+      - name: Tạo file jar
         uses: actions/upload-artifact@v4
-        with: 
+        with:
           name: Crystal-Core
           path: target/*.jar
           retention-days: 1
+
+      # 🧹 Tự động dọn dẹp Workflows Runs
+      - name: Giữ lại 5 Runs còn lại xóa hết
+        if: success()
+        run: |
+          echo "Dọn dẹp Workflows Runs..."
+
+          runs=$(gh api repos/${{ github.repository }}/actions/runs \
+          --paginate --jq '.workflow_runs[].id')
+
+          count=0
+          for run in $runs; do
+            count=$((count+1))
+            if [ $count -gt 5 ]; then
+              echo "Deleting run $run"
+              gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
+            fi
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
