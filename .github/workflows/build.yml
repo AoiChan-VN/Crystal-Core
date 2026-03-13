@@ -31,7 +31,7 @@ jobs:
       - name: 【🟢🅽🅾🅳🅴】
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: 24
 
       # Cài đặt JavaScript
       - name: 【☕🅹🅰🆅🅰】
@@ -57,7 +57,7 @@ jobs:
       - name: 【🗑️Dọn Dẹp】
         if: success()
         run: |
-          echo "Dọn dẹp Workflows Runs..."
+          echo "Đang dọn Workflows..."
 
           runs=$(gh api repos/${{ github.repository }}/actions/runs \
           --paginate --jq '.workflow_runs[].id')
@@ -66,7 +66,7 @@ jobs:
           for run in $runs; do
             count=$((count+1))
             if [ $count -gt 5 ]; then
-              echo "Deleting run $run"
+              echo "Đã xóa ✂ $run"
               gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
             fi
           done
