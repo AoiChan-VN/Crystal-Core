@@ -13,7 +13,7 @@ public class SkillExecutor {
         // 【!】Code: check cooldown
         if (SkillCooldownManager.isCooldown(player, skill.getId())) {
 
-            player.sendMessage("§cSkill đang hồi chiêu!");
+            player.sendMessage("§cđang hồi chiêu!");
 
             return;
         }
