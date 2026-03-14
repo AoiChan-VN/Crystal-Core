@@ -1,12 +1,12 @@
 package aoichan.crystal.bootstrap;
 
-import aoichan.crystal.core.engine.CrystalEngine;
+import aoichan.crystal.core.engine.AoiEngine;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class CrystalPlugin extends JavaPlugin {
+public final class AoiMain extends JavaPlugin {
 
-    private static AoiPlugin instance;
-    private CrystalEngine engine;
+    private static AoiMain instance;
+    private AoilEngine engine;
 
     @Override
     public void onEnable() {
@@ -14,7 +14,7 @@ public final class CrystalPlugin extends JavaPlugin {
         instance = this;
 
         // 【!】Code: Khởi động engine chính
-        engine = new CrystalEngine(this);
+        engine = new AoiEngine(this);
         engine.start();
 
         getLogger().info("Crystal-MMORPG Khởi động");
