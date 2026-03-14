@@ -64,7 +64,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/AoiChan-Dev/AoiDev</url>
+            <url>https://maven.pkg.github.com/AoiChan-VN/AoiDev</url>
         </repository>
     </distributionManagement>
          
