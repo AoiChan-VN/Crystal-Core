@@ -1,6 +1,6 @@
 package aoichan.crystal.gameplay.socket;
 
-import aoichan.crystal.bootstrap.CrystalPlugin;
+import aoichan.crystal.bootstrap.AoiMain;
 import org.bukkit.NamespacedKey;
 
 public class SocketUtil {
