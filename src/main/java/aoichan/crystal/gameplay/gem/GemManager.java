@@ -7,9 +7,9 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrystalManager {
+public class GemManager {
 
-    private static final Map<String, Crystal> crystals = new HashMap<>();
+    private static final Map<String, Gem> gems = new HashMap<>();
 
     private static File file;
     private static YamlConfiguration config;
@@ -17,27 +17,27 @@ public class CrystalManager {
     public static void load() {
 
         // 【!】Code: load file gems.yml
-        file = new File(AoiMain.get().getDataFolder(), "crystals.yml");
+        file = new File(AoiMain.get().getDataFolder(), "gems.yml");
 
         if (!file.exists()) {
-            AoiMain.get().saveResource("crystals.yml", false);
+            AoiMain.get().saveResource("gems.yml", false);
         }
 
         config = YamlConfiguration.loadConfiguration(file);
 
-        crystals.clear();
+        gems.clear();
 
         for (String id : config.getKeys(false)) {
 
             String name = config.getString(id + ".name");
 
-            Map<CrystalStat, Double> stats = new HashMap<>();
+            Map<GemStat, Double> stats = new HashMap<>();
 
             if (config.contains(id + ".stats")) {
 
                 for (String statKey : config.getConfigurationSection(id + ".stats").getKeys(false)) {
 
-                    CrystalStat stat = CrystalStat.valueOf(statKey.toUpperCase());
+                    GemStat stat = GemStat.valueOf(statKey.toUpperCase());
 
                     double value = config.getDouble(id + ".stats." + statKey);
 
@@ -47,24 +47,24 @@ public class CrystalManager {
 
             }
 
-            Crystal crystal = new Crystal(id, name, stats);
+            Gem gem = new Gem(id, name, stats);
 
-            Crystals.put(id, crystal);
+            gems.put(id, gem);
 
         }
 
     }
 
-    public static Crystal getCrystal(String id) {
+    public static Gem getGem(String id) {
 
-        return crystals.get(id);
-
-    }
-
-    public static Map<String, Crystal> getAll() {
-
-        return crystals;
+        return gems.get(id);
 
     }
 
-} 
+    public static Map<String, Gem> getAll() {
+
+        return gems;
+
+    }
+
+}
