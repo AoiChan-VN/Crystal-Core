@@ -1,4 +1,4 @@
-name: Crystal-Core
+name: Crystal-MMORPG
 version: 1.0.0
 main: aiochan.crystal.bootstrap.CrystalPlugin
 api-version: 1.20
@@ -9,8 +9,11 @@ description: Crystal-MMORPG
 commands:
 
   crystal:
+    aliases:
+    - cr
+    - aoi
     description: AoiChan Main Command
-    usage: /crystal
+    usage: /cr
 
 permissions:
   crystal.use:
