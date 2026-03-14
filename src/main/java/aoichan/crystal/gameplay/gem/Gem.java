@@ -6,17 +6,21 @@ public class Gem {
 
     private final String id;
     private final String name;
+    private final GemRarity rarity;
     private final Map<GemStat, Double> stats;
 
-    public Gem(String id, String name, Map<GemStat, Double> stats) {
+    public Gem(String id, String name, GemRarity rarity, Map<GemStat, Double> stats) {
 
-        // 【!】Code: id của gem
+        // 【!】Code: id gem
         this.id = id;
 
-        // 【!】Code: tên hiển thị
+        // 【!】Code: tên gem
         this.name = name;
 
-        // 【!】Code: stat của gem
+        // 【!】Code: rarity gem
+        this.rarity = rarity;
+
+        // 【!】Code: stat gem
         this.stats = stats;
 
     }
@@ -29,8 +33,12 @@ public class Gem {
         return name;
     }
 
+    public GemRarity getRarity() {
+        return rarity;
+    }
+
     public Map<GemStat, Double> getStats() {
         return stats;
     }
 
-}
+    }
