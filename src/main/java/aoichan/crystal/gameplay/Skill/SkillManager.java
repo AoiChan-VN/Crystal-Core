@@ -1,6 +1,6 @@
 package aoichan.crystal.gameplay.skill;
 
-import aoichan.crystal.bootstrap.CrystalPlugin;
+import aoichan.crystal.bootstrap.AoiMain;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -14,12 +14,12 @@ public class SkillManager {
     public static void load() {
 
         File file = new File(
-                CrystalPlugin.get().getDataFolder(),
+                AoiMain.get().getDataFolder(),
                 "skills.yml"
         );
 
         if (!file.exists()) {
-            CrystalPlugin.get().saveResource("skills.yml", false);
+            AoiMain.get().saveResource("skills.yml", false);
         }
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
