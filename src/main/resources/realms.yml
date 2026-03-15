@@ -1,0 +1,33 @@
+luyen_khi:
+
+  name: "Luyện Khí"
+
+  stats:
+    damage: 5
+    max_mana: 20
+
+truc_co:
+
+  name: "Trúc Cơ"
+
+  stats:
+    damage: 15
+    max_mana: 40
+
+kim_dan:
+
+  name: "Kim Đan"
+
+  stats:
+    damage: 30
+    crit_rate: 10
+    max_mana: 80
+
+nguyen_anh:
+
+  name: "Nguyên Anh"
+
+  stats:
+    damage: 60
+    crit_rate: 20
+    skill_damage: 15
