@@ -17,16 +17,17 @@ public class ModuleLoader {
         this.plugin = plugin;
     }
 
-    // 【!】Code: đăng ký module
+    // 【!】Code: register module
     public void registerModule(Module module){
 
         modules.add(module);
         module.enable();
 
         plugin.getLogger().info("Module enabled: " + module.getName());
+
     }
 
-    // 【!】Code: tắt module
+    // 【!】Code: disable module
     public void disableModules(){
 
         for(Module module : modules){
@@ -34,6 +35,7 @@ public class ModuleLoader {
         }
 
         modules.clear();
+
     }
 
-} 
+}
