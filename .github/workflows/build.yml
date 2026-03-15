@@ -29,7 +29,7 @@ jobs:
       - name: 📒 𝓝𝓸𝓭𝓮
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: 24
 
       # Cài đặt JavaScript
       - name: ☕ ｊａｖａ
@@ -41,7 +41,7 @@ jobs:
 
       # Xây dựng cấu trúc
       - name: ⚒ 𝓑𝓾𝓲𝓵𝓭 🏗️
-        run: mvn -B package -DskipTests
+        run: mvn clean package
       
       # Đóng gói thành file .jar
       - name: 📦 𝓤𝓹𝓵𝓸𝓪𝓻𝓭 𝓳𝓪𝓻
