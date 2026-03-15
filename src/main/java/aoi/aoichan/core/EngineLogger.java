@@ -1,28 +1,18 @@
 package aoi.aoichan.core;
 
-import java.util.logging.Logger;
+import org.bukkit.Bukkit;
 
 /*
- * Logger riêng cho CrystalEngine
- */
+ Logger chuẩn engine
+*/
 
 public class EngineLogger {
 
-    private final Logger logger;
+    public static void log(String message) {
 
-    public EngineLogger(Logger logger) {
-        this.logger = logger;
+        // 【!】Code: log ra console
+        Bukkit.getConsoleSender().sendMessage(message);
+
     }
 
-    public void info(String msg) {
-        logger.info("[CrystalEngine] " + msg);
-    }
-
-    public void warn(String msg) {
-        logger.warning("[CrystalEngine] " + msg);
-    }
-
-    public void error(String msg) {
-        logger.severe("[CrystalEngine] " + msg);
-    }
-} 
+}
