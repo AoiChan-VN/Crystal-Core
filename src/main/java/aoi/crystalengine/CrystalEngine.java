@@ -2,61 +2,46 @@ package com.aoi.crystalengine;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.aoi.crystalengine.player.PlayerManager;
-import com.aoi.crystalengine.storage.DataStorage;
-import com.aoi.crystalengine.api.service.ServiceManager;
-import com.aoi.crystalengine.util.Log;
+import com.aoi.crystalengine.bootstrap.EngineBootstrap;
+import com.aoi.crystalengine.util.EngineLog;
 
 /*
 #【!】Code:
-Main plugin class.
-Đây là lõi khởi động của toàn bộ hệ thống Crystal.
-Các plugin khác sẽ hook vào Engine thông qua API.
+Main engine entry.
+Tất cả hệ thống được khởi tạo từ EngineBootstrap.
 */
 
 public class CrystalEngine extends JavaPlugin {
 
     private static CrystalEngine instance;
-
-    private PlayerManager playerManager;
-    private DataStorage dataStorage;
-    private ServiceManager serviceManager;
+    private EngineBootstrap bootstrap;
 
     @Override
     public void onEnable() {
 
         instance = this;
 
-        Log.info("Booting CrystalEngine...");
+        EngineLog.info("Starting CrystalEngine Core...");
 
-        // init systems
-        serviceManager = new ServiceManager();
-        dataStorage = new DataStorage();
-        playerManager = new PlayerManager();
+        bootstrap = new EngineBootstrap(this);
+        bootstrap.start();
 
-        Log.success("CrystalEngine enabled successfully.");
+        EngineLog.success("CrystalEngine Core started.");
     }
 
     @Override
     public void onDisable() {
 
-        Log.info("CrystalEngine shutting down...");
+        EngineLog.warn("CrystalEngine shutting down...");
+        bootstrap.shutdown();
     }
 
     public static CrystalEngine get() {
         return instance;
     }
 
-    public PlayerManager getPlayerManager() {
-        return playerManager;
+    public EngineBootstrap getBootstrap() {
+        return bootstrap;
     }
 
-    public DataStorage getDataStorage() {
-        return dataStorage;
-    }
-
-    public ServiceManager getServiceManager() {
-        return serviceManager;
-    }
 }
-
