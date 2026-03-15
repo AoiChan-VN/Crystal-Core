@@ -17,7 +17,11 @@ public class EventBus {
 
         for (Method method : listener.getClass().getDeclaredMethods()) {
 
-            if (!method.isAnnotationPresent(Subscribe.class)) continue;
+            if (!method.isAnnotationPresent(Subscribe.class))
+                continue;
+
+            if (method.getParameterCount() != 1)
+                continue;
 
             Class<?> eventType = method.getParameterTypes()[0];
 
@@ -31,19 +35,38 @@ public class EventBus {
 
         List<ListenerMethod> list = listeners.get(event.getClass());
 
-        if (list == null) return;
+        if (list == null)
+            return;
 
-        for (ListenerMethod method : list) {
+        for (ListenerMethod lm : list) {
 
             try {
-                method.method.invoke(method.owner, event);
+
+                lm.method.invoke(lm.owner, event);
+
             } catch (Exception e) {
+
                 e.printStackTrace();
             }
         }
 
     }
 
-    private record ListenerMethod(Object owner, Method method) {}
+    /*
+    #【!】Code:
+    Listener wrapper
+    */
+    private static class ListenerMethod {
 
-} 
+        private final Object owner;
+        private final Method method;
+
+        public ListenerMethod(Object owner, Method method) {
+
+            this.owner = owner;
+            this.method = method;
+        }
+
+    }
+
+}
