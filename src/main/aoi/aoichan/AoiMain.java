@@ -7,10 +7,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AoiMain extends JavaPlugin {
 
-    // 【!】Code: Singleton instance để plugin khác truy cập Engine
+    // 【!】Code: Instance singleton
     private static AoiMain instance;
 
-    // 【!】Code: Core engine
+    // 【!】Code: Engine core
     private EngineCore engineCore;
 
     public static AoiMain getInstance() {
@@ -24,20 +24,20 @@ public final class AoiMain extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        // 【!】Code: khởi tạo instance
+        // 【!】Code: lưu instance
         instance = this;
 
         // 【!】Code: load config
         ConfigManager.init(this);
 
-        // 【!】Code: khởi động engine
+        // 【!】Code: start engine
         engineCore = new EngineCore(this);
         engineCore.start();
 
         // 【!】Code: register command
         getCommand("aoiengine").setExecutor(new EngineCommand());
 
-        getLogger().info("AoiEngine Started.");
+        getLogger().info("AoiEngine Enabled.");
     }
 
     @Override
@@ -48,6 +48,6 @@ public final class AoiMain extends JavaPlugin {
             engineCore.shutdown();
         }
 
-        getLogger().info("AoiEngine Shutdown.");
+        getLogger().info("AoiEngine Disabled.");
     }
 }
