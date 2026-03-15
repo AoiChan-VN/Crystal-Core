@@ -1,14 +1,23 @@
 package aoi.aoichan.core;
 
 import aoi.aoichan.AoiMain;
+import aoi.aoichan.module.ModuleManager;
+import aoi.aoichan.server.TPSMonitor;
+import aoi.aoichan.server.MSPTMonitor;
+import aoi.aoichan.database.DatabaseManager;
 
 /*
- * Bootstrap hệ thống CrystalEngine
- */
+ Bootstrap toàn bộ hệ thống engine
+*/
 
 public class EngineBootstrap {
 
     private final AoiMain plugin;
+
+    private ModuleManager moduleManager;
+    private TPSMonitor tpsMonitor;
+    private MSPTMonitor msptMonitor;
+    private DatabaseManager database;
 
     public EngineBootstrap(AoiMain plugin) {
         this.plugin = plugin;
@@ -16,21 +25,36 @@ public class EngineBootstrap {
 
     public void start() {
 
-        // 【!】Code: Bắt đầu load các hệ thống core
-        plugin.getEngineLogger().info("Đang load Core Systems...");
+        // 【!】Code: load config
+        EngineConfig.load(plugin);
 
-        // Sau này sẽ load:
-        // - ModuleManager
-        // - EventBus
-        // - Database
-        // - API
+        // 【!】Code: database
+        database = new DatabaseManager(plugin);
+        database.connect();
 
-        plugin.getEngineLogger().info("Core Systems đã load xong.");
+        // 【!】Code: module manager
+        moduleManager = new ModuleManager();
+
+        // 【!】Code: monitor server
+        tpsMonitor = new TPSMonitor(plugin);
+        msptMonitor = new MSPTMonitor(plugin);
+
+        tpsMonitor.start();
+        msptMonitor.start();
+
+        EngineLogger.log("§a[AoiEngine] CrystalEngine V2 started.");
+
     }
 
     public void shutdown() {
 
-        // 【!】Code: Tắt các service
-        plugin.getEngineLogger().info("Đang shutdown Core Systems...");
+        if (tpsMonitor != null) tpsMonitor.stop();
+        if (msptMonitor != null) msptMonitor.stop();
+
+        if (database != null) database.disconnect();
+
+        EngineLogger.log("§c[AoiEngine] Engine stopped.");
+
     }
-} 
+
+}
