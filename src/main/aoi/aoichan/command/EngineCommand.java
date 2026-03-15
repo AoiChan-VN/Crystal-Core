@@ -17,7 +17,7 @@ public class EngineCommand implements CommandExecutor {
                 // 【!】Code: reload config
                 ConfigManager.reload();
 
-                sender.sendMessage("AoiEngine config reloaded.");
+                sender.sendMessage("AoiEngine reloaded.");
 
                 return true;
             }
@@ -28,4 +28,5 @@ public class EngineCommand implements CommandExecutor {
 
         return true;
     }
-} 
+
+}
