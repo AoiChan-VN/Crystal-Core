@@ -14,11 +14,11 @@ public class ConfigManager {
 
     }
 
-    // 【!】Code: reload config không restart server
+    // 【!】Code: reload config
     public static void reload(){
 
         plugin.reloadConfig();
 
     }
 
-} 
+}
