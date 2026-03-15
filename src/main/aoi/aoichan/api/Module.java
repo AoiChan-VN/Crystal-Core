@@ -5,10 +5,10 @@ public interface Module {
     // 【!】Code: tên module
     String getName();
 
-    // 【!】Code: bật module
+    // 【!】Code: enable module
     void enable();
 
-    // 【!】Code: tắt module
+    // 【!】Code: disable module
     void disable();
 
-} 
+}
