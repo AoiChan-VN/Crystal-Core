@@ -1,29 +1,34 @@
 package aoi.aoichan.core;
 
-import aoi.aoichan.AoiMain;
 import org.bukkit.configuration.file.FileConfiguration;
+import aoi.aoichan.AoiMain;
 
 /*
- * Quản lý config của CrystalEngine
- */
+ Hệ thống config
+*/
 
 public class EngineConfig {
 
-    private final AoiMain plugin;
-    private final FileConfiguration config;
+    private static FileConfiguration config;
 
-    public EngineConfig(AoiMain plugin) {
+    public static void load(AoiMain plugin) {
 
-        this.plugin = plugin;
+        // 【!】Code: tạo config
+        plugin.saveDefaultConfig();
+        config = plugin.getConfig();
 
-        // 【!】Code: Load config.yml
-        this.config = plugin.getConfig();
     }
 
-    public boolean debugEnabled() {
+    public static void reload(AoiMain plugin) {
 
-        // 【!】Code: đọc config debug
-        return config.getBoolean("debug", false);
+        // 【!】Code: reload config
+        plugin.reloadConfig();
+        config = plugin.getConfig();
+
     }
 
-} 
+    public static FileConfiguration get() {
+        return config;
+    }
+
+}
