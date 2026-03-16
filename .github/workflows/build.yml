@@ -1,5 +1,9 @@
 name: 🍀𝓐𝓸𝒾𝒞𝒽𝒶𝓃💋 ➪【Crystal💎】
 
+# Bật/tắt upload Artifact ( .jar )
+env:
+  ENABLE_ARTIFACT: false
+
 on:
   push:
     branches: [ main ]
@@ -21,9 +25,6 @@ jobs:
       actions: write
       contents: read
 
-    env:
-      ENABLE_ARTIFACT: false
-
     steps:
       - name: 🔎𝓒𝓱𝓮𝓬𝓴 𝓢𝓸𝓾𝓻𝓬𝓮
         uses: actions/checkout@v4
@@ -44,33 +45,36 @@ jobs:
 
       # Xây dựng cấu trúc
       - name: ⚒ 𝓑𝓾𝓲𝓵𝓭 🏗️
-        run: mvn -B package
+        run: mvn -B -ntp package
       
       # Đóng gói file .jar
       - name: 📦 𝓤𝓹𝓵𝓸𝓪𝓻𝓭 𝓳𝓪𝓻
-        if: env.ENABLE_ARTIFACT == 'true'
+        if: ${{ env.ENABLE_ARTIFACT == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: AoiEngine
           path: target/*.jar
           retention-days: 1
 
-      # Tự động dọn dẹp Workflows Runs
+      # Tự động dọn dẹp Workflows Runs 【 5 Runs 】
       - name: 🗑️ 𝓒𝓵𝓮𝓪𝓻 𝓦𝓸𝓻𝓴𝓯𝓸𝔀𝓼
-        if: success()
         run: |
-          echo "Đang dọn Workflows..."
+          gh api repos/${{ github.repository }}/actions/runs \
+            --paginate \
+            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[5:] | .[].id' \
+            | while read run; do
+                echo "đã xóa ✂ $run"
+                gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
+            done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          runs=$(gh api repos/${{ github.repository }}/actions/runs \
-          --paginate --jq '.workflow_runs[].id')
-
-          count=0
-          for run in $runs; do
-            count=$((count+1))
-            if [ $count -gt 5 ]; then
-              echo "Đã xóa ✂ $run"
-              gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
-            fi
+      # Tự động dọn dẹp Cache 【 5 Cache 】
+      - name: 🗑️ 𝓒𝓵𝓮𝓪𝓻 𝓒𝓪𝓬𝓱𝓮
+        run: |
+          gh cache list --limit 100 | awk '{print $1}' | tail -n +6 | while read key; do
+            gh đã xóa ✂ "$key"
           done
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
