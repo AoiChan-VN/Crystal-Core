@@ -21,6 +21,9 @@ jobs:
       actions: write
       contents: read
 
+    env:
+      ENABLE_ARTIFACT: false
+
     steps:
       - name: 🔎𝓒𝓱𝓮𝓬𝓴 𝓢𝓸𝓾𝓻𝓬𝓮
         uses: actions/checkout@v4
@@ -43,8 +46,9 @@ jobs:
       - name: ⚒ 𝓑𝓾𝓲𝓵𝓭 🏗️
         run: mvn -B package
       
-      # Đóng gói thành file .jar
+      # Đóng gói file .jar
       - name: 📦 𝓤𝓹𝓵𝓸𝓪𝓻𝓭 𝓳𝓪𝓻
+        if: env.ENABLE_ARTIFACT == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: AoiEngine
