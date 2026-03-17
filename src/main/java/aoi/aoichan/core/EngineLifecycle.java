@@ -20,7 +20,7 @@ public class EngineLifecycle {
         this.plugin = plugin;
     }
 
-    public void start() {EngineAPI.init(this);
+    public void start() {
         // 1. Init thread pool
         this.threadPool = new EngineThreadPool();
 
@@ -29,6 +29,9 @@ public class EngineLifecycle {
 
         // 3. Register core services
         registerCoreServices();
+
+        // 4.
+        EngineAPI.init(this);
 
         // 4. Load modules
         this.moduleManager = new ModuleManager(serviceRegistry);
