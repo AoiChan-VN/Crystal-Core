@@ -1,4 +1,4 @@
-# 🌌 AoiCore - Architecture Design (Refined Premium Edition)
+# 🌌 AoiCore - Architecture Design (Premium Edition)
 
 ## 🎯 Mục tiêu
 
