@@ -275,7 +275,7 @@ data.set("mana", 100);
 
 ```yaml
 name: AoiCore
-main: aoi.aoichan.bootstrap.AoiMain
+main: aoi.AoiChan.bootstrap.AoiMain
 version: 1.0
 api-version: 1.21
 ```
