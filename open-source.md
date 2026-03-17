@@ -27,123 +27,73 @@ AoiCore là core engine cho server Minecraft (Spigot/Paper) với mục tiêu:
 ---
 
 ## 🧩 Kiến trúc tổng thể
-
+có thể bổ sung thêm nếu cần
 ```
 AoiCore
 ├── AoiMain
 ├── core/
-│   ├── CoreAPI
-│   ├── CoreProvider
-│
 ├── player/
-│   ├── PlayerData
-│   ├── PlayerService
-│
 ├── data/
-│   ├── DataContainer
-│   ├── DataRegistry
-│   ├── DataKey (type-safe)
-│
 ├── database/
-│   ├── Database
-│   ├── DataRepository
-│
 ├── system/
-│   ├── Scheduler
-│   ├── Config
-│
 ├── hook/
-│   ├── CoreHook
-│
 ├── event/
-│   ├── PlayerDataLoadEvent
-│   ├── PlayerDataSaveEvent
-│
 ├── util/
 ```
 
 ## 🧍 PlayerData Design
-
 ## 📦 DataContainer System (Improved)
-
 ### 🔐 Type-safe nâng cao
-
 ## 🔌 Hook System
-
-### Cơ chế hoạt động
-
-Khi player load:
-
-## ⚡ Player Flow
-
-### Join
-
-* Async load từ DB
-* Deserialize JSON
-* Tạo PlayerData
-* Attach containers từ hooks
-* Đưa vào cache
-
-### Runtime
-
-* Plugin gọi API
-* Lấy PlayerData từ cache
-* Xử lý hoàn toàn trên RAM
-
-### Quit
-
-* Mark dirty
-* Save async
-* Remove khỏi cache
-* 
+## ⚡ Player Flows
 ## 🗃️ Database Design
 
 ### Format JSON
 
 ### Ưu điểm
-
 * Không cần migration schema
 * Dễ mở rộng
 * Linh hoạt plugin
 
 ## ⚙️ Cache System
-
 ## 🔄 Save System
-
 ### Cách hoạt động
-
 * Khi data thay đổi → set dirty
 * Scheduler chạy mỗi X giây
 * Batch save các player dirty
 
 ### Bổ sung an toàn
-
 * Save ngay khi player quit
 * Flush toàn bộ khi server shutdown
 
 ## ⏱️ Scheduler System
-
 ## ⚙️ Config System
-
 * Load config.yml vào RAM
 * Có thể reload bằng command
 * Không cần restart server
-
+* 
 ---
 
-## 📡 API Usage
+🧠 Advanced Pack
 
+DataRegistry auto register container
+Hook auto scan (reflection)
+Event system (load/save event)
+SQLite (main) / MySQL / Redis tùy chỉnh sử dụng trong config
+Packet-level optimization
+
+⚡ Hardcore Optimization
+
+Async write queue (non-blocking IO)
+Binary serialize (MessagePack)
+Cache metrics (TPS impact monitor)
+
+## 📡 API Usage
 ## 📡 Event System
 
 → Cho phép plugin hook vào lifecycle
 
 ## 🚀 Mở rộng plugin
-
-Plugin mới chỉ cần:
-
-1. Implement CoreHook
-2. Register hook
-3. Dùng DataContainer
 
 👉 Không cần sửa Core
 
@@ -168,16 +118,6 @@ Plugin mới chỉ cần:
 * Query DB liên tục
 * Sync IO trên main thread
 * Coupling giữa plugins
-
----
-
-## 🧪 Hướng nâng cấp tương lai
-
-* Async write queue
-* Metrics (cache size, DB latency)
-* Module system
-* Binary serialization (MessagePack/BSON)
-
 ---
 
 ## 🎯 Kết luận
@@ -192,3 +132,6 @@ Nó là nền tảng backend cho toàn bộ hệ sinh thái plugin:
 
 👉 Sẵn sàng cho production server quy mô lớn 🚀
  
+## Quan trọng:
+• No Code test, lỗi, bug ẩn
+• File + Code Comment // 【❅】:
