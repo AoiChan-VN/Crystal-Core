@@ -100,6 +100,8 @@ src/main/java/aoichan
 * Module Auto Save
 * Dirty Flag System
 * Lifencycle
+* EventBus riêng (không phụ thuộc Bukkit)
+* Module dependency graph (load đúng thứ tự)
 
 ---
 
