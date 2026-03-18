@@ -7,7 +7,7 @@
 ## 💡 Giới thiệu:
 
 - Hệ thống: Server MMORPG
-- Hỗ trợ lưu trữ SQLite và MySQLite
+- Hỗ trợ lưu trữ SQLite và MySQL
 - Nhanh gọn, nhẹ nhàng dễ sử dụng
 
 ## 📥 Tải xuống:
