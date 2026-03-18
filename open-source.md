@@ -20,8 +20,7 @@ AoiCore là core engine cho server Minecraft (Spigot/Paper) với mục tiêu:
 * Core không phụ thuộc plugin con
 
 
-## 🚀 Mở rộng plugin
-👉 Không cần sửa Core
+## Mở rộng plugin 👉 Không cần sửa Core
 
 ---
 
@@ -30,7 +29,9 @@ AoiCore là core engine cho server Minecraft (Spigot/Paper) với mục tiêu:
 * Không block main thread
 * không spam load, save,...
 * Không phụ thuộc gameplay
-* Reload không restart
+* HOT-Reload không restart
+* PlayerData System ( SQLite / MySQL )
+* Module Auto Save
 
 ---
 
