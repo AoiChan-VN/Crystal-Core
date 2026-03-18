@@ -37,6 +37,23 @@ AoiCore
 ├── data/
 │   ├── DataContainer.java
 │   ├── DataRegistry.java
+│   ├── key/
+│   │   ├── DataKey.java
+│   │   ├── NamespacedKey.java
+│   ├── serializer/
+│        ├── DataSerializer.java
+│        ├── JsonSerializer.java
+│        ├── MsgPackSerializer.java
+├── pipeline/
+│   ├── Pipeline.java
+│   ├── PipelineStage.java
+│   ├── PipelineContext.java
+├──thread/
+│   ├── ThreadContext.java
+│   ├── ThreadDispatcher.java
+├── service/
+│   ├── ServiceRegistry.java
+│   ├── ServiceProvider.java
 ├── pool/
 │   ├── PacketPool
 │   ├── DataContainerPool
@@ -44,6 +61,10 @@ AoiCore
 │   ├── CacheManager.java
 │   ├── CacheEntry.java
 │   ├── CachePolicy.java
+├── module/
+│   ├── AoiModule.java
+│   ├── ModuleManager.java
+│   ├── ModuleLoader.java
 ├── database/
 │   ├── DatabaseProvider.java
 │   ├── AsyncQueue.java
