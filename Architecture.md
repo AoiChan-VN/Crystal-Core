@@ -224,7 +224,8 @@ LOAD → ENABLE → ACTIVE → DISABLE
 
 ---
  
-## Quan trọng:
+## Quan trọng khi Build:
+
+• No Skeleton
 • No Code test, lỗi, bug ẩn
 • File + Code Comment // 【❅】:
-
