@@ -3,8 +3,8 @@
 ##               ꧁𝓐𝓸𝓲𝓬𝓱𝓪𝓷꧂
 | Máy chủ | phiên bản |       Hỗ trợ       |
 |---------|-----------|--------------------|
-|  Spigot |   1.0.x   | :white_check_mark: |
-|  Paper  |           |                    |
+|  Spigot |  v1.0.x   | :white_check_mark: |
+|  Paper  |           | :white_check_mark: |
 |         |           |                    |
 
 ## 🔴Báo lỗi
