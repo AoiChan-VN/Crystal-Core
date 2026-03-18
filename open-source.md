@@ -19,105 +19,8 @@ AoiCore là core engine cho server Minecraft (Spigot/Paper) với mục tiêu:
 * Tuyệt đối không truy cập DB trên main thread
 * Core không phụ thuộc plugin con
 
----
-
-## 🧩 Kiến trúc tổng thể
-có thể bổ sung thêm nếu cần
-```
-AoiCore
-├── bootstrap/
-│   └── AoiMain.java
-├── lifecycle/
-│   └── LifecycleManager.java
-├── player/
-│   ├── PlayerManager.java
-│   ├── PlayerSession.java
-│   ├── PlayerState.java
-│   ├── PlayerPipeline.java
-├── data/
-│   ├── DataContainer.java
-│   ├── DataRegistry.java
-│   ├── key/
-│   │   ├── DataKey.java
-│   │   ├── NamespacedKey.java
-│   ├── serializer/
-│        ├── DataSerializer.java
-│        ├── JsonSerializer.java
-│        ├── MsgPackSerializer.java
-├── pipeline/
-│   ├── Pipeline.java
-│   ├── PipelineStage.java
-│   ├── PipelineContext.java
-├──thread/
-│   ├── ThreadContext.java
-│   ├── ThreadDispatcher.java
-├── service/
-│   ├── ServiceRegistry.java
-│   ├── ServiceProvider.java
-├── pool/
-│   ├── PacketPool
-│   ├── DataContainerPool
-├── cache/
-│   ├── CacheManager.java
-│   ├── CacheEntry.java
-│   ├── CachePolicy.java
-├── module/
-│   ├── AoiModule.java
-│   ├── ModuleManager.java
-│   ├── ModuleLoader.java
-├── database/
-│   ├── DatabaseProvider.java
-│   ├── AsyncQueue.java
-│   ├── driver/
-│        ├── SQLiteDriver.java
-│        ├── MySQLDriver.java
-│        ├── RedisDriver.java
-├── scheduler/
-│   ├── SyncScheduler.java
-│   ├── AsyncScheduler.java
-├──metrics/
-│   ├── TPSMonitor
-│   ├── CacheStats
-│   ├── DBStats
-├── event/
-│   ├── AoiEventBus.java
-│   ├── events/
-│       ├── PlayerDataLoadEvent
-│       ├── PlayerDataSaveEvent
-├── hook/
-├── util/
-```
-
-### 🔐 Type-safe nâng cao
-•Key system (namespace)
-•Versioning
-•Serializer strategy
-
-### Format JSON
-
-## 🔄 Batch Save | Save System | Auto Save Scheduler
-## ⏱️ Scheduler System
-## ⚙️ Hot Reload Engine
----
-
-🧠 Advanced Pack
-
-DataRegistry auto register container
-Hook auto scan (reflection)
-Event system (load/save event)
-SQLite (main) / MySQL / Redis tùy chỉnh sử dụng trong config
-Packet-level optimization
-
-⚡ Hardcore Optimization
-
-Async write queue (non-blocking IO)
-Binary serialize (MessagePack)
-Cache metrics (TPS impact monitor
-
-→ Cho phép plugin hook vào lifecycle
 
 ## 🚀 Mở rộng plugin
-
 👉 Không cần sửa Core
 
 ---
@@ -125,6 +28,7 @@ Cache metrics (TPS impact monitor
 ## 🧱 Tiêu chuẩn "Premium"
 
 * Không block main thread
+* không spam load, save,...
 * Không phụ thuộc gameplay
 * Reload không restart
 
