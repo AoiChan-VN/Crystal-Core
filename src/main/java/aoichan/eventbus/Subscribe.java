@@ -6,4 +6,5 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 public @interface Subscribe {
     EventPriority priority() default EventPriority.NORMAL;
+    boolean async() default false;
 }
