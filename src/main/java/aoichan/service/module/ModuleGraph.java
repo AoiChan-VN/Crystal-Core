@@ -15,22 +15,30 @@ public class ModuleGraph {
     public List<Module> resolve() {
         List<Module> sorted = new ArrayList<>();
         Set<Module> visited = new HashSet<>();
+        Set<Module> stack = new HashSet<>();
 
         for (Module m : graph.keySet()) {
-            dfs(m, visited, sorted);
+            dfs(m, visited, stack, sorted);
         }
 
         return sorted;
     }
 
-    private void dfs(Module m, Set<Module> visited, List<Module> sorted) {
-        if (visited.contains(m)) return;
-        visited.add(m);
-
-        for (Module dep : graph.getOrDefault(m, Collections.emptyList())) {
-            dfs(dep, visited, sorted);
+    private void dfs(Module m, Set<Module> visited, Set<Module> stack, List<Module> sorted) {
+        if (stack.contains(m)) {
+            throw new IllegalStateException("Cycle detected in ModuleGraph: " + m.getClass().getSimpleName());
         }
 
+        if (visited.contains(m)) return;
+
+        stack.add(m);
+
+        for (Module dep : graph.getOrDefault(m, Collections.emptyList())) {
+            dfs(dep, visited, stack, sorted);
+        }
+
+        stack.remove(m);
+        visited.add(m);
         sorted.add(m);
     }
 }
