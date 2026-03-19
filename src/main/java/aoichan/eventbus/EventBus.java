@@ -1,5 +1,7 @@
 package aoichan.eventbus;
 
+import aoichan.thread.AsyncPool;
+
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -15,7 +17,7 @@ public class EventBus {
             Subscribe meta = m.getAnnotation(Subscribe.class);
 
             listeners.computeIfAbsent(type, k -> new ArrayList<>())
-                    .add(new ListenerMethod(obj, m, meta.priority()));
+                    .add(new ListenerMethod(obj, m, meta.priority(), meta.async()));
         }
 
         listeners.values().forEach(list -> list.sort(Comparator.comparing(l -> l.priority)));
@@ -28,10 +30,18 @@ public class EventBus {
         for (ListenerMethod lm : list) {
             if (event.isCancelled()) break;
 
-            try {
-                lm.method.invoke(lm.owner, event);
-            } catch (Exception e) {
-                e.printStackTrace();
+            Runnable task = () -> {
+                try {
+                    lm.method.invoke(lm.owner, event);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            };
+
+            if (lm.async) {
+                AsyncPool.run(task);
+            } else {
+                task.run();
             }
         }
     }
@@ -40,11 +50,13 @@ public class EventBus {
         Object owner;
         Method method;
         EventPriority priority;
+        boolean async;
 
-        ListenerMethod(Object o, Method m, EventPriority p) {
+        ListenerMethod(Object o, Method m, EventPriority p, boolean async) {
             owner = o;
             method = m;
             priority = p;
+            this.async = async;
             method.setAccessible(true);
         }
     }
