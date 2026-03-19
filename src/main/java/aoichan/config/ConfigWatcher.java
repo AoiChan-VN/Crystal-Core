@@ -1,5 +1,7 @@
 package aoichan.config;
 
+import aoichan.thread.AsyncPool;
+
 import java.io.IOException;
 import java.nio.file.*;
 
@@ -15,22 +17,23 @@ public class ConfigWatcher implements Runnable {
 
     @Override
     public void run() {
-        try {
-            WatchService watch = FileSystems.getDefault().newWatchService();
-            path.register(watch, StandardWatchEventKinds.ENTRY_MODIFY);
+        AsyncPool.run(() -> {
+            try {
+                WatchService watch = FileSystems.getDefault().newWatchService();
+                path.register(watch, StandardWatchEventKinds.ENTRY_MODIFY);
 
-            while (true) {
-                WatchKey key = watch.take();
+                while (true) {
+                    WatchKey key = watch.take();
 
-                for (WatchEvent<?> event : key.pollEvents()) {
-                    reload.run();
+                    for (WatchEvent<?> event : key.pollEvents()) {
+                        reload.run();
+                    }
+
+                    key.reset();
                 }
-
-                key.reset();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
             }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        });
     }
 }
- 
