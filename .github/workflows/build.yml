@@ -1,4 +1,4 @@
-name: 🍀𝓐𝓸𝒾𝒞𝒽𝒶𝓃💋 ➪【Crystal💎】
+name: ➪【🌱AoiEngine🍀】
 
 # Bật/tắt upload Artifact ( .jar )
 env:
@@ -18,7 +18,7 @@ on:
 
 jobs:
   build:
-    name: 🎐𝓐𝓸𝓲𝓒𝓱𝓪𝓷🎐
+    name: ༺◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡༻
     runs-on: ubuntu-latest
 
     permissions:
