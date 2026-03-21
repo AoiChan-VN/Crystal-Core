@@ -1,7 +1,8 @@
-name: ༺◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡༻
+name: AoiRPG
 version: 1.0
-main: vn.aoi.onii.plugin
+main: vn.aoi.onii.Plugin
 api-version: 1.20
+
 commands:
-  onee:
+  aoi:
     description: Bạn đang gọi tui à?
