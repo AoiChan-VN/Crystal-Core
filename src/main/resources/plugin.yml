@@ -1,1 +1,7 @@
-
+name: ༺◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡༻
+version: 1.0
+main: aoi.package.Main
+api-version: 1.20
+commands:
+  onee:
+    description: Call Onee-chan
