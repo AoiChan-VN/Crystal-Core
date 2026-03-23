@@ -4,5 +4,6 @@ main: vn.aoi.onii.Main
 api-version: 1.20
 
 commands:
-  aoi:
+  onii:
+  class:
     description: Bạn đang gọi tui à?
