@@ -38,4 +38,3 @@ public class DatabaseManager {
         try { if (conn != null) conn.close(); } catch (Exception ignored) {}
     }
 }
- 
