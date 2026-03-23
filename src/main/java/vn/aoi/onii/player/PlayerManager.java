@@ -1,4 +1,3 @@
-// File: player/PlayerManager.java
 package vn.aoi.onii.player;
 
 import org.bukkit.Bukkit;
