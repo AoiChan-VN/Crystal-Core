@@ -9,6 +9,7 @@ public class PlayerData {
     private int exp = 0;
 
     private transient boolean dirty;
+    
     private String playerclass;
 
     public PlayerData(UUID uuid) {
@@ -22,7 +23,6 @@ public class PlayerData {
             level++;
         }
         dirty = true;
-    }
     
     public void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
