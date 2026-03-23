@@ -21,4 +21,4 @@ public class MageClass implements PlayerClass {
     public void onRemove(ClassContext ctx) {
         ctx.getPlayer().setWalkSpeed(0.2f);
     }
-} 
+}
