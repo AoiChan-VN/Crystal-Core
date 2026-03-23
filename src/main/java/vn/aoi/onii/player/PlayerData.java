@@ -23,10 +23,6 @@ public class PlayerData {
             level++;
         }
         dirty = true;
-    
-    public void setPlayerClass(String playerClass) {
-        this.playerClass = playerClass;
-        this.dirty = true;
     }
 
     public boolean isDirty() { return dirty; }
@@ -36,4 +32,8 @@ public class PlayerData {
     public int getLevel() { return level; }
     
     public String getPlayerClass() { return playerClass; }
+
+    public void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
+        this.dirty = true;
 }
