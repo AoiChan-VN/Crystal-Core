@@ -1,4 +1,3 @@
-// File: database/DatabaseManager.java
 package vn.aoi.onii.database;
 
 import vn.aoi.onii.Main;
