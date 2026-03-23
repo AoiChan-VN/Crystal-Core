@@ -10,9 +10,14 @@ import java.util.*;
 public class SkillConfigManager {
 
     private final Map<String, SkillConfig> configs = new HashMap<>();
+    
+public SkillConfig get(String id) {
+    if (id == null) return null;
+    return configs.get(id.toLowerCase());
+}
 
     public void load(File file) {
-        configs.clear(); // FIX reload
+        configs.clear();
 
         try {
             if (!file.exists()) {
