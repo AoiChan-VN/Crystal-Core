@@ -49,4 +49,3 @@ public class ClassManager {
         return registry.get(data.getPlayerClass());
     }
 }
- 
