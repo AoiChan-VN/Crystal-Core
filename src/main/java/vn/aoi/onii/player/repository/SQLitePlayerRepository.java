@@ -22,7 +22,11 @@ public class SQLitePlayerRepository {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return gson.fromJson(rs.getString("json"), PlayerData.class);
+                PlayerData data = gson.fromJson(rs.getString("json"), PlayerData.class);
+                if (data == null || data.getUuid() == null) {
+                    return new PlayerData(uuid);
+                }
+                return data;
             }
         } catch (Exception e) {
             e.printStackTrace();
