@@ -1,4 +1,3 @@
-// File: scheduler/AsyncExecutor.java
 package vn.aoi.onii.scheduler;
 
 import java.util.concurrent.*;
