@@ -1,4 +1,3 @@
-// File: core/Bootstrap.java
 package vn.aoi.onii.core;
 
 import vn.aoi.onii.Main;
@@ -34,6 +33,12 @@ public class Bootstrap {
         this.playerManager = new PlayerManager(plugin, database, executor);
         playerManager.init();
 
+        ClassRegistry registry = new ClassRegistry();
+        registry.register(new WarriorClass());
+        registry.register(new MageClass());
+        
+        ClassManager classManager = new ClassManager(playerManager, registry);
+        
         this.commandManager = new CommandManager(plugin, playerManager);
         commandManager.register();
     }
