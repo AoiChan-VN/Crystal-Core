@@ -39,7 +39,13 @@ public class PlayerManager implements Listener {
 
     @EventHandler
     public void join(PlayerJoinEvent e) {
-        executor.run(() -> cache.put(e.getPlayer().getUniqueId(), repo.load(e.getPlayer().getUniqueId())));
+        UUID id = e.getPlayer().getUniqueId();
+
+        executor.run(() -> {
+            PlayerData data = repo.load(id);
+
+            Bukkit.getScheduler().runTask(plugin, () -> cache.put(id, data));
+        });
     }
 
     @EventHandler
