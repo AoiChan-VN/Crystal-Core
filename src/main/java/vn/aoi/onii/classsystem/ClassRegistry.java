@@ -17,4 +17,4 @@ public class ClassRegistry {
     public Collection<PlayerClass> all() {
         return classes.values();
     }
-} 
+}
