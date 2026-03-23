@@ -12,10 +12,10 @@ public class CommandManager {
     private final PlayerManager playerManager;
     private final ClassManager ClassManager;
 
-    public CommandManager(Main plugin, PlayerManager pm, ClassManager cl) {
+    public CommandManager(Main plugin, PlayerManager pm, ClassManager cm) {
         this.plugin = plugin;
         this.playerManager = pm;
-        this.classManager = cl;
+        this.classManager = cm;
     }
 
     public void register() {
