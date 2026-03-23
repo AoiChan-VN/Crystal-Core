@@ -22,4 +22,4 @@ public class ConfigManager {
     }
 
     public FileConfiguration get() { return config; }
-} 
+}
