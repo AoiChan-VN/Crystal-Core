@@ -1,7 +1,5 @@
 package vn.aoi.onii.player;
 
-import vn.aoi.onii.classsystem.PlayerClass;
-
 import java.util.UUID;
 
 public class PlayerData {
