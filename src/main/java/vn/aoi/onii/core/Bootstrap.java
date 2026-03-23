@@ -57,6 +57,7 @@ public class Bootstrap {
         CooldownManager cooldown = new CooldownManager();
 
         SkillManager skillManager = new SkillManager(
+                plugin,
                 skillRegistry,
                 cooldown,
                 classManager,
