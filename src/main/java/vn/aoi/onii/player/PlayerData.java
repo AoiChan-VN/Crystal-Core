@@ -1,4 +1,3 @@
-// File: player/PlayerData.java
 package vn.aoi.onii.player;
 
 import java.util.UUID;
@@ -10,6 +9,7 @@ public class PlayerData {
     private int exp = 0;
 
     private transient boolean dirty;
+    private String playerclass;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
@@ -23,10 +23,17 @@ public class PlayerData {
         }
         dirty = true;
     }
+    
+    public void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
+        this.dirty = true;
+    }
 
     public boolean isDirty() { return dirty; }
     public void saved() { dirty = false; }
 
     public UUID getUuid() { return uuid; }
     public int getLevel() { return level; }
+    
+    public String getPlayerClass() { return playerClass; }
 }
