@@ -1,8 +1,6 @@
 // =========================
 //       CLASS SYSTEM
 // =========================
-
-// File: classsystem/PlayerClass.java
 package vn.aoi.onii.classsystem;
 
 public interface PlayerClass {
