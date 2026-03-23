@@ -29,4 +29,4 @@ public class PlayerData {
 
     public UUID getUuid() { return uuid; }
     public int getLevel() { return level; }
-} 
+}
