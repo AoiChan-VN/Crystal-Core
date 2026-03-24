@@ -13,17 +13,15 @@ public class SkillManager {
 
     private final Main plugin;
     private final SkillRegistry registry;
-    private final CooldownManager cooldown;
     private final ClassManager classManager;
     private final PlayerManager playerManager;
     private final SkillConfigManager configManager;
 
-    public SkillManager(Main plugin, SkillRegistry registry, CooldownManager cooldown,
+    public SkillManager(Main plugin, SkillRegistry registry,
                         ClassManager classManager, PlayerManager playerManager,
                         SkillConfigManager configManager) {
         this.plugin = plugin;
         this.registry = registry;
-        this.cooldown = cooldown;
         this.classManager = classManager;
         this.playerManager = playerManager;
         this.configManager = configManager;
