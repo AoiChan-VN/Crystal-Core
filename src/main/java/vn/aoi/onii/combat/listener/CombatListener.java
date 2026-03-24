@@ -24,7 +24,7 @@ public class CombatListener implements Listener {
         if (attackerData == null) return;
 
         StatProfile atk = attackerData.getStats();
-        ElementProfile atkElem = new ElementProfile();
+        ElementProfile atkElem = attackerData.getElements();
 
         StatProfile def = new StatProfile();
         ElementProfile defElem = new ElementProfile();
@@ -33,6 +33,7 @@ public class CombatListener implements Listener {
             var d = playerManager.get(tp);
             if (d != null) {
                 def = d.getStats();
+                defElem = d.getElements();
             }
         }
 
@@ -46,9 +47,7 @@ public class CombatListener implements Listener {
 
         e.setDamage(result.damage);
 
-        if (result.crit) {
-            attacker.sendMessage("CRIT " + (int) result.damage);
-        }
+        if (result.crit) attacker.sendMessage("CRIT " + (int) result.damage);
 
         if (result.element != ElementType.NONE) {
             attacker.sendMessage("ELEMENT " + result.element.name());
