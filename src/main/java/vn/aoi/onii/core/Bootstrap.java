@@ -66,6 +66,13 @@ public class Bootstrap {
                 skillConfig
         );
 
+        BuffManager buffManager = new BuffManager();
+
+        getServer().getPluginManager().registerEvents(
+            new CombatListener(playerManager, buffManager),
+            this
+        );
+
         Bukkit.getPluginManager().registerEvents(new SkillListener(skillManager, classManager), plugin);
         Bukkit.getPluginManager().registerEvents(new CombatListener(playerManager), plugin);
 
