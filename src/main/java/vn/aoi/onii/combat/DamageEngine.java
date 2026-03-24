@@ -19,6 +19,8 @@ public class DamageEngine {
         double def = defender.get(StatType.DEF);
         double critChance = attacker.get(StatType.CRIT);
 
+        critChance = Math.max(0, Math.min(critChance, 1));
+
         double damage = base + (str * 0.7) + (agi * 0.3);
 
         damage *= (100.0 / (100.0 + def));
@@ -34,6 +36,8 @@ public class DamageEngine {
         double elementMultiplier = 1.0 + (atkElement - defElement) / 100.0;
 
         damage *= elementMultiplier;
+
+        damage = Math.max(0, damage);
 
         result.damage = damage;
         result.crit = crit;
