@@ -1,6 +1,6 @@
 package vn.aoi.onii.player;
 
-import vn.aoi.onii.combat.StatProfile;
+import vn.aoi.onii.combat.*;
 import java.util.UUID;
 
 public class PlayerData {
@@ -16,27 +16,22 @@ public class PlayerData {
     private String playerClass;
 
     private StatProfile stats = new StatProfile();
+    private ElementProfile elements = new ElementProfile();
 
     private transient boolean dirty;
 
     public PlayerData() {}
 
-    public PlayerData(UUID uuid) {
-        this.uuid = uuid;
-    }
+    public PlayerData(UUID uuid) { this.uuid = uuid; }
 
     public StatProfile getStats() {
         if (stats == null) stats = new StatProfile();
         return stats;
     }
 
-    public void addExp(int amount) {
-        exp += amount;
-        while (exp >= level * 100) {
-            exp -= level * 100;
-            level++;
-        }
-        dirty = true;
+    public ElementProfile getElements() {
+        if (elements == null) elements = new ElementProfile();
+        return elements;
     }
 
     public boolean hasMana(int amount) { return mana >= amount; }
@@ -53,9 +48,6 @@ public class PlayerData {
         dirty = true;
     }
 
-    public int getMana() { return mana; }
-    public int getMaxMana() { return maxMana; }
-
     public String getPlayerClass() { return playerClass; }
 
     public void setPlayerClass(String playerClass) {
@@ -67,5 +59,4 @@ public class PlayerData {
     public void saved() { dirty = false; }
 
     public UUID getUuid() { return uuid; }
-    public int getLevel() { return level; }
 }
