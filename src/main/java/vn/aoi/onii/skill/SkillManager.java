@@ -1,62 +1,70 @@
 package vn.aoi.onii.skill;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import vn.aoi.onii.Main;
-import vn.aoi.onii.classsystem.ClassContext;
-import vn.aoi.onii.classsystem.ClassManager;
+
 import vn.aoi.onii.player.PlayerManager;
-import vn.aoi.onii.skill.config.SkillConfig;
-import vn.aoi.onii.skill.config.SkillConfigManager;
+import vn.aoi.onii.player.PlayerData;
+import vn.aoi.onii.classsystem.ClassContext;
+import vn.aoi.onii.combat.BuffManager;
+
+import java.util.*;
 
 public class SkillManager {
 
-    private final Main plugin;
-    private final SkillRegistry registry;
-    private final ClassManager classManager;
-    private final PlayerManager playerManager;
-    private final SkillConfigManager configManager;
+    private final Map<String, Skill> skills = new HashMap<>();
+    private final Map<UUID, Map<String, Long>> cooldowns = new HashMap<>();
 
-    public SkillManager(Main plugin, SkillRegistry registry,
-                        ClassManager classManager, PlayerManager playerManager,
-                        SkillConfigManager configManager) {
-        this.plugin = plugin;
-        this.registry = registry;
-        this.classManager = classManager;
-        this.playerManager = playerManager;
+    private final SkillConfigManager configManager;
+    private final PlayerManager playerManager;
+    private final BuffManager buffManager;
+
+    public SkillManager(SkillConfigManager configManager, PlayerManager playerManager, BuffManager buffManager) {
         this.configManager = configManager;
+        this.playerManager = playerManager;
+        this.buffManager = buffManager;
+    }
+
+    public void register(Skill skill) {
+        skills.put(skill.getId(), skill);
     }
 
     public void use(Player player, String skillId) {
 
-        if (!Bukkit.isPrimaryThread()) {
-            Bukkit.getScheduler().runTask(plugin, () -> use(player, skillId));
-            return;
-        }
-
-        Skill skill = registry.get(skillId);
+        Skill skill = skills.get(skillId);
         if (skill == null) return;
+
+        PlayerData data = playerManager.get(player);
+        if (data == null) return;
 
         SkillConfig cfg = configManager.get(skillId);
         if (cfg == null) return;
 
-        if (cooldown.isOnCooldown(player.getUniqueId(), skillId)) {
-            player.sendMessage("Cooldown...");
+        if (!data.hasMana(cfg.mana)) {
+            player.sendMessage("§cNot enough mana");
             return;
         }
 
-        var data = playerManager.get(player);
-        if (data == null) return;
-
-        if (!data.hasMana(cfg.mana)) {
-            player.sendMessage("Not enough mana");
+        if (isCooldown(player.getUniqueId(), skillId)) {
+            player.sendMessage("§eSkill cooling down...");
             return;
         }
 
         data.consumeMana(cfg.mana);
 
-        skill.execute(new ClassContext(player, data));
+        ClassContext ctx = new ClassContext(player, data, buffManager);
+        skill.execute(ctx);
 
-        cooldown.setCooldown(player.getUniqueId(), skillId, cfg.cooldown);
+        setCooldown(player.getUniqueId(), skillId, cfg.cooldown);
+    }
+
+    private boolean isCooldown(UUID uuid, String skillId) {
+        Map<String, Long> map = cooldowns.getOrDefault(uuid, Collections.emptyMap());
+        long time = map.getOrDefault(skillId, 0L);
+        return System.currentTimeMillis() < time;
+    }
+
+    private void setCooldown(UUID uuid, String skillId, long cd) {
+        cooldowns.computeIfAbsent(uuid, k -> new HashMap<>())
+                .put(skillId, System.currentTimeMillis() + cd);
     }
 }
