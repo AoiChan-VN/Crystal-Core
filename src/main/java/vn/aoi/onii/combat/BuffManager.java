@@ -12,10 +12,13 @@ public class BuffManager {
     }
 
     public List<Buff> getBuffs(UUID uuid) {
-        List<Buff> list = buffs.getOrDefault(uuid, Collections.emptyList());
-
+        List<Buff> list = buffs.getOrDefault(uuid, new ArrayList<>());
         list.removeIf(Buff::isExpired);
         return list;
+    }
+
+    public void remove(UUID uuid) {
+        buffs.remove(uuid);
     }
 
     public StatProfile apply(UUID uuid, StatProfile base) {
@@ -35,4 +38,4 @@ public class BuffManager {
 
         return result;
     }
-} 
+}
