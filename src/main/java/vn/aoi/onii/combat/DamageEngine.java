@@ -16,26 +16,35 @@ public class DamageEngine {
 
         double str = attacker.get(StatType.STR);
         double agi = attacker.get(StatType.AGI);
-        double def = defender.get(StatType.DEF);
-        double critChance = attacker.get(StatType.CRIT);
+        double intel = attacker.get(StatType.INT);
 
+        double def = defender.get(StatType.DEF);
+
+        double critChance = attacker.get(StatType.CRIT);
         critChance = Math.max(0, Math.min(critChance, 1));
 
-        double damage = base + (str * 0.7) + (agi * 0.3);
+        double damage = base + (str * 0.6) + (agi * 0.25) + (intel * 0.15);
 
-        damage *= (100.0 / (100.0 + def));
+        double penetration = agi * 0.002;
+        def = CombatStats.applyPenetration(def, penetration);
+
+        damage = CombatStats.applyDefense(damage, def);
 
         boolean crit = ThreadLocalRandom.current().nextDouble() < critChance;
-        if (crit) damage *= 1.8;
+        if (crit) damage *= (1.5 + (agi * 0.001));
 
         ElementType element = rollElement(atkElem);
 
         double atkElement = atkElem.getAttack(element);
         double defElement = defElem.getResist(element);
 
-        double elementMultiplier = 1.0 + (atkElement - defElement) / 100.0;
+        double elementBonus = (atkElement - defElement) / 100.0;
 
-        damage *= elementMultiplier;
+        double counter = elementCounter(element);
+
+        damage *= (1.0 + elementBonus) * counter;
+
+        double lifesteal = str * 0.001;
 
         damage = Math.max(0, damage);
 
@@ -61,5 +70,15 @@ public class DamageEngine {
         }
 
         return ElementType.NONE;
+    }
+
+    private static double elementCounter(ElementType type) {
+        return switch (type) {
+            case FIRE -> 1.1;
+            case WATER -> 1.1;
+            case EARTH -> 1.05;
+            case WIND -> 1.05;
+            default -> 1.0;
+        };
     }
 }
