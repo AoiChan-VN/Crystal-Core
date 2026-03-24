@@ -11,6 +11,15 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         bootstrap = new Bootstrap(this);
         bootstrap.init();
+
+        File file = new File(getDataFolder(), "skills.json");
+
+        if (!file.exists()) {
+        saveResource("skills.json", false);
+}
+
+SkillConfigManager skillConfigManager = new SkillConfigManager();
+skillConfigManager.load(file);
     }
 
     @Override
