@@ -29,13 +29,6 @@ jobs:
       - name: 🔎𝓒𝓱𝓮𝓬𝓴 𝓢𝓸𝓾𝓻𝓬𝓮
         uses: actions/checkout@v4
 
-      # Cài đặt Actions Node.js
-      - name: 📒 𝓝𝓸𝓭𝓮
-        uses: actions/setup-node@v4
-        with:
-          runs:
-          using: 'node24'
-
       # Cài đặt JavaScript
       - name: ☕ ｊａｖａ
         uses: actions/setup-java@v4
