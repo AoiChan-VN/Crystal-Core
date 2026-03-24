@@ -9,6 +9,7 @@ import vn.aoi.onii.player.PlayerManager;
 public class CombatListener implements Listener {
 
     private final PlayerManager playerManager;
+    private final BuffManager buffManager = new BuffManager();
 
     public CombatListener(PlayerManager pm) {
         this.playerManager = pm;
@@ -23,7 +24,9 @@ public class CombatListener implements Listener {
         var attackerData = playerManager.get(attacker);
         if (attackerData == null) return;
 
-        StatProfile atk = attackerData.getStats();
+        StatProfile atkBase = attackerData.getStats();
+        StatProfile atk = buffManager.apply(attacker.getUniqueId(), atkBase);
+
         ElementProfile atkElem = attackerData.getElements();
 
         StatProfile def = new StatProfile();
@@ -32,12 +35,12 @@ public class CombatListener implements Listener {
         if (target instanceof Player tp) {
             var d = playerManager.get(tp);
             if (d != null) {
-                def = d.getStats();
+                def = buffManager.apply(tp.getUniqueId(), d.getStats());
                 defElem = d.getElements();
             }
         }
 
-        DamageResult result = DamageEngine.calculate(
+        DamageResult result = FinalDamageEngine.calculate(
                 atk,
                 def,
                 atkElem,
