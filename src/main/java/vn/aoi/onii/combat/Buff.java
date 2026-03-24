@@ -1,7 +1,5 @@
 package vn.aoi.onii.combat;
 
-import java.util.*;
-
 public class Buff {
 
     public String id;
@@ -21,4 +19,4 @@ public class Buff {
     public boolean isExpired() {
         return System.currentTimeMillis() > expireAt;
     }
-} 
+}
