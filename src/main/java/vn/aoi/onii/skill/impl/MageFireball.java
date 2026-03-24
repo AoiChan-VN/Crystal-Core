@@ -9,6 +9,9 @@ import vn.aoi.onii.combat.*;
 public class MageFireball implements Skill {
 
     @Override
+    public long 
+
+    @Override
     public String getId() {
         return "fireball";
     }
