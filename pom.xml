@@ -1,9 +1,12 @@
 <project xmlns="http://maven.apache.org" xmlns:xsi="http://www.w3.org"
   xsi:schemaLocation="http://maven.apache.org http://maven.apache.org">
+  
   <modelVersion>4.0.0</modelVersion>
   <groupId>vn.aoi.onii</groupId>
   <artifactId>AoiChan</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
+
+  <packaging>jar<packaging>
 
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
