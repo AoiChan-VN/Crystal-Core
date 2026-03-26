@@ -1,1 +1,7 @@
+title: "Shop Tu Tiên"
 
+items:
+  test_item:
+    material: DIAMOND
+    name: "§bCông pháp Thiên cấp"
+    slot: 13
