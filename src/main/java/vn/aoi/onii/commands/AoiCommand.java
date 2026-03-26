@@ -24,6 +24,7 @@ public class AoiCommand implements CommandExecutor {
         // INFO
         if (args.length == 1 && args[0].equalsIgnoreCase("info")) {
 
+            sender.sendMessage("〖❀〗Thông Tin〖❀〗");
             sender.sendMessage("§6Đạo hữu: §f" + data.getName());
             sender.sendMessage("§6Cảnh giới: §f" + data.getRealm().getDisplay());
             sender.sendMessage("§6Tu vi: §f" + data.getStage().getDisplay());
@@ -63,7 +64,7 @@ public class AoiCommand implements CommandExecutor {
                 data.setExp(0);
                 manager.save(data);
 
-                player.sendMessage("§6🔥 Đại cảnh giới đột phá → " + nextRealm.getDisplay());
+                player.sendMessage("§6Đại cảnh giới đột phá → " + nextRealm.getDisplay());
                 return true;
             }
 
