@@ -12,12 +12,12 @@ public class ProfileGUI {
 
     public static Inventory create(PlayerData data) {
 
-        Inventory inv = Bukkit.createInventory(null, 27, "Thông Tin Tu Tiên");
+        Inventory inv = Bukkit.createInventory(null, 27, "Thông tin tu hành");
 
         ItemStack info = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta = info.getItemMeta();
 
-        meta.setDisplayName("§6Thông tin");
+        meta.setDisplayName("§a§lThông tin");
 
         meta.setLore(Arrays.asList(
                 "§7Cảnh giới: §e" + data.getRealm().getDisplay(),
