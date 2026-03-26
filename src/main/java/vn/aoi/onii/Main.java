@@ -9,12 +9,14 @@ import vn.aoi.onii.listeners.ChatListener;
 import vn.aoi.onii.player.PlayerManager;
 import vn.aoi.onii.shop.ShopListener;
 
+import java.io.File;
+
 public class Main extends JavaPlugin {
 
     private static Main instance;
-    private Economy econ;
     private Database database;
-    private PlayerManager manager;
+    private PlayerManager playerManager;
+    private Economy econ;
 
     @Override
     public void onEnable() {
@@ -29,16 +31,25 @@ public class Main extends JavaPlugin {
         database.connect();
         database.createTable();
 
-        manager = new PlayerManager(database);
+        playerManager = new PlayerManager(database);
 
-        getCommand("aoi").setExecutor(new AoiCommand(manager));
+        getCommand("aoi").setExecutor(new AoiCommand(playerManager));
 
-        getServer().getPluginManager().registerEvents(new ChatListener(manager), this);
-        getServer().getPluginManager().registerEvents(new ShopListener(manager, econ), this);
+        getServer().getPluginManager().registerEvents(new ChatListener(playerManager), this);
+        getServer().getPluginManager().registerEvents(new ShopListener(playerManager, econ), this);
+    }
+
+    @Override
+    public void onDisable() {
+        database.close();
     }
 
     public static Main getInstance() {
         return instance;
+    }
+
+    public File getShopFile() {
+        return new File(getDataFolder(), "shop.yml");
     }
 
     private boolean setupEconomy() {
@@ -52,4 +63,8 @@ public class Main extends JavaPlugin {
         econ = rsp.getProvider();
         return econ != null;
     }
-}
+
+    public Economy getEcon() {
+        return econ;
+    }
+            }
