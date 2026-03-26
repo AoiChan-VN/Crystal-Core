@@ -3,18 +3,20 @@ package vn.aoi.onii.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-
-import vn.aoi.onii.Main;
+import vn.aoi.onii.database.Database;
+import vn.aoi.onii.leaderboard.TopGUI;
 import vn.aoi.onii.player.*;
 import vn.aoi.onii.realm.RealmProgression;
-import vn.aoi.onii.leaderboard.*;
+import vn.aoi.onii.shop.ShopManager;
 
 public class AoiCommand implements CommandExecutor {
 
     private final PlayerManager manager;
+    private final Database db;
 
-    public AoiCommand(PlayerManager manager) {
+    public AoiCommand(PlayerManager manager, Database db) {
         this.manager = manager;
+        this.db = db;
     }
 
     @Override
@@ -24,74 +26,67 @@ public class AoiCommand implements CommandExecutor {
 
         PlayerData data = manager.get(player.getUniqueId(), player.getName());
 
-        // INFO | Thông tin chi tiết
-        if (args.length == 1 && args[0].equalsIgnoreCase("info")) {
-
-            sender.sendMessage("〖❀〗Thông Tin〖❀〗");
-            sender.sendMessage("§6Đạo hữu: §f" + data.getName());
-            sender.sendMessage("§6Cảnh giới: §f" + data.getRealm().getDisplay());
-            sender.sendMessage("§6Tu vi: §f" + data.getStage().getDisplay());
-            sender.sendMessage("§6EXP: §f" + data.getExp());
-
+        // SHOP
+        if (args.length == 1 && args[0].equalsIgnoreCase("shop")) {
+            player.openInventory(new ShopManager().createShop(1));
             return true;
         }
 
-        // TOP | Bảng xếp hạng
+        // TOP
         if (args.length == 1 && args[0].equalsIgnoreCase("top")) {
-            player.openInventory(new TopGUI(Main.getInstance().getDatabase()).create());
+            player.openInventory(new TopGUI(db).create());
             return true;
         }
-        
-        // BREAKTHROUGH | ⇮
+
+        // INFO
+        if (args.length == 1 && args[0].equalsIgnoreCase("info")) {
+            player.sendMessage("【❅】Thông Tin【❅】");
+            player.sendMessage("§6Đạo hữu: §f" + data.getName());
+            player.sendMessage("§6Cảnh giới: §f" + data.getRealm().getDisplay());
+            player.sendMessage("§6Tu vi: §f" + data.getStage().getDisplay());
+            player.sendMessage("§6EXP: §f" + data.getExp());
+            player.sendMessage("§6Công pháp: §f" + data.getTechnique());
+            return true;
+        }
+
+        // BREAK
         if (args.length == 1 && args[0].equalsIgnoreCase("break")) {
+            int req = RealmProgression.getRequiredExp(data.getRealm(), data.getStage());
 
-            int required = RealmProgression.getRequiredExp(data.getRealm(), data.getStage());
-
-            if (data.getExp() < required) {
-                player.sendMessage("§cChưa đủ tu vi để đột phá!");
+            if (data.getExp() < req) {
+                player.sendMessage("§cChưa đủ EXP!");
                 return true;
             }
 
-            // STAGE | ⇮
             var nextStage = RealmProgression.nextStage(data.getStage());
 
             if (nextStage != null) {
                 data.setStage(nextStage);
-                data.setExp(0);
-                manager.save(data);
-
-                player.sendMessage("§aĐột phá thành công → " + nextStage.getDisplay());
-                return true;
+            } else {
+                var nextRealm = RealmProgression.nextRealm(data.getRealm());
+                if (nextRealm != null) {
+                    data.setRealm(nextRealm);
+                    data.setStage(vn.aoi.onii.enums.Stage.SO_KY);
+                }
             }
 
-            // REALM | ⇮
-            var nextRealm = RealmProgression.nextRealm(data.getRealm());
-
-            if (nextRealm != null) {
-                data.setRealm(nextRealm);
-                data.setStage(vn.aoi.onii.enums.Stage.SO_KY);
-                data.setExp(0);
-                manager.save(data);
-
-                player.sendMessage("§6Đại cảnh giới đột phá → " + nextRealm.getDisplay());
-                return true;
-            }
-
-            player.sendMessage("§cĐã đạt cảnh giới tối cao!");
-            return true;
-        }
-
-        // EXP | ⇮
-        if (args.length == 2 && args[0].equalsIgnoreCase("addexp")) {
-            int amount = Integer.parseInt(args[1]);
-            data.setExp(data.getExp() + amount);
+            data.setExp(0);
             manager.save(data);
 
-            player.sendMessage("§a+EXP: " + amount);
+            player.sendMessage("§aĐột phá thành công!");
             return true;
         }
 
-        player.sendMessage("/aoi break | /aoi addexp <số>");
+        // EXP
+        if (args.length == 2 && args[0].equalsIgnoreCase("addexp")) {
+            int exp = Integer.parseInt(args[1]);
+            data.setExp(data.getExp() + exp);
+            manager.save(data);
+            player.sendMessage("§a+" + exp + " EXP");
+            return true;
+        }
+
+        player.sendMessage("/aoi shop | top | break | addexp");
         return true;
     }
 }
