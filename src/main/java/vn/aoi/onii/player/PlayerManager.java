@@ -1,54 +1,67 @@
 package vn.aoi.onii.player;
 
-import vn.aoi.onii.database.SQLite;
+import vn.aoi.onii.database.Database;
+import vn.aoi.onii.enums.Realm;
+import vn.aoi.onii.enums.Stage;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayerManager {
 
-    private final SQLite sqlite;
+    private final Database db;
+    private final HashMap<UUID, PlayerData> cache = new HashMap<>();
 
-    public PlayerManager(SQLite sqlite) {
-        this.sqlite = sqlite;
+    public PlayerManager(Database db) {
+        this.db = db;
     }
 
-    public PlayerData getPlayer(UUID uuid, String name) {
+    public PlayerData get(UUID uuid, String name) {
+        if (cache.containsKey(uuid)) return cache.get(uuid);
+
         try {
-            PreparedStatement ps = sqlite.getConnection().prepareStatement(
-                    "SELECT * FROM players WHERE uuid=?"
-            );
+            PreparedStatement ps = db.getConnection().prepareStatement(
+                    "SELECT * FROM players WHERE uuid=?");
             ps.setString(1, uuid.toString());
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new PlayerData(
-                        rs.getString("name"),
-                        rs.getString("canhgioi"),
-                        rs.getString("tuvi")
-                );
-            } else {
-                createPlayer(uuid, name);
-                return new PlayerData(name, "Phàm nhân", "Sơ kỳ");
+                PlayerData data = new PlayerData(uuid, name);
+                data.setRealm(Realm.valueOf(rs.getString("realm")));
+                data.setStage(Stage.valueOf(rs.getString("stage")));
+                data.setSect(rs.getString("sect"));
+
+                cache.put(uuid, data);
+                return data;
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+
+        PlayerData data = new PlayerData(uuid, name);
+        save(data);
+        cache.put(uuid, data);
+        return data;
     }
 
-    public void createPlayer(UUID uuid, String name) {
+    public void save(PlayerData data) {
         try {
-            PreparedStatement ps = sqlite.getConnection().prepareStatement(
-                    "INSERT INTO players VALUES(?,?,?,?)"
-            );
-            ps.setString(1, uuid.toString());
-            ps.setString(2, name);
-            ps.setString(3, "Phàm nhân");
-            ps.setString(4, "Sơ kỳ");
+            PreparedStatement ps = db.getConnection().prepareStatement("""
+                INSERT OR REPLACE INTO players(uuid,name,realm,stage,sect)
+                VALUES(?,?,?,?,?)
+            """);
+
+            ps.setString(1, data.getUuid().toString());
+            ps.setString(2, data.getName());
+            ps.setString(3, data.getRealm().name());
+            ps.setString(4, data.getStage().name());
+            ps.setString(5, data.getSect());
+
             ps.executeUpdate();
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
