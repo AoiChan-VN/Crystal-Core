@@ -25,13 +25,12 @@ public class AoiCommand implements CommandExecutor {
                 return true;
             }
 
-            PlayerData data = manager.getPlayer(target.getUniqueId(), target.getName());
+            PlayerData data = manager.get(target.getUniqueId(), target.getName());
 
-            sender.sendMessage("§a༒【Thông tin】༒");
             sender.sendMessage("§6Đạo hữu: §f" + data.getName());
-            sender.sendMessage("§6Cảnh giới: §f" + data.getCanhGioi());
-            sender.sendMessage("§6Tu vi: §f" + data.getTuVi());
-            sender.sendMessage("§6Tông môn: §7(Chưa có)");
+            sender.sendMessage("§6Cảnh giới: §f" + data.getRealm().getDisplay());
+            sender.sendMessage("§6Tu vi: §f" + data.getStage().getDisplay());
+            sender.sendMessage("§6Tông môn: §f" + data.getSect());
 
             return true;
         }
