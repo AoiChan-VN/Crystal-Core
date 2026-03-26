@@ -21,8 +21,8 @@ public class ShopManager {
 
         List<String> keys = new ArrayList<>(config.getConfigurationSection("shop.items").getKeys(false));
 
-        int size = 54;
-        Inventory inv = Bukkit.createInventory(null, size, config.getString("shop.title") + " §7[" + page + "]");
+        Inventory inv = Bukkit.createInventory(null, 54,
+                config.getString("shop.title") + " §7[" + page + "]");
 
         int start = (page - 1) * 28;
         int end = Math.min(start + 28, keys.size());
@@ -31,22 +31,15 @@ public class ShopManager {
 
         for (int i = start; i < end; i++) {
 
-            String key = keys.get(i);
-            String path = "shop.items." + key;
+            String path = "shop.items." + keys.get(i);
 
-            Material mat = Material.valueOf(config.getString(path + ".material"));
-            String name = config.getString(path + ".name");
-            double price = config.getDouble(path + ".price");
-            String tier = config.getString(path + ".tier");
-
-            ItemStack item = new ItemStack(mat);
+            ItemStack item = new ItemStack(Material.valueOf(config.getString(path + ".material")));
             ItemMeta meta = item.getItemMeta();
 
-            meta.setDisplayName(name);
+            meta.setDisplayName(config.getString(path + ".name"));
             meta.setLore(Arrays.asList(
-                    "§7Cấp: §e" + tier,
-                    "§7Giá: §a" + price,
-                    "§8Click để lĩnh ngộ"
+                    "§7Cấp: §e" + config.getString(path + ".tier"),
+                    "§7Giá: §a" + config.getDouble(path + ".price")
             ));
 
             item.setItemMeta(meta);
@@ -56,19 +49,18 @@ public class ShopManager {
             if (slot % 9 == 8) slot += 2;
         }
 
-        // nút điều hướng
-        inv.setItem(45, createButton("§e⬅ Trang trước"));
-        inv.setItem(53, createButton("§eTrang sau ➡"));
+        inv.setItem(45, createBtn("§e⬅"));
+        inv.setItem(53, createBtn("§e➡"));
 
         return inv;
     }
 
-    private ItemStack createButton(String name) {
-        ItemStack item = new ItemStack(Material.ARROW);
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
-        item.setItemMeta(meta);
-        return item;
+    private ItemStack createBtn(String name) {
+        ItemStack i = new ItemStack(Material.ARROW);
+        ItemMeta m = i.getItemMeta();
+        m.setDisplayName(name);
+        i.setItemMeta(m);
+        return i;
     }
 
     public YamlConfiguration getConfig() {
