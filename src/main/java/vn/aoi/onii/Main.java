@@ -3,13 +3,12 @@ package vn.aoi.onii;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import vn.aoi.onii.commands.AoiCommand;
 import vn.aoi.onii.database.Database;
 import vn.aoi.onii.listeners.ChatListener;
 import vn.aoi.onii.player.PlayerManager;
-import vn.aoi.onii.shop.ShopListener;
 import vn.aoi.onii.quest.*;
+import vn.aoi.onii.shop.ShopListener;
 
 import java.io.File;
 
@@ -19,6 +18,7 @@ public class Main extends JavaPlugin {
     private Database database;
     private PlayerManager playerManager;
     private Economy econ;
+    private QuestManager questManager;
 
     @Override
     public void onEnable() {
@@ -26,6 +26,7 @@ public class Main extends JavaPlugin {
 
         saveDefaultConfig();
         saveResource("shop.yml", false);
+        saveResource("quests.yml", false);
 
         setupEconomy();
 
@@ -34,14 +35,13 @@ public class Main extends JavaPlugin {
         database.createTable();
 
         playerManager = new PlayerManager(database);
+        questManager = new QuestManager();
 
-        getCommand("aoi").setExecutor(new AoiCommand(playerManager));
+        getCommand("aoi").setExecutor(new AoiCommand(playerManager, database));
 
-        QuestManager questManager = new QuestManager();
-
-        getServer().getPluginManager().registerEvents(new QuestListener(questManager, playerManager, econ), this);
         getServer().getPluginManager().registerEvents(new ChatListener(playerManager), this);
         getServer().getPluginManager().registerEvents(new ShopListener(playerManager, econ), this);
+        getServer().getPluginManager().registerEvents(new QuestListener(questManager, playerManager, econ), this);
     }
 
     @Override
@@ -71,5 +71,9 @@ public class Main extends JavaPlugin {
 
     public Economy getEcon() {
         return econ;
+    }
+
+    public Database getDatabase() {
+        return database;
     }
 }
