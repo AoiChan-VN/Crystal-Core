@@ -1,12 +1,16 @@
 shop:
-  title: "Cửa Hàng Công Pháp"
+  title: "🏯 Vạn Bảo Lâu 🏯"
 
   items:
     pham:
       material: BOOK
-      name: "§fPhàm Công"
+      name: "§fDẫn Khí Thuật"
+      lore:
+        - "Công pháp phàm phẩm"
+        - "Phù hợp cho luyện thể kỳ"
       tier: PHAM
       price: 100
+      command: 
 
     linh:
       material: ENCHANTED_BOOK
