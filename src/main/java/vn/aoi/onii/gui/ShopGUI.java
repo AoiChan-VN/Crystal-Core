@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class ShopGUI {
 
