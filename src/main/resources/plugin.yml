@@ -1,10 +1,16 @@
 name: AoiChan
-version: 1.0
 main: vn.aoi.onii.Main
+version: 1.0
 api-version: 1.21
 
 commands:
   aoi:
-    description: Đại đạo chân ngôn
+    description: Main command
     usage: /aoi
-    permission: aoi.admin
+    permission: aoi.use
+
+permissions:
+  aoi.use:
+    default: true
+  aoi.admin:
+    default: op
