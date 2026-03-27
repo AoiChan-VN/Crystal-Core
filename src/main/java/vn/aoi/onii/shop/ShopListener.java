@@ -1,12 +1,19 @@
 package vn.aoi.onii.shop;
 
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import vn.aoi.onii.Main;
+import vn.aoi.onii.nbt.NBTManager;
 import vn.aoi.onii.player.*;
+
+import java.util.*;
 
 public class ShopListener implements Listener {
 
@@ -23,63 +30,81 @@ public class ShopListener implements Listener {
 
         if (!(e.getWhoClicked() instanceof Player player)) return;
 
-        String title = e.getView().getTitle();
-        if (!title.contains("Cửa Hàng")) return;
+        if (!e.getView().getTitle().contains("Cửa Hàng")) return;
 
         e.setCancelled(true);
 
-        ShopManager shop = new ShopManager();
-        YamlConfiguration config = shop.getConfig();
+        ItemStack clicked = e.getCurrentItem();
+        if (clicked == null || !clicked.hasItemMeta()) return;
 
-        ItemStack item = e.getCurrentItem();
-        if (item == null || !item.hasItemMeta()) return;
-
-        if (item.getItemMeta().getDisplayName().equals("§e➡")) {
-            player.openInventory(shop.createShop(getPage(title) + 1));
-            return;
-        }
-
-        if (item.getItemMeta().getDisplayName().equals("§e⬅")) {
-            player.openInventory(shop.createShop(Math.max(1, getPage(title) - 1)));
-            return;
-        }
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(
+                Main.getInstance().getShopFile()
+        );
 
         for (String key : config.getConfigurationSection("shop.items").getKeys(false)) {
 
             String path = "shop.items." + key;
 
-            if (!item.getItemMeta().getDisplayName().equals(config.getString(path + ".name"))) continue;
+            String name = config.getString(path + ".name");
+
+            if (!clicked.getItemMeta().getDisplayName().equals(name)) continue;
 
             double price = config.getDouble(path + ".price");
-            String tier = config.getString(path + ".tier");
-
-            PlayerData data = manager.get(player.getUniqueId(), player.getName());
-
-            if (data.getTechnique().equalsIgnoreCase(tier)) {
-                player.sendMessage("§eĐã học rồi!");
-                return;
-            }
+            String type = config.getString(path + ".type");
 
             if (!econ.has(player, price)) {
-                player.sendMessage("§cKhông đủ tiền!");
+                player.sendMessage("§cKhông đủ linh thạch!");
                 return;
             }
 
             econ.withdrawPlayer(player, price);
 
-            data.setTechnique(tier);
-            manager.save(data);
+            // ================= WEAPON =================
+            if (type.equalsIgnoreCase("WEAPON")) {
 
-            player.sendMessage("§aĐã học " + tier);
-            return;
-        }
-    }
+                Material mat = Material.valueOf(config.getString(path + ".material"));
+                String tier = config.getString(path + ".tier");
+                String effects = config.getString(path + ".effects");
 
-    private int getPage(String title) {
-        try {
-            return Integer.parseInt(title.split("\\[")[1].replace("]", ""));
-        } catch (Exception e) {
-            return 1;
+                ItemStack item = new ItemStack(mat);
+                ItemMeta meta = item.getItemMeta();
+
+                meta.setDisplayName(name);
+                meta.setLore(Arrays.asList(
+                        "§7Phẩm chất: §e" + tier,
+                        "§7Hiệu ứng: §a" + effects
+                ));
+
+                item.setItemMeta(meta);
+
+                // ================= NBT =================
+                NBTManager.set(item, "tier", tier);
+                NBTManager.set(item, "effects", effects);
+
+                player.getInventory().addItem(item);
+
+                player.sendMessage("§aĐã mua pháp bảo!");
+                return;
+            }
+
+            // ================= TECHNIQUE =================
+            if (type.equalsIgnoreCase("TECHNIQUE")) {
+
+                String tech = config.getString(path + ".tech");
+
+                PlayerData data = manager.get(player.getUniqueId(), player.getName());
+
+                if (data.getTechnique().equalsIgnoreCase(tech)) {
+                    player.sendMessage("§eĐã học rồi!");
+                    return;
+                }
+
+                data.setTechnique(tech);
+                manager.save(data);
+
+                player.sendMessage("§aĐã lĩnh ngộ công pháp: " + tech);
+                return;
+            }
         }
     }
 }
