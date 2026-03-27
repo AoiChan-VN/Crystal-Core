@@ -62,4 +62,4 @@ public class TechniqueSkillListener implements Listener {
                 break;
         }
     }
-} 
+}
