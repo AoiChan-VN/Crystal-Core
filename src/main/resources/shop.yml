@@ -1,43 +1,25 @@
 shop:
-  title: "🏯 Vạn Bảo Lâu 🏯"
+  title: "【Vạn Bảo Lâu】"
 
   items:
-    pham:
-      material: BOOK
-      name: "§fDẫn Khí Thuật"
-      lore:
-        - "Công pháp phàm phẩm"
-        - "Phù hợp cho luyện thể kỳ"
-      tier: PHAM
-      price: 100
-      command: 
 
-    linh:
-      material: ENCHANTED_BOOK
-      name: "§aLinh Công"
-      tier: LINH
-      price: 500
+    than_kiem:
+      material: NETHERITE_SWORD
+      name: "§cThần Kiếm"
+      tier: THAN_KHI
+      effects: "LIFESTEAL,CRIT,LIGHTNING"
+      price: 10000
 
-    huyen:
-      material: BLAZE_ROD
-      name: "§bHuyền Công"
-      tier: HUYEN
-      price: 1500
-
-    dia:
-      material: DIAMOND
-      name: "§dĐịa Công"
-      tier: DIA
-      price: 3000
-
-    thien:
-      material: NETHER_STAR
-      name: "§6Thiên Công"
-      tier: THIEN
+    thien_kiem:
+      material: DIAMOND_SWORD
+      name: "§6Thiên Kiếm"
+      tier: THIEN_KHI
+      effects: "BURN,CRIT"
       price: 5000
 
-    than:
-      material: TOTEM_OF_UNDYING
-      name: "§cThần Công"
-      tier: THAN
-      price: 10000
+    linh_truong:
+      material: BLAZE_ROD
+      name: "§aLinh Trượng"
+      tier: LINH_KHI
+      effects: "POISON,WEAKNESS"
+      price: 2000
