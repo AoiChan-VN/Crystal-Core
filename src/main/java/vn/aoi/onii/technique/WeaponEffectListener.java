@@ -44,14 +44,14 @@ public class WeaponEffectListener implements Listener {
                 case "FREEZE":
                     if (rand.nextInt(100) < 25) {
                         target.addPotionEffect(new PotionEffect(
-                                PotionEffectType.SLOW, 60, 2));
+                                PotionEffectType.("SLOW"), 60, 2));
                     }
                     break;
 
                 case "POISON":
                     if (rand.nextInt(100) < 25) {
                         target.addPotionEffect(new PotionEffect(
-                                PotionEffectType.POISON, 60, 1));
+                                PotionEffectType.("POISON"), 60, 1));
                     }
                     break;
 
@@ -70,7 +70,7 @@ public class WeaponEffectListener implements Listener {
                 case "WEAKNESS":
                     if (rand.nextInt(100) < 30) {
                         target.addPotionEffect(new PotionEffect(
-                                PotionEffectType.WEAKNESS, 80, 1));
+                                PotionEffectType.("WEAKNESS"), 80, 1));
                     }
                     break;
             }
