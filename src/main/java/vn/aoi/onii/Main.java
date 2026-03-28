@@ -24,8 +24,6 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        loadConfigs();
-
         if (!setupEconomy()) {
             getLogger().severe("Vault not found! Disabling plugin...");
             getServer().getPluginManager().disablePlugin(this);
@@ -35,7 +33,6 @@ public class Main extends JavaPlugin {
         initDatabase();
         initManagers();
         registerCommands();
-        registerListeners();
 
         getLogger().info("Onii plugin enabled!");
     }
