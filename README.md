@@ -11,7 +11,7 @@
 <div align="center">
 📥 Tải xuống:
   
-https://github.com/AoiChan-Dev/AoiDev/releases/latest
+https://github.com/AoiChan-VN/Onii/releases
 
 📋 Hướng dẫn:
 
