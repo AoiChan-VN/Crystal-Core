@@ -8,8 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import vn.aoi.onii.commands.*;
 import vn.aoi.onii.database.Database;
 import vn.aoi.onii.listeners.ChatListener;
+import vn.aoi.onii.listeners.*;
 import vn.aoi.onii.player.PlayerManager;
-import vn.aoi.onii.quest.*;
 
 public class Main extends JavaPlugin {
 
@@ -33,6 +33,7 @@ public class Main extends JavaPlugin {
         initDatabase();
         initManagers();
         registerCommands();
+        registerListeners();
 
         getLogger().info("Onii plugin enabled!");
     }
@@ -44,7 +45,7 @@ public class Main extends JavaPlugin {
         }
         getLogger().info("Onii plugin disabled.");
     }
-    
+
     // ================= INIT =================
 
     private void initDatabase() {
@@ -66,13 +67,18 @@ public class Main extends JavaPlugin {
             return;
         }
 
-        cmd.setExecutor(new AoiCommand(playerManager));
+        cmd.setExecutor(new AoiCommand(playerManager, questManager));
         cmd.setTabCompleter(new AoiTabComplete());
     }
 
     private void registerListeners() {
-        getServer().getPluginManager().registerEvents(new ChatListener(playerManager), this);
-        getServer().getPluginManager().registerEvents(new QuestListener(questManager, playerManager, economy), this);
+        getServer().getPluginManager().registerEvents(
+                new ChatListener(playerManager), this
+        );
+
+        getServer().getPluginManager().registerEvents(
+                new QuestListener(questManager, playerManager, economy), this
+        );
     }
 
     private boolean setupEconomy() {
