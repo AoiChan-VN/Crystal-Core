@@ -61,15 +61,23 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        CommandManager manager = new CommandManager();
-        manager.register(new HelpCommand());
 
-        PluginCommand cmd = getCommand("aoi");
-        if (cmd != null) {
-            cmd.setExecutor(manager);
-            cmd.setTabCompleter(manager);
-        }
+    CommandManager manager = new CommandManager();
 
+    // đăng ký subcommands
+    manager.register(new HelpCommand());
+
+    PluginCommand cmd = getCommand("aoi");
+
+    if (cmd == null) {
+        getLogger().severe("Command 'aoi' not found!");
+        return;
+    }
+
+    cmd.setExecutor(manager);
+    cmd.setTabCompleter(manager);
+    }
+    
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(
                 new ChatListener(playerManager), this
