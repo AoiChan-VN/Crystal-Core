@@ -27,6 +27,11 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        if (sub instanceof AbstractCommand ac && !ac.hasPermission(sender)) {
+            sender.sendMessage("§cBạn không có quyền!");
+            return true;
+        }
+
         return sub.execute(sender, Arrays.copyOfRange(args, 1, args.length));
     }
 
@@ -34,7 +39,14 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
         if (args.length == 1) {
-            List<String> list = new ArrayList<>(subCommands.keySet());
+            List<String> list = new ArrayList<>();
+
+            for (SubCommand cmd : subCommands.values()) {
+                if (cmd.getPermission() == null || sender.hasPermission(cmd.getPermission())) {
+                    list.add(cmd.getName());
+                }
+            }
+
             list.removeIf(s -> !s.startsWith(args[0].toLowerCase()));
             return list;
         }
@@ -47,4 +59,8 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
         return Collections.emptyList();
     }
-} 
+
+    public Collection<SubCommand> getCommands() {
+        return subCommands.values();
+    }
+}
