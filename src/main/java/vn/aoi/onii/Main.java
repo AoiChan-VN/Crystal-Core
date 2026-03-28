@@ -20,6 +20,8 @@ public class Main extends JavaPlugin {
     private PlayerManager playerManager;
     private QuestManager questManager;
     private Economy economy;
+    private File shopFile;
+    private FileConfiguration shopConfig;
 
     @Override
     public void onEnable() {
@@ -61,6 +63,17 @@ public class Main extends JavaPlugin {
         database = new Database(this);
         database.connect();
         database.createTable();
+    }
+
+    private void loadConfigs() {
+        saveDefaultConfig();
+
+        shopFile = new File(getDataFolder(), "shop.yml");
+        if (!shopFile.exists()) {
+            saveResource("shop.yml", false);
+        }
+
+        shopConfig = YamlConfiguration.loadConfiguration(shopFile);
     }
 
     private void initManagers() {
@@ -113,6 +126,10 @@ public class Main extends JavaPlugin {
 
     public Economy getEconomy() {
         return economy;
+    }
+
+    public FileConfiguration getShopConfig() {
+        return shopConfig;
     }
 
     public PlayerManager getPlayerManager() {
