@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import vn.aoi.onii.commands.*;
 import vn.aoi.onii.database.Database;
 import vn.aoi.onii.listeners.ChatListener;
-import vn.aoi.onii.listeners.*;
+import vn.aoi.onii.quest.*;
 import vn.aoi.onii.player.PlayerManager;
 
 public class Main extends JavaPlugin {
