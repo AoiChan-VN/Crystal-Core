@@ -14,7 +14,7 @@ public class AoiTabComplete implements TabCompleter {
         List<String> list = new ArrayList<>();
 
         if (args.length == 1) {
-            list.addAll(Arrays.asList("profile", "shop", "top", "break", "info"));
+            list.addAll(Arrays.asList("profile", "top", "break", "info"));
 
             if (sender.hasPermission("aoi.admin")) {
                 list.addAll(Arrays.asList("setexp","addexp","setrealm","setstage","settech","reload"));
