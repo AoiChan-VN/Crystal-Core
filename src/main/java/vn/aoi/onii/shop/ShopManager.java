@@ -6,7 +6,6 @@ import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import vn.aoi.onii.Main;
 
-import java.io.File;
 import java.util.*;
 
 public class ShopManager {
@@ -14,7 +13,7 @@ public class ShopManager {
     private final YamlConfiguration config;
 
     public ShopManager() {
-        config = YamlConfiguration.loadConfiguration(Main.getInstance().getShopFile());
+        config = YamlConfiguration.loadConfiguration(Main.getInstance().getShopConfig());
     }
 
     public Inventory createShop(int page) {
