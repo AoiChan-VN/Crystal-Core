@@ -20,9 +20,6 @@ public class Main extends JavaPlugin {
     private QuestManager questManager;
     private Economy economy;
 
-    private File shopFile;
-    private FileConfiguration shopConfig;
-
     @Override
     public void onEnable() {
         instance = this;
