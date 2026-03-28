@@ -28,4 +28,4 @@ public class NBTManager {
                 PersistentDataType.STRING
         );
     }
-} 
+}
