@@ -43,11 +43,11 @@ public class InfoCommand extends AbstractCommand {
         sender.sendMessage("§eDanh tính: §f" + player.getName());
         sender.sendMessage("§eTông môn: §f" + data.getSect());
 
-        sender.sendMessage("§eCảnh giới: §f" + data.getString("realm").getDisplay());
+        sender.sendMessage("§eCảnh giới: §f" + data.getRealm().getDisplay());
         sender.sendMessage("§eTu vi: §f" + data.getStage().getDisplay());
 
-        sender.sendMessage("§eCông pháp: §f" + data.getTechnique().getDisplay());
-        sender.sendMessage("§ePháp bảo: §f" + data.getWeapon().getDisplay());
+        sender.sendMessage("§eCông pháp: §f" + data.getTechniqueTier().getDisplay());
+        sender.sendMessage("§ePháp bảo: §f" + data.getWeaponTier().getDisplay());
 
         sender.sendMessage("§6═══════════════════════════");
 
