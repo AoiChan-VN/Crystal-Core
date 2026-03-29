@@ -75,6 +75,7 @@ public class Main extends JavaPlugin {
         cmd.setExecutor(manager);
         cmd.setTabCompleter(manager);
     }
+    
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(
                 new ChatListener(playerManager), this
