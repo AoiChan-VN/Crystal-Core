@@ -47,8 +47,6 @@ public class Main extends JavaPlugin {
         getLogger().info("Onii plugin disabled.");
     }
 
-    // ================= INIT =================
-
     private void initDatabase() {
         database = new Database(this);
         database.connect();
@@ -63,7 +61,7 @@ public class Main extends JavaPlugin {
     private void registerCommands() {
         CommandManager manager = new CommandManager();
 
-        manager.register(new HelpCommand());
+        manager.register(new HelpCommand(manager));
         manager.registry(new InfoCommand());
 
         PluginCommand cmd = getCommand("aoi");
@@ -97,8 +95,6 @@ public class Main extends JavaPlugin {
         economy = rsp.getProvider();
         return economy != null;
     }
-
-    // ================= GETTER =================
 
     public static Main getInstance() {
         return instance;
