@@ -5,14 +5,16 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import vn.aoi.onii.commands.core.CommandManager;
 import vn.aoi.onii.commands.sub.*;
+import vn.aoi.onii.commands.;
 import vn.aoi.onii.database.Database;
 import vn.aoi.onii.listeners.ChatListener;
 import vn.aoi.onii.player.PlayerManager;
 import vn.aoi.onii.quest.*;
 
 public class Main extends JavaPlugin {
+
+    private static Main instance;
 
     private Database database;
     private PlayerManager playerManager;
@@ -21,6 +23,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
 
         if (!setupEconomy()) {
             getLogger().severe("Vault not found! Disabling plugin...");
@@ -41,6 +44,7 @@ public class Main extends JavaPlugin {
         if (database != null) {
             database.close();
         }
+        getLogger().info("Onii plugin disabled.");
     }
 
     // ================= INIT =================
@@ -57,13 +61,6 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-
-        CommandManager manager = new CommandManager();
-
-        // ===== REGISTER COMMANDS =====
-        manager.register(new HelpCommand(manager));
-        manager.register(new InfoCommand());
-
         PluginCommand cmd = getCommand("aoi");
 
         if (cmd == null) {
@@ -71,8 +68,8 @@ public class Main extends JavaPlugin {
             return;
         }
 
-        cmd.setExecutor(manager);
-        cmd.setTabCompleter(manager);
+        cmd.setExecutor(new AoiCommand(playerManager, questManager));
+        cmd.setTabCompleter(new AoiTabComplete());
     }
 
     private void registerListeners() {
@@ -97,5 +94,23 @@ public class Main extends JavaPlugin {
 
         economy = rsp.getProvider();
         return economy != null;
+    }
+
+    // ================= GETTER =================
+
+    public static Main getInstance() {
+        return instance;
+    }
+
+    public Economy getEconomy() {
+        return economy;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+
+    public QuestManager getQuestManager() {
+        return questManager;
     }
 }
