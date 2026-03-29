@@ -60,22 +60,20 @@ public class Main extends JavaPlugin {
         questManager = new QuestManager();
     }
     
+    // ========= registerCommands =========
+
     private void registerCommands() {
+        CommandManager manager = new CommandManager();
         
-    CommandManager manager = new CommandManager();
+        manager.register(new HelpCommand());
+        manager.register(new InfoCommand());
+        
+        PluginCommand cmd = getCommand("aoi");
 
-    // đăng ký subcommands
-        
-    manager.register(new HelpCommand());
-    manager.register(new InfoCommand());
-        
-    PluginCommand cmd = getCommand("aoi");
-
-    if (cmd != null)) {
-        cmd.setExecutor(manager);
-        cmd.setTabCompleter(manager);
-    }
-}
+        if (cmd != null)) {
+            cmd.setExecutor(manager);
+            cmd.setTabCompleter(manager);
+        }
         
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(
