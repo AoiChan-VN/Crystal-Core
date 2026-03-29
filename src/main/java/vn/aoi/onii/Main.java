@@ -65,7 +65,7 @@ public class Main extends JavaPlugin {
     private void registerCommands() {
         CommandManager manager = new CommandManager();
         
-        manager.register(new HelpCommand());
+        manager.register(new HelpCommand(manager));
         manager.register(new InfoCommand());
         
         PluginCommand cmd = getCommand("aoi");
@@ -74,6 +74,7 @@ public class Main extends JavaPlugin {
             cmd.setExecutor(manager);
             cmd.setTabCompleter(manager);
         }
+    }
         
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(
