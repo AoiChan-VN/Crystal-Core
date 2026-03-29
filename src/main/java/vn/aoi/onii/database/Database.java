@@ -2,8 +2,8 @@ package vn.aoi.onii.database;
 
 import vn.aoi.onii.Main;
 import vn.aoi.onii.player.PlayerData;
-
 import org.bukkit.entity.Player;
+
 import java.sql.*;
 import java.util.UUID;
 
@@ -35,8 +35,7 @@ public class Database {
                 "stage TEXT," +
                 "sect TEXT," +
                 "technique TEXT," +
-                "level INTEGER," +
-                "realm TEXT)"
+                "exp INTEGER),"
         )) {
             ps.execute();
         } catch (SQLException e) {
@@ -55,7 +54,7 @@ public class Database {
 
             if (rs.next()) {
                 return new PlayerData(
-                        rs.getInt("level"),
+                        rs.getInt("exp"),
                         rs.getString("realm")
                 );
             }
@@ -72,10 +71,10 @@ public class Database {
 
     public void save(UUID uuid, PlayerData data) {
         try (PreparedStatement ps = connection.prepareStatement(
-                "REPLACE INTO players(uuid, level, realm) VALUES(?,?,?)"
+                "REPLACE INTO players(uuid, exp, realm) VALUES(?,?,?)"
         )) {
             ps.setString(1, uuid.toString());
-            ps.setInt(2, data.getLevel());
+            ps.setInt(2, data.getExp());
             ps.setString(3, data.getRealm());
             ps.execute();
         } catch (SQLException e) {
