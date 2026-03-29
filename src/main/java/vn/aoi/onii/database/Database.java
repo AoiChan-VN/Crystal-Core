@@ -1,8 +1,9 @@
 package vn.aoi.onii.database;
 
 import vn.aoi.onii.Main;
-import org.bukkit.entity.Player;
+import vn.aoi.onii.player.PlayerData;
 
+import org.bukkit.entity.Player;
 import java.sql.*;
 import java.util.UUID;
 
