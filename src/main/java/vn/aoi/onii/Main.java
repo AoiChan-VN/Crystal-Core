@@ -7,14 +7,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import vn.aoi.onii.commands.core.CommandManager;
 import vn.aoi.onii.commands.sub.HelpCommand;
+import vn.aoi.onii.commands.sub.InfoCommand;
 import vn.aoi.onii.database.Database;
 import vn.aoi.onii.listeners.ChatListener;
-import vn.aoi.onii.quest.*;
+import vn.aoi.onii.listeners.QuestListener;
 import vn.aoi.onii.player.PlayerManager;
+import vn.aoi.onii.quest.QuestManager;
 
 public class Main extends JavaPlugin {
-
-    private static Main instance;
 
     private Database database;
     private PlayerManager playerManager;
@@ -23,7 +23,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        instance = this;
 
         if (!setupEconomy()) {
             getLogger().severe("Vault not found! Disabling plugin...");
@@ -44,7 +43,6 @@ public class Main extends JavaPlugin {
         if (database != null) {
             database.close();
         }
-        getLogger().info("Onii plugin disabled.");
     }
 
     // ================= INIT =================
@@ -59,23 +57,26 @@ public class Main extends JavaPlugin {
         playerManager = new PlayerManager(database);
         questManager = new QuestManager();
     }
-    
-    // ========= registerCommands =========
 
     private void registerCommands() {
+
         CommandManager manager = new CommandManager();
-        
+
+        // ===== REGISTER COMMANDS =====
         manager.register(new HelpCommand(manager));
         manager.register(new InfoCommand());
-        
+
         PluginCommand cmd = getCommand("aoi");
 
-        if (cmd != null)) {
-            cmd.setExecutor(manager);
-            cmd.setTabCompleter(manager);
+        if (cmd == null) {
+            getLogger().severe("Command 'aoi' not found!");
+            return;
         }
+
+        cmd.setExecutor(manager);
+        cmd.setTabCompleter(manager);
     }
-        
+
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(
                 new ChatListener(playerManager), this
@@ -98,23 +99,5 @@ public class Main extends JavaPlugin {
 
         economy = rsp.getProvider();
         return economy != null;
-    }
-
-    // ================= GETTER =================
-
-    public static Main getInstance() {
-        return instance;
-    }
-
-    public Economy getEconomy() {
-        return economy;
-    }
-
-    public PlayerManager getPlayerManager() {
-        return playerManager;
-    }
-
-    public QuestManager getQuestManager() {
-        return questManager;
     }
 }
