@@ -1,1 +1,3 @@
-
+prefix: "&b[Onii]"
+messages:
+  reload: "&aReloaded successfully!"
