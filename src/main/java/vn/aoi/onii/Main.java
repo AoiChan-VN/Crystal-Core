@@ -24,7 +24,7 @@ public class Main extends JavaPlugin {
         playerManager = new PlayerManager();
         cultivationService = new CultivationService(playerManager);
 
-        getCommand("tutien").setExecutor(new TutienCommand(playerManager, cultivationService));
+        getCommand("aoi").setExecutor(new AoiCommand(playerManager, cultivationService));
 
         getLogger().info("AoiChan Enabled!");
     }
