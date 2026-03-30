@@ -13,6 +13,7 @@ ranks:
     max-level: 1
     exp-required: 10
     next-rank: "Luyện khí"
+  
   "Luyện khí":
     max-level: 9
     levels:
@@ -26,6 +27,7 @@ ranks:
       8: { exp: 250, phase: "Hậu kỳ" }
       9: { exp: 300, phase: "Hậu kỳ" }
     next-rank: "Trúc cơ"
+  
   "Trúc cơ":
     max-level: 4
     levels:
@@ -34,13 +36,9 @@ ranks:
       3: { exp: 1200, phase: "Hậu kỳ" }
       4: { exp: 2000, phase: "Viên mãn" }
     next-rank: "Kim đan"
+  
   "Độ kiếp":
     max-level: 1
     exp-required: 10000
     is-do-kiep: true # Kích hoạt sét đánh
     next-rank: "Chân tiên"
-
-messages:
-  prefix: "§b[AoiChan] §f"
-  insufficient-exp: "§cBạn cần thêm §e%exp% §clinh khí để đột phá!"
-  level-up: "§aChúc mừng! Bạn đã đột phá lên §e%rank% %phase% (Tầng %level%)"
