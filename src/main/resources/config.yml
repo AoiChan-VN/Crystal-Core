@@ -1,7 +1,3 @@
-prefix: "&b[Aoi]"
-messages:
-  reload: "&aReloaded successfully!"
-
 database:
   file: database.db
 
