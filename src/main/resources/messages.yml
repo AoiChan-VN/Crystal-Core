@@ -1,1 +1,6 @@
-no-permission: "§cBạn không có quyền!"
+prefix: "&6[AoiChan] "
+
+rankup: "&aBạn đã đột phá lên &e{rank} {phase}"
+fail: "&cBạn đã chết khi độ kiếp!"
+success: "&bĐộ kiếp thành công!"
+info: "&eCảnh giới: &6{rank} &e- &b{phase}"
