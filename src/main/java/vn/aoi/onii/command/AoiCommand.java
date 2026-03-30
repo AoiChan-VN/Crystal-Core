@@ -7,12 +7,12 @@ import org.bukkit.entity.Player;
 import vn.aoi.onii.player.PlayerManager;
 import vn.aoi.onii.cultivation.CultivationService;
 
-public class TutienCommand implements CommandExecutor {
+public class AoiCommand implements CommandExecutor {
 
     private final PlayerManager manager;
     private final CultivationService service;
 
-    public TutienCommand(PlayerManager manager, CultivationService service) {
+    public AoiCommand(PlayerManager manager, CultivationService service) {
         this.manager = manager;
         this.service = service;
     }
