@@ -5,9 +5,9 @@ import vn.aoi.onii.data.Database;
 import vn.aoi.onii.player.PlayerManager;
 import vn.aoi.onii.rank.RankManager;
 
-public final class AoiChanPlugin extends JavaPlugin {
+public final class AoiMain extends JavaPlugin {
 
-    private static AoiChanPlugin instance;
+    private static AoiMain instance;
     private Database database;
     private PlayerManager playerManager;
     private RankManager rankManager;
@@ -26,7 +26,7 @@ public final class AoiChanPlugin extends JavaPlugin {
 
         this.playerManager = new PlayerManager(this);
 
-        getLogger().info("AoiChan Plugin Enabled!");
+        getLogger().info("Plugins ➝【Bật】");
     }
 
     @Override
@@ -35,7 +35,7 @@ public final class AoiChanPlugin extends JavaPlugin {
         database.close();
     }
 
-    public static AoiChanPlugin get() {
+    public static AoiMain get() {
         return instance;
     }
 
