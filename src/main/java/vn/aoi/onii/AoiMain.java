@@ -7,16 +7,16 @@ import vn.aoi.onii.listener.PlayerListener;
 import vn.aoi.onii.player.PlayerManager;
 import vn.aoi.onii.rank.RankManager;
 import vn.aoi.onii.system.ExpService;
-import vn.aoi.onii.system.ThienKiepService;
+import vn.aoi.onii.system.DoKiepService;
 
-public final class AoiMain extends JavaPlugin {
+public final class AoiChanPlugin extends JavaPlugin {
 
-    private static AoiMain instance;
+    private static AoiChanPlugin instance;
     private Database database;
     private PlayerManager playerManager;
     private RankManager rankManager;
     private ExpService expService;
-    private ThienKiepService thienKiepService;
+    private DoKiepService doKiepService;
 
     @Override
     public void onEnable() {
@@ -31,11 +31,11 @@ public final class AoiMain extends JavaPlugin {
 
         playerManager = new PlayerManager(this);
         expService = new ExpService(this);
-        thienKiepService = new ThienKiepService(this);
+        doKiepService = new DoKiepService(this);
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(this), this);
 
-        getLogger().info("AoiChan Enabled!");
+        getLogger().info("AoiChan FULL Enabled!");
     }
 
     @Override
@@ -44,10 +44,10 @@ public final class AoiMain extends JavaPlugin {
         database.close();
     }
 
-    public static AoiMain get() { return instance; }
+    public static AoiChanPlugin get() { return instance; }
     public Database getDatabase() { return database; }
     public PlayerManager getPlayerManager() { return playerManager; }
     public RankManager getRankManager() { return rankManager; }
     public ExpService getExpService() { return expService; }
-    public ThienKiepService getThienKiepService() { return thienKiepService; }
+    public DoKiepService getDoKiepService() { return doKiepService; }
 }
