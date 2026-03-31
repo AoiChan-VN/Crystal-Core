@@ -1,6 +1,6 @@
 package vn.aoi.onii.rank;
 
-import vn.aoi.onii.rank.ThienKiep;
+import vn.aoi.onii.system.ThienKiepService;
 
 import java.util.*;
 
