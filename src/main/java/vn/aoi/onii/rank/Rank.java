@@ -1,4 +1,7 @@
 package vn.aoi.onii.rank;
+
+import vn.aoi.onii.rank.ThienKiep;
+
 import java.util.*;
 
 public class Rank {
