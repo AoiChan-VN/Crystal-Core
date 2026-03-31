@@ -15,7 +15,12 @@ public class PlayerData {
     public int getLevel() { return level; }
     public int getExp() { return exp; }
 
-    public void setRank(String rank) { this.rank = rank; }
+    public void addExp(int amount) { this.exp += amount; }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+        this.level = 1;
+    }
+
     public void setLevel(int level) { this.level = level; }
-    public void setExp(int exp) { this.exp = exp; }
-} 
+}
