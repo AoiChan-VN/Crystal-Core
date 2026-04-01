@@ -4,8 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import vn.aoi.onii.command.CommandManager;
 import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.data.Database;
-import vn.aoi.onii.listener.JoinListener;
-import vn.aoi.onii.listener.MobKillListener;
+import vn.aoi.onii.listener.*;
 
 public class Main extends JavaPlugin {
 
@@ -24,6 +23,7 @@ public class Main extends JavaPlugin {
         CommandManager.init(this);
 
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
+        getServer().getPluginManager().registerEvents(new QuitListener(), this);
         getServer().getPluginManager().registerEvents(new MobKillListener(), this);
     }
 
