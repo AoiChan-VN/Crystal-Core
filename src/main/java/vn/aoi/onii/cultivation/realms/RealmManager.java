@@ -1,4 +1,4 @@
-package vn.aoi.onii.cultivation;
+package vn.aoi.onii.cultivation.realms;
 
 import org.bukkit.configuration.ConfigurationSection;
 import vn.aoi.onii.Main;
