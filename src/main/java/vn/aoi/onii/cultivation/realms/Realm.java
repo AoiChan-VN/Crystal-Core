@@ -1,4 +1,4 @@
-package vn.aoi.onii.cultivation;
+package vn.aoi.onii.cultivation.realms;
 
 import java.util.Map;
 
