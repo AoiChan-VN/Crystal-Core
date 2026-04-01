@@ -40,5 +40,5 @@ ranks:
   "Độ kiếp":
     max-level: 1
     exp-required: 10000
-    is-do-kiep: true # Kích hoạt sét đánh
+    is-thien-kiep: true # Kích hoạt sét đánh
     next-rank: "Chân tiên"
