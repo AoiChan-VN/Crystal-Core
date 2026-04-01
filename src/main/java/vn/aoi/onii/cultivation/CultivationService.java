@@ -1,12 +1,11 @@
 package vn.aoi.onii.cultivation;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
 import vn.aoi.onii.Main;
+import vn.aoi.onii.events.BreakthroughEvent;
+import vn.aoi.onii.events.LevelUpEvent;
 import vn.aoi.onii.player.PlayerData;
-import vn.aoi.onii.cultivation.realms.Realm;
-
-import java.util.Map;
 
 public class CultivationService {
 
@@ -21,51 +20,41 @@ public class CultivationService {
         if (data == null) return;
 
         data.addExp(amount);
-        processLevelUp(player, data);
-    }
-
-    private void processLevelUp(Player player, PlayerData data) {
 
         while (true) {
+
             Realm realm = plugin.getRealmManager().getRealm(data.getRealm());
             if (realm == null) return;
 
-            int currentLevel = data.getLevel();
+            if (data.getLevel() >= realm.getMaxLevel()) {
 
-            // MAX LEVEL → BREAKTHROUGH
-            if (currentLevel >= realm.getMaxLevel()) {
-                handleBreakthrough(player, data, realm);
+                String next = realm.getNextRank();
+                if (next == null) return;
+
+                data.setRealm(next);
+                data.setLevel(1);
+                data.setExp(0);
+
+                Bukkit.getPluginManager().callEvent(
+                        new BreakthroughEvent(player, next)
+                );
+
+                player.sendMessage("§6Đột phá: " + next);
                 return;
             }
 
-            int requiredExp = realm.getRequiredExp(currentLevel);
+            int required = realm.getRequiredExp(data.getLevel());
 
-            if (data.getExp() < requiredExp) return;
+            if (data.getExp() < required) return;
 
-            // LEVEL UP
-            data.setExp(data.getExp() - requiredExp);
-            data.setLevel(currentLevel + 1);
+            data.setExp(data.getExp() - required);
+            data.setLevel(data.getLevel() + 1);
 
-            player.sendMessage("§a⬆ Đột phá tầng " + data.getLevel());
+            Bukkit.getPluginManager().callEvent(
+                    new LevelUpEvent(player, data.getLevel())
+            );
 
+            player.sendMessage("§aLevel Up: " + data.getLevel());
         }
-    }
-
-    private void handleBreakthrough(Player player, PlayerData data, Realm realm) {
-
-        if (realm.isThienKiep()) {
-            player.sendMessage("§c⚡ Thiên kiếp giáng xuống!");
-            ThunderTribulation.start(player);
-            return;
-        }
-
-        String next = realm.getNextRank();
-        if (next == null) return;
-
-        data.setRealm(next);
-        data.setLevel(1);
-        data.setExp(0);
-
-        player.sendMessage("§6✨ Đột phá cảnh giới: " + next);
     }
 }
