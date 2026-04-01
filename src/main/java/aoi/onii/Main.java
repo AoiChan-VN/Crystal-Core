@@ -3,41 +3,40 @@ package vn.aoi.onii;
 import org.bukkit.plugin.java.JavaPlugin;
 import vn.aoi.onii.command.CommandManager;
 import vn.aoi.onii.config.ConfigManager;
-import vn.aoi.onii.database.DatabaseManager;
+import vn.aoi.onii.data.Database;
+import vn.aoi.onii.listener.JoinListener;
 import vn.aoi.onii.listener.MobKillListener;
-import vn.aoi.onii.service.CultivationService;
 
 public class Main extends JavaPlugin {
 
     private static Main instance;
-    private DatabaseManager databaseManager;
-    private ConfigManager configManager;
-    private CultivationService cultivationService;
+    private Database database;
 
     @Override
     public void onEnable() {
         instance = this;
 
-        this.configManager = new ConfigManager(this);
-        this.configManager.loadAll();
+        ConfigManager.init(this);
 
-        this.databaseManager = new DatabaseManager(this);
-        this.databaseManager.init();
+        database = new Database(this);
+        database.connect();
 
-        this.cultivationService = new CultivationService(this);
+        CommandManager.init(this);
 
-        new CommandManager(this).registerAll();
-
-        getServer().getPluginManager().registerEvents(new MobKillListener(this), this);
+        getServer().getPluginManager().registerEvents(new JoinListener(), this);
+        getServer().getPluginManager().registerEvents(new MobKillListener(), this);
     }
 
     @Override
     public void onDisable() {
-        databaseManager.shutdown();
+        database.close();
     }
 
-    public static Main getInstance() { return instance; }
-    public DatabaseManager getDatabaseManager() { return databaseManager; }
-    public ConfigManager getConfigManager() { return configManager; }
-    public CultivationService getCultivationService() { return cultivationService; }
+    public static Main getInstance() {
+        return instance;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
 }
