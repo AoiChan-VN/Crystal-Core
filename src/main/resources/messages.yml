@@ -1,9 +1,6 @@
 messages:
   prefix: "&6[AoiChan] "
-
-  no-player: "&cPlayer không tồn tại!"
-  no-permission: "&cKhông có quyền!"
-
+  
   cooldown: "&cChờ {time}s trước khi dùng lại!"
 
   info:
