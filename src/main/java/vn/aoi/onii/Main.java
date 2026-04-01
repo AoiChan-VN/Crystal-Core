@@ -13,6 +13,7 @@ public class Main extends JavaPlugin {
     private DatabaseManager databaseManager;
     private PlayerManager playerManager;
     private RealmManager realmManager;
+    private CultivationService cultivationService;
 
     @Override
     public void onEnable() {
@@ -27,6 +28,8 @@ public class Main extends JavaPlugin {
         realmManager.loadRealms();
 
         playerManager = new PlayerManager(this);
+
+        cultivationService = new CultivationService(this);
 
         getCommand("tuvi").setExecutor(new CultivationCommand(this));
 
@@ -52,5 +55,9 @@ public class Main extends JavaPlugin {
 
     public RealmManager getRealmManager() {
         return realmManager;
+    }
+
+    public CultivationService getCultivationService() {
+        return cultivationService;
     }
 }
