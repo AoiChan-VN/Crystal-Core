@@ -39,6 +39,7 @@ public class CommandManager {
     }
 
     private void autoScan(Main plugin) {
+
         try {
             String pkg = "vn.aoi.onii.commands.modules";
             String path = pkg.replace('.', '/');
@@ -46,17 +47,18 @@ public class CommandManager {
             Enumeration<URL> resources = plugin.getClassLoader().getResources(path);
 
             while (resources.hasMoreElements()) {
+
                 File folder = new File(resources.nextElement().toURI());
 
                 for (File file : Objects.requireNonNull(folder.listFiles())) {
 
                     if (!file.getName().endsWith(".class")) continue;
 
-                    String name = pkg + "." + file.getName().replace(".class", "");
-
-                    Class<?> clazz = Class.forName(name);
+                    String className = pkg + "." + file.getName().replace(".class", "");
+                    Class<?> clazz = Class.forName(className);
 
                     if (ICommandModule.class.isAssignableFrom(clazz)) {
+
                         ICommandModule module = (ICommandModule)
                                 clazz.getDeclaredConstructor(Main.class).newInstance(plugin);
 
