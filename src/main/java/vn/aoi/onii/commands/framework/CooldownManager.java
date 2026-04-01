@@ -1,6 +1,7 @@
 package vn.aoi.onii.commands.framework;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CooldownManager {
 
@@ -8,7 +9,6 @@ public class CooldownManager {
 
     public static boolean isOnCooldown(String key, int seconds) {
         long now = System.currentTimeMillis();
-
         if (!cooldowns.containsKey(key)) return false;
 
         long last = cooldowns.get(key);
