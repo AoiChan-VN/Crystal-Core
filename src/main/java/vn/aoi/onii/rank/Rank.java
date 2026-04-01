@@ -15,4 +15,4 @@ public class Rank {
     public void setFlatExp(int f){flat=f;}    
     public int getMax(){return max;}    
     public String next(){return next;}    
-    public boolean isThienKiep(){return ThienKiep;} }
+    public boolean isThienKiep(){return DoKiep;} }
