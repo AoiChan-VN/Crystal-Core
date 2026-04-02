@@ -8,12 +8,11 @@ import vn.aoi.onii.manager.PlayerManager;
 public class QuitListener implements Listener {
 
     @EventHandler
-    public void quit(PlayerQuitEvent e) {
+    public void onQuit(PlayerQuitEvent e){
+        var d=PlayerManager.get(e.getPlayer().getUniqueId());
+        if(d==null) return;
 
-        var data = PlayerManager.get(e.getPlayer().getUniqueId());
-        if (data == null) return;
-
-        PlayerRepository.saveAsync(data);
-        PlayerManager.remove(data.getUuid());
+        PlayerRepository.save(d);
+        PlayerManager.remove(d.uuid);
     }
 }
