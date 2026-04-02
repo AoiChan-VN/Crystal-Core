@@ -5,38 +5,21 @@ import java.sql.*;
 
 public class Database {
 
-    private final Main plugin;
-    private Connection connection;
+    private Connection conn;
 
-    public Database(Main plugin) {
-        this.plugin = plugin;
+    public Database(Main p){
+        try{
+            conn = DriverManager.getConnection("jdbc:sqlite:"+p.getDataFolder()+"/data.db?journal_mode=WAL");
+            Statement st = conn.createStatement();
+            st.executeUpdate("CREATE TABLE IF NOT EXISTS players(uuid TEXT PRIMARY KEY,realm TEXT,level INT,exp INT)");
+        }catch(Exception e){e.printStackTrace();}
     }
 
-    public void connect() {
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:sqlite:" + plugin.getDataFolder() + "/data.db?journal_mode=WAL"
-            );
+    public void connect(){}
 
-            Statement st = connection.createStatement();
-            st.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS players (
-                    uuid TEXT PRIMARY KEY,
-                    realm TEXT,
-                    level INTEGER,
-                    exp INTEGER
-                );
-            """);
+    public Connection get(){ return conn; }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void close(){
+        try{ if(conn!=null) conn.close(); }catch(Exception ignored){}
     }
-
-    public Connection getConnection() { return connection; }
-
-    public void close() {
-        try { if (connection != null) connection.close(); }
-        catch (Exception ignored) {}
-    }
-} 
+}
