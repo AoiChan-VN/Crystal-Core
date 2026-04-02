@@ -11,17 +11,16 @@ import vn.aoi.onii.task.AutoSaveTask;
 public class Main extends JavaPlugin {
 
     private static Main instance;
-    private Database database;
+    private Database db;
 
-    @Override
     public void onEnable() {
         instance = this;
 
         ConfigManager.init(this);
         RealmManager.load();
 
-        database = new Database(this);
-        database.connect();
+        db = new Database(this);
+        db.connect();
 
         CommandManager.init(this);
 
@@ -32,11 +31,10 @@ public class Main extends JavaPlugin {
         new AutoSaveTask().runTaskTimer(this, 6000, 6000);
     }
 
-    @Override
     public void onDisable() {
-        database.close();
+        db.close();
     }
 
-    public static Main getInstance() { return instance; }
-    public Database getDatabase() { return database; }
+    public static Main get() { return instance; }
+    public Database db() { return db; }
 }
