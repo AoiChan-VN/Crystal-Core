@@ -16,7 +16,7 @@ public class CultivationService {
         this.playerManager = playerManager;
         this.realmManager = realmManager;
     }
-
+    
     // ➕ ADD EXP
     public void addExp(Player player, double amount) {
         if (amount <= 0 || amount > 1000) return; // anti exploit
@@ -65,12 +65,11 @@ public class CultivationService {
                                 cultivator.getRealm(),
                                 cultivator.getRealm(),
                                 cultivator.getLevel()
-                        )
-                );
-
-            } else break;
+                        );
+                     }
+                } else break;
+             }
         }
-    }
 
     // 🌩️ RANK UP
     private void handleRankUp(Player player, Cultivator cultivator, Realm realm) {
