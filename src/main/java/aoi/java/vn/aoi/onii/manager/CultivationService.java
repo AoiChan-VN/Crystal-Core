@@ -80,7 +80,12 @@ public class CultivationService {
     private void handleRankUp(Player player, Cultivator cultivator, Realm realm) {
 
         if (realm.isTribulation()) {
-            // TODO: hook TribulationTask ở Phase 3
+
+            player.sendMessage("§c⚡ Thiên kiếp bắt đầu!");
+
+            new TribulationTask(player, playerManager, realm.getDuration(), this)
+                    .runTaskTimer(AoiPlugin.get(), 0L, 20L);
+
             return;
         }
 
@@ -94,5 +99,7 @@ public class CultivationService {
         Bukkit.getPluginManager().callEvent(
                 new PlayerLevelUpEvent(player, oldRealm, newRealm, 1)
         );
+
+        player.sendMessage("§6Đột phá cảnh giới: " + newRealm);
     }
 }
