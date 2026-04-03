@@ -1,13 +1,12 @@
 name: AoiChan
-main: vn.aoi.onii.Main
 version: 1.0
+main: vn.aoi.onii.AoiPlugin
 api-version: 1.21
 
-commands:
-  aoi:
-    description: Main command
-    usage: /aoi
+author: AoiChan
+description: Cultivation System Plugin
 
-permissions:
-  aoichan.admin:
-    default: op
+commands:
+  cultivation:
+    description: Show cultivation info
+    usage: /cultivation
