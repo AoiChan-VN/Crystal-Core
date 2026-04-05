@@ -49,7 +49,14 @@ public class AoiPlugin extends JavaPlugin {
         this.cultivationService = new CultivationService(playerManager, realmManager);
 
         // ⚙️ Commands
-        getCommand("cultivation").setExecutor(new CultivationCommand(playerManager));
+        PaperCommandManager acf = new PaperCommandManager(this);
+
+        // optional: enable async completions
+        acf.enableUnstableAPI("help");
+
+        acf.registerCommand(
+                new AoiCommand(playerManager, cultivationService)
+        );
 
         // 🌐 API
         new AoiAPI(playerManager);
