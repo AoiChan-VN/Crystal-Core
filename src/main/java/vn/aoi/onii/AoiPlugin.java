@@ -53,7 +53,8 @@ public class AoiPlugin extends JavaPlugin {
 
         playerManager = new PlayerManager(repository);
         realmManager = new RealmManager(getConfig());
-        cultivationService = new CultivationService(playerManager, realmManager);
+
+        cultivationService = new CultivationService(playerManager, realmManager, configManager);
 
         // ================= ACF =================
 
