@@ -29,8 +29,9 @@ public class PlayerManager {
     }
 
     // 🔥 LOAD PLAYER
-    public void loadPlayer(UUID uuid) {
-        repository.load(uuid).thenAccept(cultivator -> {
+    public void loadPlayer(UUID uuid) {  
+        onlinePlayers.put(uuid, true);
+        repository.load(uuid).thenAccept(cultivator -> { 
             if (cultivator == null) {
                 cultivator = Cultivator.builder()
                         .uuid(uuid)
@@ -41,7 +42,6 @@ public class PlayerManager {
             }
 
             cache.put(uuid, cultivator);
-            onlinePlayers.put(uuid, true);
         });
     }
 
