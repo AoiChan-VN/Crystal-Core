@@ -2,20 +2,19 @@ package vn.aoi.onii.manager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
 import vn.aoi.onii.AoiPlugin;
-import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.api.PlayerExpGainEvent;
 import vn.aoi.onii.api.PlayerLevelUpEvent;
+import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.model.Cultivator;
 import vn.aoi.onii.model.Realm;
 import vn.aoi.onii.task.TribulationTask;
 
 public class CultivationService {
 
-    private final ConfigManager config;
     private final PlayerManager playerManager;
     private final RealmManager realmManager;
+    private final ConfigManager config;
 
     public CultivationService(PlayerManager playerManager,
                               RealmManager realmManager,
@@ -39,7 +38,15 @@ public class CultivationService {
         if (finalAmount <= 0) return;
 
         Bukkit.getScheduler().runTask(AoiPlugin.get(), () -> {
+
             cultivator.setExp(cultivator.getExp() + finalAmount);
+
+            // ✅ MESSAGE EXP
+            player.sendMessage(
+                    config.getMessage("exp.gain",
+                            "%amount%", String.valueOf(finalAmount))
+            );
+
             checkLevelUp(player, cultivator);
         });
     }
@@ -70,6 +77,11 @@ public class CultivationService {
                 cultivator.setExp(cultivator.getExp() - data.getExpRequired());
                 cultivator.setLevel(level + 1);
 
+                player.sendMessage(
+                        config.getMessage("level.up",
+                                "%level%", String.valueOf(cultivator.getLevel()))
+                );
+
                 Bukkit.getPluginManager().callEvent(
                         new PlayerLevelUpEvent(
                                 player,
@@ -87,6 +99,8 @@ public class CultivationService {
 
         if (realm.isTribulation()) {
 
+            player.sendMessage(config.getMessage("tribulation.start"));
+
             new TribulationTask(player, playerManager, realm.getDuration(), this)
                     .runTaskTimer(AoiPlugin.get(), 0L, 20L);
 
@@ -99,6 +113,11 @@ public class CultivationService {
         cultivator.setRealm(newRealm);
         cultivator.setLevel(1);
         cultivator.setExp(0);
+
+        player.sendMessage(
+                config.getMessage("level.realm-up",
+                        "%realm%", newRealm)
+        );
 
         Bukkit.getPluginManager().callEvent(
                 new PlayerLevelUpEvent(player, oldRealm, newRealm, 1)
