@@ -2,9 +2,6 @@ storage: sqlite
 
 auto-save-interval: 300
 
-mobs-exp:
-  ZOMBIE: 5
-
 realms:
   "Phàm nhân":
     next-rank: "Luyện khí"
@@ -25,7 +22,50 @@ realms:
       8: { exp: 140, phase: "Hậu kỳ" }
       9: { exp: 160, phase: "Hậu kỳ" }
 
+  "Trúc cơ":
+    next-rank: "Kim đan"
+    max-level: 4
+    levels:
+      1: { exp: 250, phase: "Sơ kỳ" }
+      2: { exp: 350, phase: "Trung kỳ" }
+      3: { exp: 450, phase: "Hậu kỳ" }
+      4: { exp: 500, phae: "Viên mãn" }
+
+  "Kim đan":
+    next-rank: "Nguyên anh"
+    max-level: 4
+    levels:
+      1: { exp: 250, phase: "Sơ kỳ" }
+      2: { exp: 350, phase: "Trung kỳ" }
+      3: { exp: 450, phase: "Hậu kỳ" }
+      4: { exp: 500, phae: "Viên mãn" }
+
+  "Nguyên anh":
+    next-rank: "Hóa thần"
+    max-level: 4
+    levels:
+      1: { exp: 250, phase: "Sơ kỳ" }
+      2: { exp: 350, phase: "Trung kỳ" }
+      3: { exp: 450, phase: "Hậu kỳ" }
+      4: { exp: 500, phae: "Viên mãn" }
+
   "Độ kiếp":
+    next-rank: "Chân tiên"
+    max-level: 4
+    levels:
+      1: { exp: 1000, phase: "Nhập đạo" }
+      2: { exp: 1500, phase: "Ngộ đạo" }
+      3: { exp: 2000, phase: "Dung đạo" }
+      4: { exp: 3000, phase: "Hóa đạo" }
     is-tribulation: true
     duration: 30
-    next-rank: "Chân tiên"
+
+mobs-exp:
+  ZOMBIE: 1
+  PIG_MAN: 0.5
+  CREPPER: 1
+  SKELETON: 1
+  WHITHE_SKELETON: 2
+  WHITHE_BOSS: 50
+  END_MAN: 0.5
+  END_DRAGON: 100
