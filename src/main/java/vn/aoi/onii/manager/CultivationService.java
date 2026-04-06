@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import vn.aoi.onii.AoiPlugin;
+import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.api.PlayerExpGainEvent;
 import vn.aoi.onii.api.PlayerLevelUpEvent;
 import vn.aoi.onii.model.Cultivator;
@@ -12,12 +13,16 @@ import vn.aoi.onii.task.TribulationTask;
 
 public class CultivationService {
 
+    private final ConfigManager config;
     private final PlayerManager playerManager;
     private final RealmManager realmManager;
 
-    public CultivationService(PlayerManager playerManager, RealmManager realmManager) {
+    public CultivationService(PlayerManager playerManager,
+                              RealmManager realmManager,
+                              ConfigManager config) {
         this.playerManager = playerManager;
         this.realmManager = realmManager;
+        this.config = config;
     }
 
     public void addExp(Player player, double amount) {
