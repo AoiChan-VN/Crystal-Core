@@ -23,8 +23,6 @@ public class AoiCommand extends BaseCommand {
         this.service = service;
     }
 
-    // ================= PLAYER =================
-
     @Subcommand("info")
     public void onInfo(Player player) {
 
@@ -41,41 +39,29 @@ public class AoiCommand extends BaseCommand {
         player.sendMessage("§eEXP: §f" + c.getExp());
     }
 
-    // ================= ADMIN =================
-
     @Subcommand("addexp")
     @CommandPermission("aoi.admin")
-    @CommandCompletion("@players @range:1-100000")
     public void onAddExp(CommandSender sender, Player target, double amount) {
 
         if (sender instanceof Player player) {
             if (CommandCooldown.isOnCooldown("addexp", player.getUniqueId(), 3000)) {
-                long remain = CommandCooldown.getRemaining("addexp", player.getUniqueId(), 3000);
-                player.sendMessage("§cCooldown: " + (remain / 1000.0) + "s");
+                player.sendMessage("§cCooldown!");
                 return;
             }
         }
 
         service.addExp(target, amount);
-        sender.sendMessage("§aĐã thêm EXP!");
-    }
-
-    @Subcommand("setexp")
-    @CommandPermission("aoi.admin")
-    public void onSetExp(CommandSender sender, OfflinePlayer target, double amount) {
-
-        var c = playerManager.get(target.getUniqueId());
-        if (c != null) {
-            c.setExp(amount);
-        }
-
-        sender.sendMessage("§aSet EXP!");
+        sender.sendMessage("§aOK");
     }
 
     @Subcommand("setrealm")
     @CommandPermission("aoi.admin")
-    @CommandCompletion("@players @realms")
     public void onSetRealm(CommandSender sender, OfflinePlayer target, String realm) {
+
+        if (!service.getRealmManager().exists(realm)) {
+            sender.sendMessage("§cRealm không tồn tại!");
+            return;
+        }
 
         var c = playerManager.get(target.getUniqueId());
         if (c != null) {
@@ -84,41 +70,30 @@ public class AoiCommand extends BaseCommand {
             c.setExp(0);
         }
 
-        sender.sendMessage("§aSet Realm!");
+        sender.sendMessage("§aOK");
     }
 
     @Subcommand("reset")
-    @CommandPermission("aoi.admin")
     public void onReset(CommandSender sender, OfflinePlayer target) {
 
         if (!(sender instanceof Player player)) {
             reset(target);
-            sender.sendMessage("§aReset (console)");
             return;
         }
 
-        ConfirmManager.request(player.getUniqueId(), () -> {
-            reset(target);
-            player.sendMessage("§aReset thành công!");
-        });
-
-        player.sendMessage("§cGõ /aoi confirm để xác nhận (10s)");
+        ConfirmManager.request(player.getUniqueId(), () -> reset(target));
+        player.sendMessage("§c/aoi confirm");
     }
 
     @Subcommand("confirm")
     public void onConfirm(Player player) {
 
-        boolean ok = ConfirmManager.confirm(player.getUniqueId());
-
-        if (!ok) {
-            player.sendMessage("§cKhông có hành động hoặc đã hết hạn!");
-            return;
+        if (!ConfirmManager.confirm(player.getUniqueId())) {
+            player.sendMessage("§cHết hạn!");
+        } else {
+            player.sendMessage("§aOK");
         }
-
-        player.sendMessage("§aXác nhận thành công!");
     }
-
-    // ================= INTERNAL =================
 
     private void reset(OfflinePlayer target) {
         var c = playerManager.get(target.getUniqueId());
