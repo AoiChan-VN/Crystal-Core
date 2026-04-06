@@ -62,7 +62,7 @@ public class TribulationTask extends BukkitRunnable {
             c.setExp(0);
         }
 
-        player.sendMessage("§4Bạn đã thất bại thiên kiếp!");
+        player.sendMessage("§4Độ thiên kiếp thất bại!");
     }
 
     private void success() {
@@ -78,6 +78,6 @@ public class TribulationTask extends BukkitRunnable {
         c.setLevel(1);
         c.setExp(0);
 
-        player.sendMessage("§b⚡ Bạn đã vượt qua thiên kiếp!");
+        player.sendMessage("§bĐộ thiên kiếp thành công!");
     }
 }
