@@ -8,8 +8,10 @@ import vn.aoi.onii.commands.AoiCommand;
 import vn.aoi.onii.api.AoiAPI;
 import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.config.MessageManager;
+
 import vn.aoi.onii.database.PlayerRepository;
 import vn.aoi.onii.database.DatabaseManager;
+
 import vn.aoi.onii.listener.ConnectionListener;
 import vn.aoi.onii.listener.MobKillListener;
 import vn.aoi.onii.manager.CultivationService;
@@ -42,13 +44,9 @@ public class AoiPlugin extends JavaPlugin {
         // 🗄️ Database
         DatabaseManager database = new DatabaseManager(getConfig());
         database.connect(getDataFolder());
-
         DatabaseExecutor executor = new DatabaseExecutor();
-
         Migration.init(database);
-
         PlayerRepository repository = new PlayerRepository(database, executor);
-
         PlayerManager playerManager = new PlayerManager(repository);
 
         // 🧠 Managers
@@ -95,7 +93,9 @@ public class AoiPlugin extends JavaPlugin {
         playerManager.getOnlinePlayers().keySet()
                 .forEach(playerManager::savePlayer);
 
-        // 🔌 Close DB
+        // 🔌 Close Data
+        executor.shutdown();
+        database.close();
         database.shutdown();
 
         getLogger().info("AoiChan Plugin 【OFF】");
