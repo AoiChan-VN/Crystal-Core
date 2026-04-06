@@ -17,7 +17,7 @@ public class PlayerRepository {
 
     private void init() {
         try (Connection conn = database.getConnection();
-             PreparedStatement ps = conn.preparedStatement()) {
+             PreparedStatement ps = conn.preparedStatement(sql)) {
 
             ps.execute("""
                 CREATE TABLE IF NOT EXISTS players (
