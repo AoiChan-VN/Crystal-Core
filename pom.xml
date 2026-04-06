@@ -101,19 +101,19 @@
                             <relocations>
                                 <relocation>
                                     <pattern>com.zaxxer.hikari</pattern>
-                                    <shadedPattern>vn.aoi.onii.libs.hikari</shadedPattern>
+                                    <shadedPattern>vn.aoi.libs.hikari</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>com.github.benmanes.caffeine</pattern>
-                                    <shadedPattern>vn.aoi.onii.libs.caffeine</shadedPattern>
+                                    <shadedPattern>vn.aoi.libs.caffeine</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>co.aikar.commands</pattern>
-                                    <shadedPattern>vn.aoi.onii.libs.acf</shadedPattern>
+                                    <shadedPattern>vn.aoi.libs.acf</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>co.aikar.locales</pattern>
-                                    <shadedPattern>vn.aoi.onii.libs.locales</shadedPattern>
+                                    <shadedPattern>vn.aoi.libs.locales</shadedPattern>
                                 </relocation>
                             </relocations>
                             <transformers>
