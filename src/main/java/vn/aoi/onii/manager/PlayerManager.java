@@ -13,10 +13,8 @@ public class PlayerManager {
 
     private final PlayerRepository repository;
 
-    // Cache chính
     private final Cache<UUID, Cultivator> cache;
 
-    // Track player online
     private final ConcurrentHashMap<UUID, Boolean> onlinePlayers = new ConcurrentHashMap<>();
 
     public PlayerManager(PlayerRepository repository) {
@@ -28,10 +26,12 @@ public class PlayerManager {
                 .build();
     }
 
-    // 🔥 LOAD PLAYER
-    public void loadPlayer(UUID uuid) {  
+    public void loadPlayer(UUID uuid) {
+
         onlinePlayers.put(uuid, true);
-        repository.load(uuid).thenAccept(cultivator -> { 
+
+        repository.load(uuid).thenAccept(cultivator -> {
+
             if (cultivator == null) {
                 cultivator = Cultivator.builder()
                         .uuid(uuid)
@@ -45,7 +45,6 @@ public class PlayerManager {
         });
     }
 
-    // 💾 SAVE PLAYER
     public void savePlayer(UUID uuid) {
         Cultivator cultivator = cache.getIfPresent(uuid);
         if (cultivator != null) {
@@ -53,23 +52,17 @@ public class PlayerManager {
         }
     }
 
-    // ❌ REMOVE (logout)
     public void unloadPlayer(UUID uuid) {
         savePlayer(uuid);
         cache.invalidate(uuid);
         onlinePlayers.remove(uuid);
     }
 
-    // 📦 GET
     public Cultivator get(UUID uuid) {
         return cache.getIfPresent(uuid);
-    }
-
-    public boolean isOnline(UUID uuid) {
-        return onlinePlayers.containsKey(uuid);
     }
 
     public ConcurrentHashMap<UUID, Boolean> getOnlinePlayers() {
         return onlinePlayers;
     }
-} 
+}
