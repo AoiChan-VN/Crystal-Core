@@ -1,5 +1,43 @@
-level-up: "&aBạn đã đột phá lên cấp {level}!"
-rank-up: "&6Bạn đã tiến vào cảnh giới {realm}!"
-tribulation-start: "&cThiên kiếp bắt đầu!"
-tribulation-fail: "&4Bạn đã thất bại!"
-tribulation-success: "&bBạn đã vượt qua thiên kiếp!"
+# ================= GENERAL =================
+prefix: "&6[Onii] "
+
+no-permission: "&cBạn không có quyền!"
+player-only: "&cChỉ player mới dùng được!"
+player-not-found: "&cKhông tìm thấy player!"
+invalid-number: "&cSố không hợp lệ!"
+
+# ================= CULTIVATION =================
+info:
+  header: "&6=== TU VI ==="
+  realm: "&eCảnh giới: &f%realm%"
+  level: "&eLevel: &f%level%"
+  exp: "&eEXP: &f%exp%"
+
+# ================= EXP =================
+exp:
+  gain: "&a+%amount% EXP"
+  cooldown: "&cBạn đang cooldown! (%time%s)"
+
+# ================= LEVEL =================
+level:
+  up: "&bBạn đã lên cấp! Level %level%"
+  realm-up: "&6Đột phá cảnh giới: %realm%"
+
+# ================= TRIBULATION =================
+tribulation:
+  start: "&c⚡ Thiên kiếp bắt đầu!"
+  success: "&b⚡ Bạn đã vượt qua thiên kiếp!"
+  fail: "&4Bạn đã thất bại thiên kiếp!"
+
+# ================= ADMIN =================
+admin:
+  add-exp: "&aĐã thêm EXP cho %player%"
+  set-exp: "&aĐã set EXP cho %player%"
+  set-realm: "&aĐã set cảnh giới cho %player%"
+  reset: "&aĐã reset %player%"
+
+# ================= CONFIRM =================
+confirm:
+  request: "&cGõ /aoi confirm để xác nhận (10s)"
+  success: "&aXác nhận thành công!"
+  expired: "&cKhông có hành động hoặc đã hết hạn!"
