@@ -7,6 +7,6 @@ author: AoiChan
 description: Cultivation System Plugin
 
 commands:
-  cultivation:
-    description: Show cultivation info
-    usage: /cultivation
+  aoi:
+    description: Show plugin help command
+    usage: /aoi help
