@@ -9,7 +9,7 @@ import vn.aoi.onii.api.AoiAPI;
 import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.config.MessageManager;
 import vn.aoi.onii.database.PlayerRepository;
-import vn.aoi.onii.database.SQLiteConnector;
+import vn.aoi.onii.database.DatabaseManager;
 import vn.aoi.onii.listener.ConnectionListener;
 import vn.aoi.onii.listener.MobKillListener;
 import vn.aoi.onii.manager.CultivationService;
@@ -21,7 +21,7 @@ public class AoiPlugin extends JavaPlugin {
 
     private static AoiPlugin instance;
 
-    private SQLiteConnector database;
+    private DatabaseManager database;
     private PlayerRepository repository;
 
     private PlayerManager playerManager;
@@ -40,7 +40,7 @@ public class AoiPlugin extends JavaPlugin {
         this.messageManager = new MessageManager(this);
 
         // 🗄️ Database
-        this.database = new SQLiteConnector(getDataFolder());
+        this.database = new DatabaseManager(getDataFolder());
         this.repository = new PlayerRepository(database);
 
         // 🧠 Managers
