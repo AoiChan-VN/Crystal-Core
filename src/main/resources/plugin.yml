@@ -1,1 +1,12 @@
+name: AoiChan
+version: 1.0
+main: vn.aoi.onii.AoiPlugin
+api-version: 1.21
 
+author: AoiChan
+description: Cultivation System Plugin
+
+commands:
+  cultivation:
+    description: Show cultivation info
+    usage: /cultivation
