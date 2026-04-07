@@ -1,5 +1,5 @@
 # ================= GENERAL =================
-prefix: "&6[Onii] "
+prefix: "&f&l[&6&lAoi&f&l] &r"
 
 no-permission: "&cBạn không có quyền!"
 player-only: "&cChỉ player mới dùng được!"
@@ -8,7 +8,7 @@ invalid-number: "&cSố không hợp lệ!"
 
 # ================= CULTIVATION =================
 info:
-  header: "&6=== TU VI ==="
+  header: "&f&n———————&r【&6&lthông tin&r】&f&n————————
   realm: "&eCảnh giới: &f%realm%"
   level: "&eLevel: &f%level%"
   exp: "&eEXP: &f%exp%"
@@ -16,18 +16,18 @@ info:
 # ================= EXP =================
 exp:
   gain: "&a+%amount% EXP"
-  cooldown: "&cBạn đang cooldown! (%time%s)"
+  cooldown: "&cđang cooldown! (%time%s)"
 
 # ================= LEVEL =================
 level:
-  up: "&bBạn đã lên cấp! Level %level%"
-  realm-up: "&6Đột phá cảnh giới: %realm%"
+  up: "&bBạn đã lên cấp! Tu vi: %level%"
+  realm-up: "&6Đột phá! Cảnh giới: %realm%"
 
 # ================= TRIBULATION =================
 tribulation:
   start: "&c⚡ Thiên kiếp bắt đầu!"
   success: "&b⚡ Bạn đã vượt qua thiên kiếp!"
-  fail: "&4Bạn đã thất bại thiên kiếp!"
+  fail: "&4Bạn đã thất bại độ thiên kiếp!"
 
 # ================= ADMIN =================
 admin:
