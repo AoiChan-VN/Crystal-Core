@@ -104,7 +104,7 @@
                 <configuration>
                     <release>${java.version}</release>
                     <compilerArgs>
-                        <arg>-Xlint:-all</arg>
+                        <arg>-Xlint:none</arg>
                         <arg>-Xlint:-processing</arg>
                         <arg>-nowarn</arg>
                     </compilerArgs>
