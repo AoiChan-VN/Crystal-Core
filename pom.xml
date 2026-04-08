@@ -167,6 +167,7 @@
                                         <Built-By>AoiChan</Built-By>
                                         <Plugin-Name>AoiChan</Plugin-Name>
                                         <Version>${project.version}</Version>
+                                        <Multi-Release>true</Multi-Release>
                                     </manifestEntries>
                                 </transformer>
 
@@ -184,9 +185,9 @@
                                         <exclude>META-INF/versions/9/module-info.class</exclude>
                                              
                                         <!-- Xóa Manifest/License của thư viện ngoài (Maven sẽ giữ lại cái của plugin bạn) -->
-                                        <exclude>META-INF/MANIFEST.MF</exclude>
                                         <exclude>META-INF/LICENSE*</exclude>
                                         <exclude>META-INF/NOTICE*</exclude>
+                                        <exclude>META-INF/DEPENDENCIES</exclude>
                 
                                         <!-- Xóa chữ ký của các thư viện ngoài (để tránh lỗi SecurityException) -->
                                         <exclude>META-INF/*.SF</exclude>
