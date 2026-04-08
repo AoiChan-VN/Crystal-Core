@@ -13,45 +13,65 @@ public class ConfigManager {
 
     private FileConfiguration config;
     private FileConfiguration messages;
+    private FileConfiguration realms;
+    private FileConfiguration mobs;
 
     public ConfigManager(AoiPlugin plugin) {
         this.plugin = plugin;
-        load();
+        loadAll();
     }
 
-    public void load() {
+    public void loadAll() {
 
         plugin.saveDefaultConfig();
         config = plugin.getConfig();
 
-        File msgFile = new File(plugin.getDataFolder(), "messages.yml");
+        messages = loadFile("messages.yml");
+        realms = loadFile("realms.yml");
+        mobs = loadFile("mobs.yml");
+    }
 
-        if (!msgFile.exists()) {
-            plugin.saveResource("messages.yml", false);
+    private FileConfiguration loadFile(String name) {
+
+        File file = new File(plugin.getDataFolder(), name);
+
+        if (!file.exists()) {
+            plugin.saveResource(name, false);
         }
 
-        messages = YamlConfiguration.loadConfiguration(msgFile);
+        return YamlConfiguration.loadConfiguration(file);
     }
 
-    public String getMessage(String path) {
-        String msg = messages.getString(path, "&cMissing message: " + path);
-        return color(msg);
-    }
+    // ================= MESSAGE =================
 
-    public String getMessage(String path, String... placeholders) {
+    public String msg(String path, String... placeholders) {
 
-        String msg = getMessage(path);
+        String msg = messages.getString(path, "&cMissing: " + path);
 
         for (int i = 0; i < placeholders.length; i += 2) {
             msg = msg.replace(placeholders[i], placeholders[i + 1]);
         }
 
-        return msg;
+        return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
-    private String color(String s) {
-        return ChatColor.translateAlternateColorCodes('&', s);
+    // ================= REALMS =================
+
+    public FileConfiguration getRealms() {
+        return realms;
     }
+
+    // ================= MOBS =================
+
+    public FileConfiguration getMobs() {
+        return mobs;
+    }
+
+    public double getMobExp(String mob) {
+        return mobs.getDouble("mobs." + mob + ".exp", 0);
+    }
+
+    // ================= CONFIG =================
 
     public FileConfiguration getConfig() {
         return config;
