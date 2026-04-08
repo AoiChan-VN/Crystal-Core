@@ -104,7 +104,9 @@
                 <configuration>
                     <release>${java.version}</release>
                     <compilerArgs>
-                        <arg>-parameters</arg>
+                        <arg>-Xlint:-all</arg>
+                        <arg>-Xlint:-processing</arg>
+                        <arg>-nowarn</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
