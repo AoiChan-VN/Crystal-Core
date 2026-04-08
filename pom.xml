@@ -176,9 +176,20 @@
                             <!-- Clean but safe -->
                             <filters>
                                 <filter>
-                                    <artifact>*:*</artifact>
+                                    <artifact>org.slf4j:*</artifact>
+                                    <artifact>org.xerial:sqlite-jdbc</artifact>
+                                    <artifact>com.zaxxer:HikariCP</artifact>
+                                    <artifact>com.github.aikar:acf-paper</artifact>
+                                    <artifact>com.github.ben-manes.caffeine:caffeine</artifact>
+                                    <artifact>com.google.protobuf:protobuf-java</artifact>
                                     <excludes>
-                                        <exclude>module-info.class</exclude>
+                                        <exclude>META-INF/MANIFEST.MF</exclude>
+                                        <exclude>META-INF/LICENSE*</exclude>
+                                        <exclude>META-INF/NOTICE*</exclude>
+                                        <exclude>META-INF/versions/9/module-info.class</exclude>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
