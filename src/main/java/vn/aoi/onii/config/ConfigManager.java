@@ -80,7 +80,7 @@ public class ConfigManager {
         String msg = getMessage(path);
 
         for (int i = 0; i < placeholders.length; i += 2) {
-            msg = msg.replace(placeholders[i], placeholders[i + 1]);
+            msg = msg.replace("%" + placeholders[i] + "%", placeholders[i + 1]);
         }
 
         return msg;
