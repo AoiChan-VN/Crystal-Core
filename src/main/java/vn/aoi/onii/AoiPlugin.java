@@ -5,10 +5,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import vn.aoi.onii.commands.AoiCommand;
 import vn.aoi.onii.commands.context.*;
-import vn.aoi.onii.service.CultivationService;
-import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.database.*;
+import vn.aoi.onii.config.ConfigManager;
+import vn.aoi.onii.listener.MobkillListener;
 import vn.aoi.onii.manager.*;
+import vn.aoi.onii.service.ExpService;
 
 public class AoiPlugin extends JavaPlugin {
 
@@ -21,9 +22,10 @@ public class AoiPlugin extends JavaPlugin {
 
     private RealmManager realmManager;
     private PlayerManager playerManager;
+    private MobManager mobManager;
+
     private ExpService expService;
     private CultivationService cultivationService;
-    private MobManager mobManager;
     
     @Override
     public void onEnable() {
@@ -55,8 +57,8 @@ public class AoiPlugin extends JavaPlugin {
 
         // =============== SERVICE ===============
         
-        cultivationService = new CultivationService(expService);
         expService = new ExpService(playerManager, realmManager, configManager);
+        cultivationService = new CultivationService(expService);
         
         // ================= ACF =================
 
@@ -66,7 +68,7 @@ public class AoiPlugin extends JavaPlugin {
         ACFCompletion.register(acf, realmManager);
 
         acf.registerCommand(new AoiCommand(playerManager, cultivationService));
-
+ 
         getLogger().info("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         getLogger().info("Aoi Plugin【ON】");
         getLogger().info("Tên: " + getDescription().getName());
