@@ -68,6 +68,8 @@ public class AoiPlugin extends JavaPlugin {
         ACFCompletion.register(acf, realmManager);
 
         acf.registerCommand(new AoiCommand(playerManager, cultivationService));
+
+        getServer().getPluginManager().registerEvents( new MobKillListener(mobManager, cultivationService, configManager), this ); } }
  
         getLogger().info("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         getLogger().info("Aoi Plugin【ON】");
