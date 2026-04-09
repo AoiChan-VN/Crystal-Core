@@ -1,4 +1,4 @@
-package vn.aoi.onii.manager;
+package vn.aoi.onii.service;
 
 import org.bukkit.entity.Player;
 import vn.aoi.onii.service.ExpService;
