@@ -23,7 +23,7 @@ public class MobManager {
     }
 
     private void load() {
-        ConfigurationSection section = configManager.getConfig().getConfigurationSection("mobs-exp");
+        ConfigurationSection section = configManager.getMobs().getConfigurationSection("mobs-exp");
 
         if (section == null) return;
 
