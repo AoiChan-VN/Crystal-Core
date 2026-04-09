@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import vn.aoi.onii.manager.CultivationService;
+import vn.aoi.onii.service.CultivationService;
 
 public class MobKillListener implements Listener {
 
