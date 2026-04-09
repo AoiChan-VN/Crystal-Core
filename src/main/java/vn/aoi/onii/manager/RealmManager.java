@@ -1,10 +1,11 @@
 package vn.aoi.onii.manager;
 
 import org.bukkit.configuration.ConfigurationSection;
-import vn.aoi.onii.model.Realm;
 import vn.aoi.onii.config.ConfigManager;
+import vn.aoi.onii.model.Realm;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public class RealmManager {
                     .levels(levels)
                     .build();
 
-            realms.put(key.toLowerCase(), realm);
+            realms.put(key.toLowerCase(Locale.ROOT), realm);
         }
     }
 
@@ -58,12 +59,15 @@ public class RealmManager {
             try {
                 level = Integer.parseInt(lvlKey);
             } catch (NumberFormatException e) {
-                continue;
+                continue; // skip key lỗi
             }
 
+            double exp = lvlSection.getDouble("exp", 0);
+            String phase = lvlSection.getString("phase", "NONE");
+
             levels.put(level, Realm.LevelData.builder()
-                    .expRequired(lvlSection.getDouble("exp", 0))
-                    .phase(lvlSection.getString("phase", "NONE"))
+                    .expRequired(exp)
+                    .phase(phase)
                     .build());
         }
 
@@ -71,11 +75,13 @@ public class RealmManager {
     }
 
     public Realm getRealm(String name) {
-        return realms.get(name.toLowerCase());
+        if (name == null) return null;
+        return realms.get(name.toLowerCase(Locale.ROOT));
     }
 
     public boolean exists(String name) {
-        return realms.containsKey(name);
+        if (name == null) return false;
+        return realms.containsKey(name.toLowerCase(Locale.ROOT));
     }
 
     public Set<String> getAllRealms() {
