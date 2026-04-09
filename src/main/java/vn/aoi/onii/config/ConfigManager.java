@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import vn.aoi.onii.AoiPlugin;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ConfigManager {
 
@@ -13,6 +14,10 @@ public class ConfigManager {
 
     private FileConfiguration config;
     private FileConfiguration messages;
+    private FileConfiguration realms;
+
+    private File messagesFile;
+    private File realmsFile;
 
     public ConfigManager(AoiPlugin plugin) {
         this.plugin = plugin;
@@ -21,17 +26,40 @@ public class ConfigManager {
 
     public void load() {
 
+        // config.yml
         plugin.saveDefaultConfig();
         config = plugin.getConfig();
 
-        File msgFile = new File(plugin.getDataFolder(), "messages.yml");
-
-        if (!msgFile.exists()) {
+        // messages.yml
+        messagesFile = new File(plugin.getDataFolder(), "messages.yml");
+        if (!messagesFile.exists()) {
             plugin.saveResource("messages.yml", false);
         }
+        messages = YamlConfiguration.loadConfiguration(messagesFile);
 
-        messages = YamlConfiguration.loadConfiguration(msgFile);
+        // realms.yml
+        realmsFile = new File(plugin.getDataFolder(), "realms.yml");
+        if (!realmsFile.exists()) {
+            plugin.saveResource("realms.yml", false);
+        }
+        realms = YamlConfiguration.loadConfiguration(realmsFile);
     }
+
+    public void reload() {
+        config = plugin.getConfig();
+        messages = YamlConfiguration.loadConfiguration(messagesFile);
+        realms = YamlConfiguration.loadConfiguration(realmsFile);
+    }
+
+    public void saveRealms() {
+        try {
+            realms.save(realmsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ================== MESSAGES ==================
 
     public String getMessage(String path) {
         String msg = messages.getString(path, "&cMissing message: " + path);
@@ -39,7 +67,6 @@ public class ConfigManager {
     }
 
     public String getMessage(String path, String... placeholders) {
-
         String msg = getMessage(path);
 
         for (int i = 0; i < placeholders.length; i += 2) {
@@ -53,7 +80,17 @@ public class ConfigManager {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
+    // ================== GETTERS ==================
+
     public FileConfiguration getConfig() {
         return config;
+    }
+
+    public FileConfiguration getMessages() {
+        return messages;
+    }
+
+    public FileConfiguration getRealms() {
+        return realms;
     }
 }
