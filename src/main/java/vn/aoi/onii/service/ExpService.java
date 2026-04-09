@@ -32,24 +32,20 @@ public class ExpService {
         double exp = cultivator.getExp() + amount;
         int level = cultivator.getLevel();
 
-        // 🔁 loop level up
         while (true) {
 
             Realm.LevelData data = realm.getLevels().get(level);
             if (data == null) break;
 
             double required = data.getExpRequired();
-
             if (exp < required) break;
 
             exp -= required;
             level++;
 
-            // 📈 lên cấp
             player.sendMessage(config.getMessage("level.up",
                     "%level%", String.valueOf(level)));
 
-            // 🚧 max level → chuẩn bị đột phá
             if (level > realm.getMaxLevel()) {
                 level = realm.getMaxLevel();
                 exp = 0;
@@ -67,11 +63,8 @@ public class ExpService {
         String next = realm.getNextRank();
         if (next == null) return;
 
-        // ⚡ thiên kiếp nếu có
         if (realm.isTribulation()) {
             player.sendMessage(config.getMessage("tribulation.start"));
-
-            // 👉 sau này anh có thể thêm lightning + damage ở đây
         }
 
         cultivator.setRealm(next);
