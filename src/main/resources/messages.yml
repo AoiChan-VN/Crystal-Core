@@ -8,7 +8,7 @@ invalid-number: "&cSố không hợp lệ!"
 
 # ================= CULTIVATION =================
 info:
-  header: "&f&n———————&r【&6&lthông tin&r】&f&n————————
+  header: "&f&n———————&r【&6&lthông tin&r】&f&n————————&r"
   realm: "&eCảnh giới: &f%realm%"
   level: "&eLevel: &f%level%"
   exp: "&eEXP: &f%exp%"
