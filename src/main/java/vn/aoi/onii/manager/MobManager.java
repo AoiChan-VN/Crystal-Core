@@ -33,13 +33,11 @@ public class MobManager {
                 double exp = section.getDouble(key);
 
                 mobExp.put(type, exp);
-            } catch (IllegalArgumentException e) {
-                // mob không hợp lệ → bỏ qua
-            }
+            } catch (IllegalArgumentException ignored) {
         }
     }
 
     public double getExp(EntityType type) {
         return mobExp.getOrDefault(type, 0.0);
     }
-} 
+}
