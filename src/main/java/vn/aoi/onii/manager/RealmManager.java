@@ -2,6 +2,7 @@ package vn.aoi.onii.manager;
 
 import org.bukkit.configuration.ConfigurationSection;
 import vn.aoi.onii.model.Realm;
+import vn.aoi.onii.config.ConfigManager;
 
 import java.util.HashMap;
 import java.util.Map;
