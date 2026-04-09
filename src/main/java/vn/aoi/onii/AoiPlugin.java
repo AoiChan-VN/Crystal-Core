@@ -59,7 +59,9 @@ public class AoiPlugin extends JavaPlugin {
         
         expService = new ExpService(playerManager, realmManager, configManager);
         cultivationService = new CultivationService(expService);
-        
+
+        getServer().getPluginManager().registerEvents( new MobKillListener(mobManager, cultivationService, configManager), this ); } }
+
         // ================= ACF =================
 
         PaperCommandManager acf = new PaperCommandManager(this);
@@ -68,8 +70,6 @@ public class AoiPlugin extends JavaPlugin {
         ACFCompletion.register(acf, realmManager);
 
         acf.registerCommand(new AoiCommand(playerManager, cultivationService));
-
-        getServer().getPluginManager().registerEvents( new MobKillListener(mobManager, cultivationService, configManager), this ); } }
  
         getLogger().info("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         getLogger().info("Aoi Plugin【ON】");
