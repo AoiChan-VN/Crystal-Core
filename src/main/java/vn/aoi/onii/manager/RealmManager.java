@@ -12,6 +12,7 @@ import java.util.Set;
 public class RealmManager {
 
     private final Map<String, Realm> realms = new HashMap<>();
+    private final Map<String, String> originalNames = new HashMap<>();
     private final ConfigManager configManager;
 
     public RealmManager(ConfigManager configManager) {
@@ -43,7 +44,9 @@ public class RealmManager {
                     .levels(levels)
                     .build();
 
-            realms.put(key.toLowerCase(Locale.ROOT), realm);
+            String lowerKey = Key.toLowerCase(Locale.ROOT);
+            realms.put(lowerKey, realm);
+            originalNames.put(lowerKey, key);
         }
     }
 
@@ -59,7 +62,7 @@ public class RealmManager {
             try {
                 level = Integer.parseInt(lvlKey);
             } catch (NumberFormatException e) {
-                continue; // skip key lỗi
+                continue;
             }
 
             double exp = lvlSection.getDouble("exp", 0);
@@ -85,6 +88,6 @@ public class RealmManager {
     }
 
     public Set<String> getAllRealms() {
-        return realms.keySet();
+        return new HashSet<>(originalNames.values());
     }
 }
