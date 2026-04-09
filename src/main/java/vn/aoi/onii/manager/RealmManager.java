@@ -42,7 +42,7 @@ public class RealmManager {
                     .levels(levels)
                     .build();
 
-            realms.put(key, realm);
+            realms.put(key.toLowerCase(), realm);
         }
     }
 
@@ -71,7 +71,7 @@ public class RealmManager {
     }
 
     public Realm getRealm(String name) {
-        return realms.get(name);
+        return realms.get(name.toLowerCase());
     }
 
     public boolean exists(String name) {
