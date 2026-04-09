@@ -6,8 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import vn.aoi.onii.manager.MobManager;
 import vn.aoi.onii.manager.CultivationService;
 
 public class MobKillListener implements Listener {
@@ -27,7 +25,7 @@ public class MobKillListener implements Listener {
 
         EntityType type = event.getEntityType();
 
-        double exp = mobManager.getExp(entity.getType());
+        double exp = config.getDouble("mobs-exp." + type.name(), 0);
 
         if (exp <= 0) return;
 
