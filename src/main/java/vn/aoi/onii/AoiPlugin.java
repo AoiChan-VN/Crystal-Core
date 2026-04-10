@@ -9,7 +9,7 @@ import vn.aoi.onii.database.*;
 import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.listener.MobKillListener;
 import vn.aoi.onii.manager.*;
-import vn.aoi.onii.service.*;
+import vn.aoi.onii.service.ExpService;
 
 public class AoiPlugin extends JavaPlugin {
 
@@ -22,10 +22,10 @@ public class AoiPlugin extends JavaPlugin {
 
     private RealmManager realmManager;
     private PlayerManager playerManager;
+    private MobManager mobManager;
 
     private ExpService expService;
     private CultivationService cultivationService;
-    private MobManager mobManager;
     
     @Override
     public void onEnable() {
@@ -53,11 +53,10 @@ public class AoiPlugin extends JavaPlugin {
 
         realmManager = new RealmManager(configManager);
         playerManager = new PlayerManager(repository);
+        mobManager = new MobManager(configManager);
         
         expService = new ExpService(playerManager, realmManager, configManager);
         cultivationService = new CultivationService(expService);
-
-        mobManager = new MobManager(configManager);
 
         // register listener
 
@@ -68,7 +67,7 @@ public class AoiPlugin extends JavaPlugin {
         ACFContext.register(acf);
         ACFCompletion.register(acf, realmManager);
 
-        acf.registerCommand(new AoiCommand(playerManager, cultivationService));
+        acf.registerCommand(new AoiCommand(playerManager);
  
         getLogger().info("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         getLogger().info("Aoi Plugin【ON】");
