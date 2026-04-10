@@ -10,6 +10,7 @@ import vn.aoi.onii.commands.confirm.ConfirmManager;
 import vn.aoi.onii.commands.cooldown.CommandCooldown;
 import vn.aoi.onii.manager.PlayerManager;
 import vn.aoi.onii.model.Cultivator;
+import vn.aoi.onii.service.CultivationService;
 
 @CommandAlias("aoi")
 public class AoiCommand extends BaseCommand {
