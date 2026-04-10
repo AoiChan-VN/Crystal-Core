@@ -24,13 +24,13 @@ public class TribulationTask extends BukkitRunnable {
 
     public TribulationTask(Player player,
                            PlayerManager playerManager,
-                           int duration,
-                           RealmManager realmManager) {
+                           RealmManager realmManager,
+                           int duration) {
 
         this.player = player;
         this.playerManager = playerManager;
-        this.duration = duration;
         this.realmManager = realmManager;
+        this.duration = duration;
     }
 
     @Override
