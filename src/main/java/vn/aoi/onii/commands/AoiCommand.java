@@ -11,7 +11,7 @@ import vn.aoi.onii.commands.cooldown.CommandCooldown;
 import vn.aoi.onii.manager.PlayerManager;
 import vn.aoi.onii.manager.RealmManager;
 import vn.aoi.onii.model.Cultivator;
-import bn.aoi.onii.service.CultivationService;
+import vn.aoi.onii.service.CultivationService;
 
 @CommandAlias("aoi")
 public class AoiCommand extends BaseCommand {
