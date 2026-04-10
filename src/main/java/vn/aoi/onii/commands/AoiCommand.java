@@ -9,21 +9,15 @@ import org.bukkit.entity.Player;
 import vn.aoi.onii.commands.confirm.ConfirmManager;
 import vn.aoi.onii.commands.cooldown.CommandCooldown;
 import vn.aoi.onii.manager.PlayerManager;
-import vn.aoi.onii.manager.RealmManager;
 import vn.aoi.onii.model.Cultivator;
 
 @CommandAlias("aoi")
 public class AoiCommand extends BaseCommand {
 
     private final PlayerManager playerManager;
-    private final RealmManager realmManager;
-    private final ConfigManager config;
 
-    public AoiCommand(PlayerManager playerManager, RealmManager realmManager, CultivationService service) {
-       
+    public AoiCommand(PlayerManager playerManager) {
         this.playerManager = playerManager;
-        this.realmManager = realmManager;
-        this.service = service;
     }
 
     @Subcommand("info")
