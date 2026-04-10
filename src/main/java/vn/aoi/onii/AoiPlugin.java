@@ -51,7 +51,7 @@ public class AoiPlugin extends JavaPlugin {
 
         // ================= MANAGER =================
 
-        realmManaget = new RealmManager(configManager);
+        realmManager = new RealmManager(configManager);
         playerManager = new PlayerManager(repository);
         
         expService = new ExpService(playerManager, realmManager, configManager);
