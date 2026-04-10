@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import vn.aoi.onii.api.PlayerLevelUpEvent;
-import vn.aoi.onii.service.CultivationService;
 import vn.aoi.onii.manager.PlayerManager;
+import vn.aoi.onii.manager.RealmManager;
 import vn.aoi.onii.model.Cultivator;
 
 import java.util.Random;
@@ -16,7 +16,7 @@ public class TribulationTask extends BukkitRunnable {
 
     private final Player player;
     private final PlayerManager playerManager;
-    private final CultivationService service;
+    private final RealmManager realmManager;
     private final int duration;
 
     private int time = 0;
@@ -25,12 +25,12 @@ public class TribulationTask extends BukkitRunnable {
     public TribulationTask(Player player,
                            PlayerManager playerManager,
                            int duration,
-                           CultivationService service) {
+                           RealmManager realmManager) {
 
         this.player = player;
         this.playerManager = playerManager;
         this.duration = duration;
-        this.service = service;
+        this.realmManager = realmManager;
     }
 
     @Override
