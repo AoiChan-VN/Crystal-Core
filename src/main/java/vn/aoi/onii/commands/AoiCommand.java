@@ -17,6 +17,10 @@ public class AoiCommand extends BaseCommand {
 
     private final PlayerManager playerManager;
     private final CultivationService service;
+    private final RealmManager realmManager;
+
+    public TribulationTask(RealmManager realmManager) {
+        this.realmManager = realmManager;
 
     public AoiCommand(PlayerManager playerManager, CultivationService service) {
         this.playerManager = playerManager;
