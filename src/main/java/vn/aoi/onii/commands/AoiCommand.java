@@ -11,16 +11,15 @@ import vn.aoi.onii.commands.cooldown.CommandCooldown;
 import vn.aoi.onii.manager.PlayerManager;
 import vn.aoi.onii.manager.RealmManager;
 import vn.aoi.onii.model.Cultivator;
-import vn.aoi.onii.service.CultivationService;
 
 @CommandAlias("aoi")
 public class AoiCommand extends BaseCommand {
 
     private final PlayerManager playerManager;
+    private final RealmManager realmManager;
 
-    public AoiCommand(PlayerManager playerManager, CultivationService cultivationService) {
+    public AoiCommand(PlayerManager playerManager) {
         this.playerManager = playerManager;
-        this.service = service;
     }
 
     @Subcommand("info")
