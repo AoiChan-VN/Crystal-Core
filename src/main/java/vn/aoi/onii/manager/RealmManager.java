@@ -41,7 +41,6 @@ public class RealmManager {
                     .strikes(r.getInt("tribulation.strikes", 3)) 
                     .damage(r.getDouble("tribulation.damage", 4.0))
                     .interval(r.getInt("tribulation.interval", 40))
-                    .duration(r.getInt("duration", 30))
                     .levels(levels)
                     .build();
 
