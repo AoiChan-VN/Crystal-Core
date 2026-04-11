@@ -14,7 +14,7 @@ public class ExpService {
     private final PlayerManager playerManager;
     private final RealmManager realmManager;
     private final ConfigManager config;
-    private final OniiPlugin plugin;
+    private final AoiPlugin plugin;
 
     public ExpService(PlayerManager playerManager, RealmManager realmManager, 
                       ConfigManager config, AoiPlugin plugin) {
