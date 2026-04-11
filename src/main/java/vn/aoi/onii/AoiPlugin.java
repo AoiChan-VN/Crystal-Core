@@ -83,13 +83,13 @@ public class AoiPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        if (executor != null) {
-            executor.shutdown();
+        for (org.bukkit.entity.Player player : org.bukkit.Bukkit.getOnlinePlayers()) {
+            player.resetPlayerTime();
         }
 
-        if (database != null) {
-            database.close();
-        }
+        if (executor != null) executor.shutdown();
+        if (database != null) database.close();
+    }
 
         getLogger().info("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         getLogger().info("Aoi Plugin【OFF】");
