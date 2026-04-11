@@ -2,7 +2,10 @@ package vn.aoi.onii.task;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import vn.aoi.onii.api.PlayerLevelUpEvent;
@@ -16,24 +19,15 @@ public class TribulationTask extends BukkitRunnable {
     private final Player player;
     private final PlayerManager playerManager;
     private final RealmManager realmManager;
-    
-    private final int totalStrikes;
-    private final double damage;
+    private final Realm realmData;
     private int strikesDone = 0;
 
-    public TribulationTask(Player player, 
-                          PlayerManager playerManager, 
-                          RealmManager realmManager, 
-                          Realm realmData) {
+    public TribulationTask(Player player, PlayerManager playerManager, RealmManager realmManager, Realm realmData) {
         this.player = player;
         this.playerManager = playerManager;
         this.realmManager = realmManager;
-        this.totalStrikes = realmData.getStrikes();
-        this.damage = realmData.getDamage();
-
-        // Hiệu ứng bắt đầu: Trời tối cục bộ
-        player.setPlayerTime(18000, false);
-        player.sendMessage("§8[!] Thiên địa biến sắc, lôi kiếp đang tụ lại...");
+        this.realmData = realmData;
+        player.setPlayerTime(18000, false); // Trời tối sầm
     }
 
     @Override
@@ -43,7 +37,7 @@ public class TribulationTask extends BukkitRunnable {
             return;
         }
 
-        if (strikesDone >= totalStrikes) {
+        if (strikesDone >= realmData.getStrikes()) {
             success();
             stopTask();
             return;
@@ -51,34 +45,32 @@ public class TribulationTask extends BukkitRunnable {
 
         strikesDone++;
         Location loc = player.getLocation();
-
-        // Sét đánh thẳng vào vị trí cao nhất trên đầu player
+        
+        // Sét đánh thẳng đầu từ Y cao nhất
         Location strikeLoc = loc.clone();
         strikeLoc.setY(loc.getWorld().getHighestBlockYAt(loc));
-        player.getWorld().strikeLightning(strikeLoc);
+        loc.getWorld().strikeLightning(strikeLoc);
 
-        // Gây sát thương tăng dần theo số đợt
-        player.damage(damage + (strikesDone * 1.5)); 
-        
-        // Âm thanh và thông báo
-        player.playSound(loc, org.bukkit.Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1f, 0.5f + (strikesDone * 0.1f));
-        player.sendMessage("§c⚡ Đạo lôi kiếp thứ " + strikesDone + "/" + totalStrikes + "!");
+        player.damage(realmData.getDamage());
+        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 0));
+        player.playSound(loc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1f, 0.5f + (strikesDone * 0.1f));
+        player.sendMessage("§c⚡ Đạo lôi kiếp thứ " + strikesDone + "/" + realmData.getStrikes() + "!");
     }
 
     private void success() {
         Cultivator c = playerManager.get(player.getUniqueId());
         if (c == null) return;
 
-        String old = c.getRealm();
-        Realm realmData = realmManager.getRealm(old);
-        String next = realmData.getNextRank();
+        String oldRealm = c.getRealm();
+        String nextRealm = realmData.getNextRank();
 
-        c.setRealm(next);
+        c.setRealm(nextRealm);
         c.setLevel(1);
         c.setExp(0);
 
-        Bukkit.getPluginManager().callEvent(new PlayerLevelUpEvent(player, old, next, 1));
-        player.sendMessage("§b⚡ Chúc mừng! Bạn đã vượt qua " + totalStrikes + " đạo lôi kiếp, đột phá lên " + next);
+        Bukkit.getPluginManager().callEvent(new PlayerLevelUpEvent(player, oldRealm, nextRealm, 1));
+        player.sendMessage("§b⚡ Độ kiếp thành công! Chào mừng đến với " + nextRealm);
+        player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f);
     }
 
     private void stopTask() {
