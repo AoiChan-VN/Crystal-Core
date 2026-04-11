@@ -13,10 +13,11 @@ public class Realm {
 
     private String name;
     private String nextRank;
-
     private int maxLevel;
+    
     private boolean tribulation;
-
+    private boolean broadcast;
+    
     private int strikes;
     private double damage;
     private int interval;
