@@ -1,6 +1,8 @@
 package vn.aoi.onii.service;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import vn.aoi.onii.AoiPlugin;
 import vn.aoi.onii.config.ConfigManager;
 import vn.aoi.onii.manager.PlayerManager;
@@ -14,14 +16,12 @@ public class ExpService {
     private final PlayerManager playerManager;
     private final RealmManager realmManager;
     private final ConfigManager config;
-    private final AoiPlugin plugin;
 
     public ExpService(PlayerManager playerManager, RealmManager realmManager, 
-                      ConfigManager config, AoiPlugin plugin) {
+                      ConfigManager config) {
         this.playerManager = playerManager;
         this.realmManager = realmManager;
         this.config = config;
-        this.plugin = plugin;
     }
 
     public void addExp(Player player, double amount) {
@@ -61,7 +61,11 @@ public class ExpService {
 
         if (realm.isTribulation()) {
             player.sendMessage(config.getMessage("tribulation.start"));
-            // Kích hoạt lôi kiếp, không setRealm ở đây
+
+            // Tự lấy Instance của Plugin không cần truyền qua Constructor
+            AoiPlugin plugin = JavaPlugin.getPlugin(AoiPlugin.class);
+                
+            // Kích hoạt lôi kiếp
             new TribulationTask(player, playerManager, realmManager, realm)
                 .runTaskTimer(plugin, 0L, realm.getInterval());
         } else {
