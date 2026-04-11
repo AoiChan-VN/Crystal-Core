@@ -63,6 +63,11 @@ public class AoiPlugin extends JavaPlugin {
             this
         );
 
+        getServer().getPluginManager().registerEvents(
+            new connectionListener(playerManager),
+            this
+        );
+
         // ================= ACF =================
 
         PaperCommandManager acf = new PaperCommandManager(this);
