@@ -21,6 +21,8 @@ public class ConnectionListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
+        event.getPlayer().resetPlayerTime();
+        
         playerManager.unloadPlayer(event.getPlayer().getUniqueId());
     }
 } 
