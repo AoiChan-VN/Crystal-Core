@@ -45,6 +45,7 @@ realms:
     max-level: 4
     is-tribulation: true
     tribulation:
+      broadcast: false
       strikes: 3
       damage: 4.0
       interval: 40
@@ -59,6 +60,7 @@ realms:
     max-level: 4
     is-tribulation: true
     tribulation:
+      broadcast: true
       strikes: 3
       damage: 4.0
       interval: 40
@@ -118,6 +120,7 @@ realms:
     max-level: 4
     is-tribulation: true
     tribulation:
+      broadcast: true
       strikes: 3
       damage: 4.0
       interval: 40
