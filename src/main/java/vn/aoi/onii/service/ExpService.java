@@ -1,7 +1,6 @@
 package vn.aoi.onii.service;
 
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import vn.aoi.onii.AoiPlugin;
 import vn.aoi.onii.config.ConfigManager;
@@ -62,15 +61,11 @@ public class ExpService {
         if (realm.isTribulation()) {
             player.sendMessage(config.getMessage("tribulation.start"));
 
-            // Tự lấy Instance của Plugin không cần truyền qua Constructor
-            AoiPlugin plugin = JavaPlugin.getPlugin(AoiPlugin.class);
-                
             // Kích hoạt lôi kiếp
             new TribulationTask(player, playerManager, realmManager, realm)
-                .runTaskTimer(plugin, 0L, realm.getInterval());
+                .runTaskTimer(AoiPlugin.get(), 0L, realm.getInterval());
         } else {
             // Lên cấp trực tiếp
-            String next = realm.getNextRank();
             cultivator.setRealm(next);
             cultivator.setLevel(1);
             cultivator.setExp(0);
