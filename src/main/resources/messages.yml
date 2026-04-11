@@ -25,9 +25,10 @@ level:
 
 # ================= TRIBULATION =================
 tribulation:
-  start: "&c⚡ Thiên kiếp bắt đầu!"
-  success: "&b⚡ Bạn đã vượt qua thiên kiếp!"
-  fail: "&4Bạn đã thất bại độ thiên kiếp!"
+  start: "&cThiên địa biến sắc, bạn đang bị lôi kiếp nhắm vào!"
+  broadcast: "&6Đạo hữu &f%player% &6độ lôi kiếp phá vỡ bình cảnh &f%realm%"
+  success: "&aBạn đã vượt qua thiên kiếp!"
+  fail: "&4Bạn đã thất bại khi độ thiên kiếp!"
 
 # ================= ADMIN =================
 admin:
