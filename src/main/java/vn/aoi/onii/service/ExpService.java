@@ -1,6 +1,7 @@
 package vn.aoi.onii.service;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import vn.aoi.onii.AoiPlugin;
 import vn.aoi.onii.config.ConfigManager;
