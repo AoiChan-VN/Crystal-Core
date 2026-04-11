@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-
 import vn.aoi.onii.api.PlayerLevelUpEvent;
 import vn.aoi.onii.manager.PlayerManager;
 import vn.aoi.onii.manager.RealmManager;
@@ -27,7 +26,7 @@ public class TribulationTask extends BukkitRunnable {
         this.playerManager = playerManager;
         this.realmManager = realmManager;
         this.realmData = realmData;
-        player.setPlayerTime(18000, false); // Trời tối sầm
+        player.setPlayerTime(18000, false);
     }
 
     @Override
@@ -46,14 +45,16 @@ public class TribulationTask extends BukkitRunnable {
         strikesDone++;
         Location loc = player.getLocation();
         
-        // Sét đánh thẳng đầu từ Y cao nhất
+        // Sét đánh từ đỉnh trời xuống tọa độ X Z của player
         Location strikeLoc = loc.clone();
         strikeLoc.setY(loc.getWorld().getHighestBlockYAt(loc));
         loc.getWorld().strikeLightning(strikeLoc);
 
         player.damage(realmData.getDamage());
         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 0));
-        player.playSound(loc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1f, 0.5f + (strikesDone * 0.1f));
+        
+        float pitch = 0.5f + (strikesDone * 0.1f);
+        player.playSound(loc, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 1f, pitch);
         player.sendMessage("§c⚡ Đạo lôi kiếp thứ " + strikesDone + "/" + realmData.getStrikes() + "!");
     }
 
@@ -62,14 +63,14 @@ public class TribulationTask extends BukkitRunnable {
         if (c == null) return;
 
         String oldRealm = c.getRealm();
-        String nextRealm = realmData.getNextRank();
+        String next = realmData.getNextRank();
 
-        c.setRealm(nextRealm);
+        c.setRealm(next);
         c.setLevel(1);
         c.setExp(0);
 
-        Bukkit.getPluginManager().callEvent(new PlayerLevelUpEvent(player, oldRealm, nextRealm, 1));
-        player.sendMessage("§b⚡ Độ kiếp thành công! Chào mừng đến với " + nextRealm);
+        Bukkit.getPluginManager().callEvent(new PlayerLevelUpEvent(player, oldRealm, next, 1));
+        player.sendMessage("§b⚡ Vượt qua thiên kiếp thành công! Cảnh giới hiện tại: " + next);
         player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f);
     }
 
