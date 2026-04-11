@@ -17,7 +17,9 @@ public class Realm {
     private int maxLevel;
     private boolean tribulation;
 
-    private int duration;
+    private int strikes;
+    private double damage;
+    private int interval;
 
     private Map<Integer, LevelData> levels;
 
