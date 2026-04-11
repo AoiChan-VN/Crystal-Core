@@ -6,10 +6,23 @@
 realms:
 
   "Phàm nhân":
-    next-rank: "Luyện khí"
-    max-level: 1
+    next-rank: "Luyện thể"
+    max-level: 3
     levels:
-      "1": { exp: 10, phase: "Phàm" }
+      "1": { exp: 15, phase: "Sơ kỳ" }
+      "2": { exp: 35, phase: "Trung kỳ" }
+      "3": { exp: 55, phase: "Hậu kỳ" }
+
+  "Luyện thể":
+    next-rank: "Luyện khí"
+    max-level: 6
+    levels:
+      "1": { exp: 50, phase: "Sơ kỳ" }
+      "2": { exp: 60, phase: "Trung kỳ" }
+      "3": { exp: 70, phase: "Hậu kỳ" }
+      "4": { exp: 70, phase: "Võ sĩ" }
+      "5": { exp: 70, phase: "Võ sư" }
+      "6": { exp: 70, phase: "Tông sư" }
 
   "Luyện khí":
     next-rank: "Trúc cơ"
@@ -43,7 +56,10 @@ realms:
     next-rank: "Nguyên anh"
     max-level: 4
     is-tribulation: true
-    duration: 30
+    tribulation:
+      strikes: 3
+      damage: 4.0
+      interval: 40
     levels:
       "1": { exp: 250, phase: "Sơ kỳ" }
       "2": { exp: 350, phase: "Trung kỳ" }
@@ -99,7 +115,10 @@ realms:
     next-rank: "Thiên tiên"
     max-level: 4
     is-tribulation: true
-    duration: 30
+    tribulation:
+      strikes: 3
+      damage: 4.0
+      interval: 40
     levels:
       "1": { exp: 250, phase: "Sơ kỳ" }
       "2": { exp: 350, phase: "Trung kỳ" }
