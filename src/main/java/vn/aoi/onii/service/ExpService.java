@@ -61,7 +61,9 @@ public class ExpService {
 
         if (realm.isTribulation()) {
             player.sendMessage(config.getMessage("tribulation.start"));
-            // Kích hoạt lôi kiếp
+
+            AoiPlugin plugin = JavaPlugin.getPlugin(AoiPlugin.class);
+
             new TribulationTask(player, playerManager, realmManager, realm)
                 .runTaskTimer(AoiPlugin.get(), 0L, realm.getInterval());
         } else {
