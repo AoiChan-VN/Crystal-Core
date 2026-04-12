@@ -31,11 +31,11 @@ https://github.com/AoiChan-VN/Onii/releases
 🍀
   
 <p align="center">
-  <a href="./.github/CONTRIBUTING.md">
-    <code><b> [ 🤝 Hướng dẫn đóng góp ] </b></code>
-  </a>
+  <kbd><b><a href="./.github/CONTRIBUTING.md"> 🤝 HƯỚNG DẪN ĐÓNG GÓP </a></b></kbd>
   &nbsp;&nbsp;
-  <a href="./.github/SECURITY.md">
-    <code><b> [ 🛡️ Chính sách bảo mật ] </b></code>
-  </a>
+  <kbd><b><a href="./.github/SECURITY.md"> 🛡️ CHÍNH SÁCH BẢO MẬT </a></b></kbd>
+</p>
+
+<p align="center">
+  <sub> <i>Cảm ơn anh đã quan tâm đến dự án <b>AoiChan</b>! 🥀</i> </sub>
 </p>
