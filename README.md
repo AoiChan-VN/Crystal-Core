@@ -4,6 +4,10 @@
 👅
 <div>
 
+<a href="https://mypet-plugin.de/">
+  <img src=".github/readme-images/logo.png" alt="MyPet" width="200">
+</a>
+
 💎 Plugins:【👻AoiChan💦】
 
 🧱 Phiên bản: Spigot / Paper 1.21.x
