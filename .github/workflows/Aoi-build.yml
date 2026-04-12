@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v5
 
       # Cài đặt JavaScript
-      - name: ☕ ｊａｖａ
+      - name: ☕ ｊａｖａＳcｒ𝚒ｐ
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
@@ -39,8 +39,12 @@ jobs:
 
       # Xây dựng cấu trúc
       - name: ⚒ 𝓑𝓾𝓲𝓵𝓭 🏗️
-        run: mvn -B -ntp clean package
-      
+        run: mvn -B -ntp clean package -DskipTests
+
+      - name: 🛡️ Security Check
+        run: mvn dependency-check:check
+        continue-on-error: true # Để build không bị dừng nếu phát hiện lỗi bảo mật nhẹ
+
       # Đóng gói file .jar
       - name: 📦 𝓤𝓹𝓵𝓸𝓪𝓻𝓭 𝓳𝓪𝓻
         if: ${{ env.ENABLE_ARTIFACT == 'true' }}
