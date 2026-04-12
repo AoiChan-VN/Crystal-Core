@@ -10,6 +10,8 @@
   </a>
 </p>
 
+![Build Status](https://github.com)
+
 💎 Plugins:【👻AoiChan💦】
 
 🧱 Phiên bản: Spigot / Paper 1.21.x
