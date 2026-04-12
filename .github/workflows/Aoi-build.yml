@@ -45,6 +45,9 @@ jobs:
         run: mvn org.owasp:dependency-check-maven:check
         continue-on-error: true # Để build không bị dừng nếu phát hiện lỗi bảo mật nhẹ
 
+      - name: 🧹 Purge Dependency Check DB
+        run: mvn org.owasp:dependency-check-maven:purge
+
       # Đóng gói file .jar
       - name: 📦 𝓤𝓹𝓵𝓸𝓪𝓻𝓭 𝓳𝓪𝓻
         if: ${{ env.ENABLE_ARTIFACT == 'true' }}
