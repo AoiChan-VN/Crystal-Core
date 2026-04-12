@@ -4,8 +4,8 @@
 👅
 <div>
 
-<a href="https://mypet-plugin.de/">
-  <img src=".github/readme-images/logo.png" alt="MyPet" width="200">
+<a href=>
+  <img src=".github/readme-images/aoilogo.png" alt="Onii" width="200">
 </a>
 
 💎 Plugins:【👻AoiChan💦】
