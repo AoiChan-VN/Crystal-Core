@@ -11,10 +11,12 @@ on:
       #- "src/**"
       #- ".github/workflows/**"
 
-  pull_request:
+  #pull_request:
     #paths:
       #- "src/**"
       #- ".github/workflows/**"
+      
+    #workflow_dispatch:
 
 jobs:
   build:
