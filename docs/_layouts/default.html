@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="/style.css">
+  <button onclick="toggleTheme()">🌙</button>
 </head>
 
 <body>
@@ -27,5 +28,11 @@
     <p>⚡ Aoi Docs</p>
   </footer>
 
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+    }
+  </script>
+  
 </body>
 </html> 
