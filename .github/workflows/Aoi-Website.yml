@@ -40,7 +40,7 @@ jobs:
         if: ${{ env.ENABLE_ARTIFACT == 'true' }}
         uses: actions/upload-pages-artifact@v3
         with:
-          name: AoiChan
+          name: Aoi-Website
           path: target/*.jar
 
   deploy:
