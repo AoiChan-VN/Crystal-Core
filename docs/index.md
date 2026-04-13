@@ -1,22 +1,38 @@
 ---
 layout: default
-title: Trang chủ
+title: Home
 ---
 
-[![🏠 GitHub](https://img.shields.io/badge/GitHub-Repo-black?style=for-the-badge&logo=github)](https://github.com/AoiChan-VN/Onii)
+# 🌌 Aoi Cultivation Plugin
 
-[⚔️ Commands](commands.md) | 
-[⚙️ Config](config/config.md)
+> ⚡ Hệ thống tu tiên cho Minecraft server
 
 ---
 
-## 🚀 Bắt đầu
+<a class="btn" href="getting-started">🚀 Bắt đầu</a>
+<a class="btn" href="commands">⚔️ Commands</a>
+<a class="btn" href="config/">⚙️ Config</a>
 
-- 👉 [Cài đặt](getting-started.md)
-- 👉 [Commands](commands.md)
+---
 
-## 🌠 Gameplay
+<div class="grid">
 
-- ⚡ EXP System
-- 🌩️ Tribulation
-- 🌌 Realms
+<div class="card">
+<h3>⚡ EXP System</h3>
+<p>Hệ thống kinh nghiệm và level.</p>
+<a class="btn" href="mechanics/exp">Xem thêm</a>
+</div>
+
+<div class="card">
+<h3>🌩️ Tribulation</h3>
+<p>Thiên kiếp khi đột phá.</p>
+<a class="btn" href="mechanics/tribulation">Xem thêm</a>
+</div>
+
+<div class="card">
+<h3>🌌 Realms</h3>
+<p>Hệ thống cảnh giới.</p>
+<a class="btn" href="config/realms">Xem thêm</a>
+</div>
+
+</div>
