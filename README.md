@@ -7,7 +7,7 @@
 ![🏠 GitHub](https://img.shields.io/badge/GitHub-Repo-black?style=for-the-badge&logo=github)
 
 <p align="center">
-  <a href="https://aoichan-vn.github.io/Aoi/">
+  <a href="muốn sử dụng? bạn hãy dán link vào đây">
     <img src=".github/readme-logo/Logo.gif" alt="Aoi Logo" width="200">
   </a>
 </p>
