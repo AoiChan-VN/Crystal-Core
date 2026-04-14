@@ -30,7 +30,7 @@ Vui lòng cung cấp đầy đủ thông tin khi báo lỗi
 
  ❗Vui lòng không đăng lên Issue mà hãy gửi mail cho tôi tại 👇
 
-📮 **Email:** 24HouStreamer@gmail.com  
+📮 **Email:** 
 </div>
 
 
