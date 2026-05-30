@@ -1,7 +1,9 @@
 package vn.aoi.cultivation.gui.menu;
 
+import vn.aoi.cultivation.config.ShopConfig.ShopItem;
 import vn.aoi.cultivation.core.security.AntiDupeManager;
 import vn.aoi.cultivation.gui.holder.CustomInventoryHolder;
+import vn.aoi.cultivation.service.ShopService;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -11,18 +13,23 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class ShopMenu {
+public final class ShopMenu {
 
     public static final String GUI_ID = "shop_menu";
 
     private static final int INVENTORY_SIZE = 54;
+    private static final int FIRST_ITEM_SLOT = 10;
 
+    private final ShopService shopService;
     private final AntiDupeManager antiDupeManager;
 
-    public ShopMenu(AntiDupeManager antiDupeManager) {
+    public ShopMenu(ShopService shopService,
+                    AntiDupeManager antiDupeManager) {
+
+        this.shopService = shopService;
         this.antiDupeManager = antiDupeManager;
     }
 
@@ -40,7 +47,7 @@ public class ShopMenu {
 
         holder.setInventory(inventory);
 
-        populateInventory(inventory);
+        buildInventory(inventory);
 
         antiDupeManager.startSession(
                 player,
@@ -50,76 +57,59 @@ public class ShopMenu {
         player.openInventory(inventory);
     }
 
-    private void populateInventory(Inventory inventory) {
+    private void buildInventory(Inventory inventory) {
 
-        fillBorders(inventory);
+        fillBorder(inventory);
 
-        inventory.setItem(
-                20,
-                createShopItem(
-                        Material.EMERALD,
-                        "§aLinh Thạch Hạ Phẩm",
-                        List.of(
-                                "§7Giá mua: 100",
-                                "§7Giá bán: 75"
-                        )
-                )
-        );
+        Collection<ShopItem> items =
+                shopService.getShopItems();
 
-        inventory.setItem(
-                22,
-                createShopItem(
-                        Material.DIAMOND,
-                        "§bLinh Thạch Trung Phẩm",
-                        List.of(
-                                "§7Giá mua: 1000",
-                                "§7Giá bán: 750"
-                        )
-                )
-        );
+        int slot = FIRST_ITEM_SLOT;
 
-        inventory.setItem(
-                24,
-                createShopItem(
-                        Material.NETHER_STAR,
-                        "§dLinh Thạch Thượng Phẩm",
-                        List.of(
-                                "§7Giá mua: 5000",
-                                "§7Giá bán: 4000"
-                        )
-                )
-        );
+        for (ShopItem shopItem : items) {
+
+            if (slot >= 44) {
+                break;
+            }
+
+            if (isBorderSlot(slot)) {
+                slot++;
+            }
+
+            inventory.setItem(
+                    slot,
+                    shopService.createDisplayItem(shopItem)
+            );
+
+            slot++;
+        }
 
         inventory.setItem(
                 49,
-                createShopItem(
-                        Material.BARRIER,
-                        "§cĐóng Menu",
-                        List.of(
-                                "§7Nhấn để đóng giao diện"
-                        )
-                )
+                createCloseButton()
         );
     }
 
-    private void fillBorders(Inventory inventory) {
+    private void fillBorder(Inventory inventory) {
 
-        ItemStack filler =
-                createShopItem(
-                        Material.BLACK_STAINED_GLASS_PANE,
-                        " ",
-                        List.of()
+        ItemStack border =
+                createBorderItem();
+
+        for (int slot = 0;
+             slot < inventory.getSize();
+             slot++) {
+
+            if (isBorderSlot(slot)) {
+
+                inventory.setItem(
+                        slot,
+                        border
                 );
-
-        for (int slot = 0; slot < inventory.getSize(); slot++) {
-
-            if (isBorder(slot)) {
-                inventory.setItem(slot, filler);
             }
         }
     }
 
-    private boolean isBorder(int slot) {
+    private boolean isBorderSlot(int slot) {
 
         return slot < 9
                 || slot >= 45
@@ -127,31 +117,52 @@ public class ShopMenu {
                 || slot % 9 == 8;
     }
 
-    private ItemStack createShopItem(Material material,
-                                     String displayName,
-                                     List<String> loreLines) {
+    private ItemStack createBorderItem() {
 
         ItemStack item =
-                new ItemStack(material);
+                new ItemStack(
+                        Material.BLACK_STAINED_GLASS_PANE
+                );
 
         ItemMeta meta =
                 item.getItemMeta();
 
-        if (meta == null) {
-            return item;
+        if (meta != null) {
+
+            meta.setDisplayName(" ");
+
+            meta.addItemFlags(
+                    ItemFlag.HIDE_ATTRIBUTES
+            );
+
+            item.setItemMeta(meta);
         }
 
-        meta.setDisplayName(displayName);
+        return item;
+    }
 
-        meta.setLore(
-                new ArrayList<>(loreLines)
-        );
+    private ItemStack createCloseButton() {
 
-        meta.addItemFlags(
-                ItemFlag.HIDE_ATTRIBUTES
-        );
+        ItemStack item =
+                new ItemStack(
+                        Material.BARRIER
+                );
 
-        item.setItemMeta(meta);
+        ItemMeta meta =
+                item.getItemMeta();
+
+        if (meta != null) {
+
+            meta.setDisplayName("§cĐóng");
+
+            meta.setLore(
+                    List.of(
+                            "§7Nhấn để đóng giao diện"
+                    )
+            );
+
+            item.setItemMeta(meta);
+        }
 
         return item;
     }
