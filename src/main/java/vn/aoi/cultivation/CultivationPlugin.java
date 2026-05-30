@@ -78,7 +78,8 @@ public final class CultivationPlugin extends JavaPlugin {
         pluginManager.registerEvents(
                 new InventoryClickListener(
                         clickCooldownManager,
-                        transactionGuard
+                        transactionGuard,
+                        shopMenu
                 ),
                 this
         );
