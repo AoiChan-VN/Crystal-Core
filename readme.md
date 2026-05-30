@@ -1,82 +1,85 @@
 ```txt
 Cultivation/
-├── src/main/java/vn/aoi/cultivation/
+├── build.gradle.kts
+├── settings.gradle.kts
+├── paper-plugin.yml
+├── gradle.properties
+├── README.md
 │
-│   ├── CultivationPlugin.java
-│
-│   ├── bootstrap/
-│   │   ├── PluginBootstrap.java
-│   │   ├── DependencyLoader.java
-│   │
-│   ├── core/
-│   │   ├── CultivationCore.java
-│   │   ├── CultivationManager.java
-│   │   ├── LifecycleManager.java
-│   │
-│   ├── player/
-│   │   ├── CultivationPlayer.java (record)
-│   │   ├── PlayerCultivationData.java
-│   │   ├── CultivationCache.java
-│   │   ├── PlayerSessionManager.java
-│   │
-│   ├── realm/
-│   │   ├── RealmType.java (sealed interface)
-│   │   ├── MortalRealm.java
-│   │   ├── FoundationRealm.java
-│   │   ├── CoreRealm.java
-│   │   ├── NascentRealm.java
-│   │
-│   ├── qi/
-│   │   ├── QiSystem.java
-│   │   ├── QiRegenTask.java
-│   │   ├── QiStorage.java (record)
-│   │
-│   ├── combat/
-│   │   ├── CultivationDamageEngine.java
-│   │   ├── CriticalStrikeHandler.java
-│   │   ├── SkillPipeline.java
-│   │
-│   ├── item/
-│   │   ├── CultivationItemFactory.java
-│   │   ├── ItemPDCKeys.java
-│   │   ├── ArtifactRegistry.java
-│   │
-│   ├── command/
-│   │   ├── CultivationCommand.java
-│   │   ├── sub/
-│   │   │   ├── QiCommand.java
-│   │   │   ├── RealmCommand.java
-│   │   │   ├── DebugCommand.java
-│   │
-│   ├── listener/
-│   │   ├── PlayerJoinListener.java
-│   │   ├── PlayerQuitListener.java
-│   │   ├── CombatListener.java
-│   │   ├── ItemListener.java
-│   │
-│   ├── storage/
-│   │   ├── DataRepository.java
-│   │   ├── SQLiteStorage.java
-│   │   ├── StorageService.java
-│   │
-│   ├── async/
-│   │   ├── AsyncBridge.java
-│   │   ├── TaskScheduler.java
-│   │
-│   ├── util/
-│   │   ├── UUIDUtil.java
-│   │   ├── Validate.java
-│   │   ├── MiniMessageUtil.java
-│   │
-│   └── exception/
-│       ├── CultivationException.java
-│       ├── DataCorruptionException.java
-│
-├── src/main/resources/
-│   ├── paper-plugin.yml
-│   ├── config.yml
-│   ├── messages.yml
-│   ├── artifacts.yml
-│
-└── build.gradle.kts
+└── src/
+    └── main/
+        ├── java/
+        │   └── vn/
+        │       └── aoi/
+        │           └── cultivation/
+        │               ├── CultivationPlugin.java
+        │
+        │               ├── bootstrap/
+        │               │   ├── PluginBootstrap.java
+        │               │   └── DependencyLoader.java
+        │
+        │               ├── core/
+        │               │   ├── engine/
+        │               │   │   ├── CultivationEngine.java
+        │               │   │   ├── QiEngine.java
+        │               │   │   └── BreakthroughEngine.java
+        │               │   │
+        │               │   ├── domain/
+        │               │   │   ├── Realm.java
+        │               │   │   ├── CultivationStage.java
+        │               │   │   └── QiState.java (record)
+        │               │   │
+        │               │   ├── service/
+        │               │   │   ├── PlayerCultivationService.java
+        │               │   │   ├── BreakthroughService.java
+        │               │   │   └── QiService.java
+        │               │   │
+        │               │   └── registry/
+        │               │       ├── RealmRegistry.java
+        │               │       └── SkillRegistry.java
+        │
+        │               ├── data/
+        │               │   ├── repository/
+        │               │   │   ├── PlayerCultivationRepository.java
+        │               │   │   └── SqlRepository.java
+        │               │   │
+        │               │   ├── model/
+        │               │   │   ├── PlayerCultivationData.java (record)
+        │               │   │   └── QiSnapshot.java (record)
+        │               │   │
+        │               │   └── cache/
+        │               │       ├── CultivationCache.java
+        │               │       └── CacheEvictor.java
+        │
+        │               ├── command/
+        │               │   ├── CultivationCommand.java
+        │               │   ├── sub/
+        │               │   │   ├── BreakthroughSubCommand.java
+        │               │   │   ├── QiSubCommand.java
+        │               │   │   └── StatsSubCommand.java
+        │
+        │               ├── listener/
+        │               │   ├── PlayerJoinListener.java
+        │               │   ├── PlayerQuitListener.java
+        │               │   ├── CombatListener.java
+        │               │   └── WorldProtectionListener.java
+        │
+        │               ├── task/
+        │               │   ├── QiRegenerationTask.java
+        │               │   ├── AuraPulseTask.java
+        │               │   └── AsyncDataSaveTask.java
+        │
+        │               ├── util/
+        │               │   ├── ThreadUtil.java
+        │               │   ├── MiniMessageUtil.java
+        │               │   └── ValidationUtil.java
+        │
+        │               └── exception/
+        │                   ├── CultivationException.java
+        │                   └── BreakthroughException.java
+        │
+        └── resources/
+            ├── config.yml
+            ├── messages.yml
+            └── realms.yml
 ```
