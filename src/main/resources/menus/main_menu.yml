@@ -1,0 +1,103 @@
+title: "<gradient:#00ffff:#0099ff>Tiên Đồ Tu Luyện</gradient>"
+
+size: 54
+
+items:
+
+  cultivation:
+
+    slot: 20
+
+    material: BEACON
+
+    amount: 1
+
+    display-name: "<aqua>Cảnh Giới"
+
+    lore:
+      - "<gray>Xem tiến trình tu luyện"
+      - "<gray>và cảnh giới hiện tại"
+
+    action: OPEN_REALM_MENU
+
+  shop:
+
+    slot: 22
+
+    material: EMERALD
+
+    amount: 1
+
+    display-name: "<green>Cửa Hàng"
+
+    lore:
+      - "<gray>Mua bán vật phẩm"
+      - "<gray>và tài nguyên tu luyện"
+
+    action: OPEN_SHOP_MENU
+
+  stats:
+
+    slot: 24
+
+    material: PLAYER_HEAD
+
+    amount: 1
+
+    display-name: "<yellow>Thông Tin"
+
+    lore:
+      - "<gray>Xem thuộc tính"
+      - "<gray>và dữ liệu nhân vật"
+
+    action: OPEN_STATS_MENU
+
+  close:
+
+    slot: 49
+
+    material: BARRIER
+
+    amount: 1
+
+    display-name: "<red>Đóng"
+
+    lore:
+      - "<gray>Thoát khỏi giao diện"
+
+    action: CLOSE_MENU
+
+fill:
+
+  enabled: true
+
+  material: BLACK_STAINED_GLASS_PANE
+
+  display-name: " "
+
+  slots:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 17
+    - 18
+    - 26
+    - 27
+    - 35
+    - 36
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 50
+    - 51
+    - 52
+    - 53 
