@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="muốn sử dụng? bạn hãy dán link vào đây">
-    <img src=".github/readme-logo/Logo.gif" alt="Aoi Logo" width="200">
+    <img src="./readme-logo/Logo.gif" alt="Aoi Logo" width="200">
   </a>
 </p>
 
