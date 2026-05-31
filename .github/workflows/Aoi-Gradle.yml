@@ -5,8 +5,12 @@ env:
   ENABLE_ARTIFACT: false
 
 on:
-  #push:
-    #branches: [ main ]
+  push:
+    branches:
+      - main
+
+  pull_request:
+    
   workflow_dispatch:
 
 permissions:
@@ -30,12 +34,40 @@ jobs:
           java-version: '21'
           cache: gradle
 
-      # Xây dựng cấu trúc
-      - name: Grant execute permission
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/wrapper-validation@v6
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Grant Execute Permission
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew clean build
+      - name: Clean Project
+        run: ./gradlew clean
+
+      - name: Compile Project
+        run: ./gradlew compileJava --stacktrace
+
+      - name: Run Tests
+        run: ./gradlew test --stacktrace
+        continue-on-error: false
+
+      - name: Build ShadowJar
+        run: ./gradlew shadowJar --stacktrace
+
+      - name: Verify Artifact Exists
+        run: |
+          ls -lah build/libs/
+          test -f build/libs/Cultivation-1.0.0-SNAPSHOT.jar
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cultivation
+          path: build/libs/*.jar
+          if-no-files-found: error
 
       #- name: 🛡️ Security Check
         #run: |
@@ -49,7 +81,7 @@ jobs:
         if: ${{ env.ENABLE_ARTIFACT == 'true' }}
         uses: actions/upload-artifact@v5
         with:
-          name: Cultivation-Jar
+          name: Cultivation
           path: build/libs/*.jar
 
       # Tự động dọn dẹp Workflows Runs 【 5 Runs 】
