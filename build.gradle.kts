@@ -5,7 +5,7 @@ plugins {
 
 group = "vn.aoi"
 version = "1.0.0-SNAPSHOT"
-description = "Cultivation - Tu Tiên Plugin"
+description = "Cultivation - Production Grade Tu Tiên Plugin"
 
 java {
     toolchain {
@@ -15,22 +15,31 @@ java {
 
 repositories {
     mavenCentral()
+
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://jitpack.io")
 }
 
 dependencies {
+
+    // Paper
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+
+    // Optional integrations
     compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 
+    // Database
     implementation("org.xerial:sqlite-jdbc:3.47.1.0")
     implementation("com.zaxxer:HikariCP:5.1.0")
+
+    // Metrics
     implementation("org.bstats:bstats-bukkit:3.1.0")
 }
 
 tasks {
+
     compileJava {
         options.encoding = "UTF-8"
         options.release.set(21)
@@ -38,22 +47,46 @@ tasks {
 
     processResources {
         filesMatching("paper-plugin.yml") {
-            expand("version" to project.version)
+            expand(
+                mapOf(
+                    "version" to project.version
+                )
+            )
         }
     }
 
     shadowJar {
+
         archiveClassifier.set("")
 
-        relocate("org.sqlite", "vn.aoi.cultivation.libs.sqlite")
-        relocate("com.zaxxer.hikari", "vn.aoi.cultivation.libs.hikari")
-        relocate("org.bstats", "vn.aoi.cultivation.libs.bstats")
+        relocate(
+            "org.sqlite",
+            "vn.aoi.cultivation.libs.sqlite"
+        )
 
-        exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
-        exclude("META-INF/NOTICE*", "META-INF/LICENSE*")
+        relocate(
+            "com.zaxxer.hikari",
+            "vn.aoi.cultivation.libs.hikari"
+        )
+
+        relocate(
+            "org.bstats",
+            "vn.aoi.cultivation.libs.bstats"
+        )
+
+        exclude("META-INF/*.SF")
+        exclude("META-INF/*.DSA")
+        exclude("META-INF/*.RSA")
+        exclude("META-INF/NOTICE*")
+        exclude("META-INF/LICENSE*")
 
         minimize {
-            exclude(dependency("org.xerial:sqlite-jdbc:.*"))
+
+            exclude(
+                dependency(
+                    "org.xerial:sqlite-jdbc:.*"
+                )
+            )
         }
     }
 
