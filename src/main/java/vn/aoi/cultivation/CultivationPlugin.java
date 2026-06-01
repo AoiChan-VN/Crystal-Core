@@ -1,65 +1,109 @@
 package vn.aoi.cultivation;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import vn.aoi.cultivation.bootstrap.PluginBootstrap;
-import vn.aoi.cultivation.data.cache.CultivationCache;
-import vn.aoi.cultivation.data.repository.PlayerCultivationRepository;
-import vn.aoi.cultivation.task.AsyncDataSaveTask;
-import vn.aoi.cultivation.util.MiniMessageUtil;
+import org.jetbrains.annotations.NotNull;
+import vn.aoi.cultivation.database.DatabaseManager;
+import vn.aoi.cultivation.manager.CultivatorManager;
+import vn.aoi.cultivation.manager.MeditationManager;
+import vn.aoi.cultivation.manager.TribulationManager;
 
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class CultivationPlugin extends JavaPlugin {
 
-    private static CultivationPlugin instance;
-
-    private CultivationCache cache;
-    private PlayerCultivationRepository repository;
-    private AsyncDataSaveTask saveTask;
-
-    @Override
-    public void onLoad() {
-        instance = this;
-    }
+    private DatabaseManager databaseManager;
+    private CultivatorManager cultivatorManager;
+    private MeditationManager meditationManager;
+    private TribulationManager tribulationManager;
 
     @Override
     public void onEnable() {
-        Objects.requireNonNull(getServer(), "Server instance is null during enable");
+        try {
+            saveDefaultConfig();
 
-        this.saveDefaultConfig();
+            this.databaseManager = new DatabaseManager(this);
+            this.databaseManager.initialize();
 
-        // Bootstrap core systems
-        PluginBootstrap bootstrap = new PluginBootstrap(this);
-        bootstrap.initialize();
+            this.cultivatorManager = new CultivatorManager(this, databaseManager);
+            this.meditationManager = new MeditationManager(this, cultivatorManager);
+            this.tribulationManager = new TribulationManager(this, cultivatorManager);
 
-        this.cache = bootstrap.getCache();
-        this.repository = bootstrap.getRepository();
+            getLogger().info("========================================");
+            getLogger().info("Cultivation Plugin Enabled");
+            getLogger().info("Target: Paper 1.21.4");
+            getLogger().info("Java: 21");
+            getLogger().info("========================================");
+        } catch (Exception exception) {
+            getLogger().log(
+                    Level.SEVERE,
+                    "Fatal startup failure. Disabling plugin.",
+                    exception
+            );
 
-        // Start async persistence loop
-        this.saveTask = new AsyncDataSaveTask(cache, repository, this);
-        this.saveTask.start();
-
-        getComponentLogger().info(
-                MiniMessageUtil.deserialize("<green>Cultivation Plugin enabled successfully.</green>")
-        );
+            getServer().getPluginManager().disablePlugin(this);
+        }
     }
 
     @Override
     public void onDisable() {
-        if (saveTask != null) {
-            saveTask.shutdown();
-        }
+        try {
+            if (meditationManager != null) {
+                meditationManager.shutdown();
+            }
 
-        if (cache != null && repository != null) {
-            cache.flushAllToRepository(repository);
-        }
+            if (tribulationManager != null) {
+                tribulationManager.shutdown();
+            }
 
-        getComponentLogger().info(
-                MiniMessageUtil.deserialize("<yellow>Cultivation Plugin safely shut down.</yellow>")
+            if (cultivatorManager != null) {
+                cultivatorManager.shutdown();
+            }
+
+            if (databaseManager != null) {
+                databaseManager.shutdown();
+            }
+
+            getLogger().info("Cultivation Plugin Disabled.");
+        } catch (Exception exception) {
+            getLogger().log(
+                    Level.SEVERE,
+                    "Error during plugin shutdown.",
+                    exception
+            );
+        }
+    }
+
+    public @NotNull DatabaseManager getDatabaseManager() {
+        return Objects.requireNonNull(
+                databaseManager,
+                "DatabaseManager not initialized"
         );
     }
 
-    public static CultivationPlugin getInstance() {
-        return instance;
+    public @NotNull CultivatorManager getCultivatorManager() {
+        return Objects.requireNonNull(
+                cultivatorManager,
+                "CultivatorManager not initialized"
+        );
     }
-} 
+
+    public @NotNull MeditationManager getMeditationManager() {
+        return Objects.requireNonNull(
+                meditationManager,
+                "MeditationManager not initialized"
+        );
+    }
+
+    public @NotNull TribulationManager getTribulationManager() {
+        return Objects.requireNonNull(
+                tribulationManager,
+                "TribulationManager not initialized"
+        );
+    }
+
+    public @NotNull Logger logger() {
+        return getLogger();
+    }
+}
